@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">healthcare-app</string>
     <string name="healthcare">Healthcare</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="login">Login</string>
+    <string name="register_a_new_user">Register a new user</string>
 </resources>
