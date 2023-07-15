@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back1"
-    tools:context=".LoginActivity">
+    android:background="@drawable/background"
+    tools:context=".RegisterActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -35,24 +35,25 @@
         app:layout_constraintVertical_bias="0.120" />
 
     <TextView
-        android:id="@+id/tvLoginTitle"
+        android:id="@+id/tvRegisterTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/login"
+        android:text="@string/registration"
         android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvHealthcare"
-        app:layout_constraintVertical_bias="0.278" />
+        app:layout_constraintVertical_bias="0.07" />
 
     <EditText
-        android:id="@+id/etLoginUsername"
+        android:id="@+id/etRegisterUsername"
         android:layout_width="325dp"
         android:layout_height="48dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:autofillHints="username"
         android:background="@drawable/input_bg"
         android:drawableStart="@drawable/ic_baseline_person_24"
@@ -69,10 +70,34 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvLoginTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/tvRegisterTitle" />
 
     <EditText
-        android:id="@+id/etLoginPassword"
+        android:id="@+id/etRegisterEmail"
+        android:layout_width="325dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="30dp"
+        android:autofillHints="username"
+        android:background="@drawable/input_bg"
+        android:drawableStart="@drawable/ic_baseline_email_24"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etRegisterUsername"
+        tools:ignore="TextFields" />
+
+    <EditText
+        android:id="@+id/etRegisterPassword"
         android:layout_width="325dp"
         android:layout_height="48dp"
         android:layout_marginTop="30dp"
@@ -92,31 +117,55 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etLoginUsername"
+        app:layout_constraintTop_toBottomOf="@+id/etRegisterEmail"
         tools:ignore="TextFields" />
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="300dp"
+    <EditText
+        android:id="@+id/etRegisterConfirmPassword"
+        android:layout_width="325dp"
         android:layout_height="48dp"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/btn_bg"
-        android:text="@string/login"
+        android:layout_marginTop="30dp"
+        android:autofillHints="password"
+        android:background="@drawable/input_bg"
+        android:drawableStart="@drawable/ic_baseline_security_24"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="@string/confirm_password"
+        android:inputType="textPassword"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etLoginPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/etRegisterPassword"
+        tools:ignore="TextFields" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="42dp"
+        android:background="@drawable/btn_bg"
+        android:text="@string/register"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etRegisterConfirmPassword" />
 
     <TextView
-        android:id="@+id/tvNewUser"
+        android:id="@+id/tvAlreadyHaveAnAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="@string/register_a_new_user"
+        android:text="@string/already_have_an_account"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
 </androidx.constraintlayout.widget.ConstraintLayout>
