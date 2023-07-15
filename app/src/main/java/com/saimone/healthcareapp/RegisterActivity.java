@@ -34,23 +34,28 @@ public class RegisterActivity extends AppCompatActivity {
             String password = etRegisterPassword.getText().toString();
             String confirmPassword = etRegisterConfirmPassword.getText().toString();
 
-            if(username.length() == 0 || email.length() == 0 || password.length() == 0 || confirmPassword.length() == 0) {
-                Toast.makeText(getApplicationContext(), "Please enter all data", Toast.LENGTH_SHORT).show();
-            } else {
-                if(password.equals(confirmPassword)) {
-                    if(!isValidUsername(username)) {
-                        Toast.makeText(getApplicationContext(), "The username must contain at least 4 characters of letters or numbers only", Toast.LENGTH_SHORT).show();
-                    } else if (!isValidEmail(email)) {
-                        Toast.makeText(getApplicationContext(), "Email entered incorrectly", Toast.LENGTH_SHORT).show();
-                    } else if (!isValidPassword(password)) {
-                            Toast.makeText(getApplicationContext(), "Password must contain more than 8 characters, have 1 letter, a symbol and a special character", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Register Success", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                    }
+            try(Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
+                if (username.length() == 0 || email.length() == 0 || password.length() == 0 || confirmPassword.length() == 0) {
+                    Toast.makeText(getApplicationContext(), "Please enter all data", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), "The entered passwords do not match", Toast.LENGTH_SHORT).show();
+                    if (password.equals(confirmPassword)) {
+                        if (!isValidUsername(username)) {
+                            Toast.makeText(getApplicationContext(), "The username must contain at least 4 characters of letters or numbers only", Toast.LENGTH_SHORT).show();
+                        } else if (!isValidEmail(email)) {
+                            Toast.makeText(getApplicationContext(), "Email entered incorrectly", Toast.LENGTH_SHORT).show();
+                        } else if (!isValidPassword(password)) {
+                            Toast.makeText(getApplicationContext(), "Password must contain more than 8 characters, have 1 letter, a symbol and a special character", Toast.LENGTH_SHORT).show();
+                        } else {
+                            db.register(username, email, password);
+                            Toast.makeText(getApplicationContext(), "Register Success", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                        }
+                    } else {
+                        Toast.makeText(getApplicationContext(), "The entered passwords do not match", Toast.LENGTH_SHORT).show();
+                    }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
 
