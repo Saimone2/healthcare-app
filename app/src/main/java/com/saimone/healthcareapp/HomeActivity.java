@@ -18,7 +18,12 @@ public class HomeActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("shared_preferences", Context.MODE_PRIVATE);
         String username = sharedPreferences.getString("username", "");
-        Toast.makeText(getApplicationContext(), "Welcome " + username, Toast.LENGTH_SHORT).show();
+
+        boolean loggedIn = getIntent().getBooleanExtra("loggedInFlag", false);
+
+        if(loggedIn) {
+            Toast.makeText(getApplicationContext(), "Welcome " + username, Toast.LENGTH_SHORT).show();
+        }
 
         CardView logout = findViewById(R.id.cvLogout);
         logout.setOnClickListener(view -> {
@@ -27,5 +32,8 @@ public class HomeActivity extends AppCompatActivity {
             editor.apply();
             startActivity(new Intent(HomeActivity.this, LoginActivity.class));
         });
+
+        CardView findDoctor = findViewById(R.id.cvFindDoctor);
+        findDoctor.setOnClickListener(view -> startActivity(new Intent(HomeActivity.this, FindDoctorActivity.class)));
     }
 }

@@ -39,7 +39,10 @@ public class LoginActivity extends AppCompatActivity {
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("username", username);
                         editor.apply();
-                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+
+                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        intent.putExtra("loggedInFlag", true);
+                        startActivity(intent);
                     } else {
                         Toast.makeText(getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
                     }

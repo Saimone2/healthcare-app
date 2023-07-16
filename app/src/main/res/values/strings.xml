@@ -16,4 +16,11 @@
     <string name="health_articles">HEALTH ARTICLES</string>
     <string name="order_details">ORDER DETAILS</string>
     <string name="logout">LOGOUT</string>
+    <string name="top_doctors">Top doctors</string>
+    <string name="family_physician">FAMILY PHYSICIAN</string>
+    <string name="dietician">DIETICIAN</string>
+    <string name="dentist">DENTIST</string>
+    <string name="surgeon">SURGEON</string>
+    <string name="cardiologist">CARDIOLOGIST</string>
+    <string name="back">BACK</string>
 </resources>
