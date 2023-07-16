@@ -46,9 +46,13 @@ public class RegisterActivity extends AppCompatActivity {
                         } else if (!isValidPassword(password)) {
                             Toast.makeText(getApplicationContext(), "Password must contain more than 8 characters, have 1 letter, a symbol and a special character", Toast.LENGTH_SHORT).show();
                         } else {
-                            db.register(username, email, password);
-                            Toast.makeText(getApplicationContext(), "Register Success", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                            int result = db.register(username, email, password);
+                            if (result == 0) {
+                                Toast.makeText(getApplicationContext(), "This username is already taken", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Register Success", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                            }
                         }
                     } else {
                         Toast.makeText(getApplicationContext(), "The entered passwords do not match", Toast.LENGTH_SHORT).show();
@@ -83,7 +87,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     public static boolean isValidPassword(String password) {
         int oneLetter = 0, oneDigit = 0, oneSpecial = 0;
-
         if(password.length() < 8) {
             return false;
         } else {

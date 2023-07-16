@@ -24,15 +24,27 @@ public class Database extends SQLiteOpenHelper {
 
     }
 
-    public void register(String username, String email, String password) {
+    public int register(String username, String email, String password) {
+        String[] str = new String[1];
+        str[0] = username;
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from users where username=?", str);
+        if(cursor.moveToFirst()) {
+            cursor.close();
+            db.close();
+            return 0;
+        }
+        cursor.close();
+
         ContentValues cv = new ContentValues();
         cv.put("username", username);
         cv.put("email", email);
         cv.put("password", password);
 
-        SQLiteDatabase db = getWritableDatabase();
+        db = getWritableDatabase();
         db.insert("users", null, cv);
         db.close();
+        return 1;
     }
 
     public int login(String username, String password) {
