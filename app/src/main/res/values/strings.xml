@@ -10,4 +10,10 @@
     <string name="registration">Registration</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="register">Register</string>
+    <string name="lab_test">LAB TEST</string>
+    <string name="buy_medicine">BUY MEDICINE</string>
+    <string name="find_doctor">FIND DOCTOR</string>
+    <string name="health_articles">HEALTH ARTICLES</string>
+    <string name="order_details">ORDER DETAILS</string>
+    <string name="logout">LOGOUT</string>
 </resources>
