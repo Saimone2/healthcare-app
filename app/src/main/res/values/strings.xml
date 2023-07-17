@@ -23,4 +23,5 @@
     <string name="surgeon">SURGEON</string>
     <string name="cardiologist">CARDIOLOGIST</string>
     <string name="back">BACK</string>
+    <string name="default_value">Default Value</string>
 </resources>
