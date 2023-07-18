@@ -16,7 +16,7 @@
             android:name=".BookAppointmentActivity"
             android:exported="false" />
         <activity
-            android:name=".DoctorDetailsActivity"
+            android:name=".DoctorsDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".FindDoctorActivity"
