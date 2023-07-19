@@ -47,7 +47,7 @@
         android:rowCount="3">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cvTest"
+            android:id="@+id/cvLabTest"
             android:layout_width="135sp"
             android:layout_height="wrap_content"
             android:layout_row="0"

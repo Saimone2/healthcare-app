@@ -35,5 +35,8 @@ public class HomeActivity extends AppCompatActivity {
 
         CardView findDoctor = findViewById(R.id.cvFindDoctor);
         findDoctor.setOnClickListener(view -> startActivity(new Intent(HomeActivity.this, FindDoctorActivity.class)));
+
+        CardView cvLabTest = findViewById(R.id.cvLabTest);
+        cvLabTest.setOnClickListener(view -> startActivity(new Intent(HomeActivity.this, LabTestActivity.class)));
     }
 }

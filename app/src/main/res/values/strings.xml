@@ -33,4 +33,6 @@
     <string name="fee">Fee</string>
     <string name="default_date">00.00.0000</string>
     <string name="default_time">00:00</string>
+    <string name="go_to_cart">GO TO CART</string>
+    <string name="add_to_cart">ADD TO CART</string>
 </resources>
