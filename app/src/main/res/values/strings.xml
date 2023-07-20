@@ -35,4 +35,6 @@
     <string name="default_time">00:00</string>
     <string name="go_to_cart">GO TO CART</string>
     <string name="add_to_cart">ADD TO CART</string>
+    <string name="checkout">CHECKOUT</string>
+    <string name="total_cost">Total cost</string>
 </resources>
