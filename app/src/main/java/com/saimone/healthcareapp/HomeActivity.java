@@ -33,10 +33,13 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(new Intent(HomeActivity.this, LoginActivity.class));
         });
 
+        CardView cvLabTest = findViewById(R.id.cvLabTest);
+        cvLabTest.setOnClickListener(view -> startActivity(new Intent(HomeActivity.this, LabTestActivity.class)));
+
         CardView findDoctor = findViewById(R.id.cvFindDoctor);
         findDoctor.setOnClickListener(view -> startActivity(new Intent(HomeActivity.this, FindDoctorActivity.class)));
 
-        CardView cvLabTest = findViewById(R.id.cvLabTest);
-        cvLabTest.setOnClickListener(view -> startActivity(new Intent(HomeActivity.this, LabTestActivity.class)));
+        CardView cvOrderDetails = findViewById(R.id.cvOrderDetails);
+        cvOrderDetails.setOnClickListener(view -> startActivity(new Intent(HomeActivity.this, OrderDetailsActivity.class)));
     }
 }

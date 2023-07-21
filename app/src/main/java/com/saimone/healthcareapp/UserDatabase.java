@@ -22,6 +22,9 @@ public class UserDatabase extends SQLiteOpenHelper {
 
         String qry2 = "create table cart(username text, product text, price float, order_type text)";
         sqLiteDatabase.execSQL(qry2);
+
+        String qry3 = "create table orderplace(username text, fullname text, address text, pincode int, contactno text, date text, time text, price float, order_type text)";
+        sqLiteDatabase.execSQL(qry3);
     }
 
     @Override
@@ -118,6 +121,38 @@ public class UserDatabase extends SQLiteOpenHelper {
                 String price = cursor.getString(2);
                 arr.add(product + "$" + price);
             } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return arr;
+    }
+
+    public void addOrder(String username, String fullname, String address, int pincode, String contactno, String date, String time, float price, String orderType) {
+        ContentValues cv = new ContentValues();
+        cv.put("username", username);
+        cv.put("fullname", fullname);
+        cv.put("address", address);
+        cv.put("pincode", pincode);
+        cv.put("contactno", contactno);
+        cv.put("date", date);
+        cv.put("time", time);
+        cv.put("price", price);
+        cv.put("order_type", orderType);
+        SQLiteDatabase db = getWritableDatabase();
+        db.insert("orderplace", null, cv);
+        db.close();
+    }
+
+    public ArrayList<String> getOrderData(String username) {
+        ArrayList<String> arr = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        String[] str = new String[1];
+        str[0] = username;
+        Cursor cursor = db.rawQuery("select * from orderplace where username=?", str);
+        if(cursor.moveToFirst()) {
+            do {
+                arr.add(cursor.getString(1) + "$" + cursor.getString(2) + "$" + cursor.getString(3) + "$" + cursor.getString(4) + "$" + cursor.getString(5) + "$" + cursor.getString(6) + "$" + cursor.getString(7));
+            } while(cursor.moveToNext());
         }
         cursor.close();
         db.close();

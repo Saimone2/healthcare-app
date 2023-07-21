@@ -37,4 +37,7 @@
     <string name="add_to_cart">ADD TO CART</string>
     <string name="checkout">CHECKOUT</string>
     <string name="total_cost">Total cost</string>
+    <string name="book">BOOK</string>
+    <string name="please_enter_all_booking_details">Please enter all booking details</string>
+    <string name="pin_code">Pin code</string>
 </resources>
