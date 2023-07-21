@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 public class UserDatabase extends SQLiteOpenHelper {
     public UserDatabase(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -24,7 +26,6 @@ public class UserDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
     }
 
     public int register(String username, String email, String password) {
@@ -71,7 +72,7 @@ public class UserDatabase extends SQLiteOpenHelper {
         cv.put("username", username);
         cv.put("product", product);
         cv.put("price", price);
-        cv.put("orderType", orderType);
+        cv.put("order_type", orderType);
 
         SQLiteDatabase db = getWritableDatabase();
         db.insert("cart",null, cv);
@@ -102,6 +103,24 @@ public class UserDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         db.delete("cart", "username=? and order_type=?", str);
         db.close();
+    }
 
+    public ArrayList<String> getCartData(String username, String orderType) {
+        ArrayList<String> arr = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        String[] str = new String[2];
+        str[0] = username;
+        str[1] = orderType;
+        Cursor cursor = db.rawQuery("select * from cart where username=? and order_type=?", str);
+        if(cursor.moveToFirst()) {
+            do {
+                String product = cursor.getString(1);
+                String price = cursor.getString(2);
+                arr.add(product + "$" + price);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return arr;
     }
 }

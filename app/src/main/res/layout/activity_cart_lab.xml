@@ -49,8 +49,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/etCLDetails"
+    <ListView
+        android:id="@+id/lvCLDetails"
         android:layout_width="331dp"
         android:layout_height="299dp"
         android:layout_marginTop="20dp"
@@ -75,7 +75,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etCLDetails" />
+        app:layout_constraintTop_toBottomOf="@+id/lvCLDetails" />
 
     <Button
         android:id="@+id/btnCLCheckout"

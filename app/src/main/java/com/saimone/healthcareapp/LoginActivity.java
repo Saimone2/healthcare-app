@@ -27,10 +27,11 @@ public class LoginActivity extends AppCompatActivity {
         tvNewUser = findViewById(R.id.tvNewUser);
 
         btnLogin.setOnClickListener(view -> {
+            //startActivity(new Intent(LoginActivity.this, HomeActivity.class));
             String username = etLoginUsername.getText().toString();
             String password = etLoginPassword.getText().toString();
 
-            try(Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
+            try(UserDatabase db = new UserDatabase(getApplicationContext(), "healthcare-users", null, 1)) {
                 if (username.length() == 0 || password.length() == 0) {
                     Toast.makeText(getApplicationContext(), "Please enter all data", Toast.LENGTH_SHORT).show();
                 } else {
