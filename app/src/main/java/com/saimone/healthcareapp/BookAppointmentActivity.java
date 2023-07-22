@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -64,7 +67,19 @@ public class BookAppointmentActivity extends AppCompatActivity {
 
         btnToBook = findViewById(R.id.btnToBook);
         btnToBook.setOnClickListener(view -> {
-            // TODO: implement save to db
+            try(Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
+                SharedPreferences sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
+                String username = sharedPreferences.getString("username", "");
+                if(db.checkAppointmentExists(username, title + "=>" + fullname, address, contactNum, 0, btnBookDate.getText().toString(), btnBookTime.getText().toString()) == 1 ) {
+                    Toast.makeText(getApplicationContext(), "Appointment already booked", Toast.LENGTH_SHORT).show();
+                } else {
+                    db.addOrder(username, title + "=>" + fullname, address, 0, contactNum, btnBookDate.getText().toString(), btnBookTime.getText().toString(), Float.parseFloat(fee), "appointment");
+                    Toast.makeText(getApplicationContext(), "Appointment is done successfully", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(BookAppointmentActivity.this, HomeActivity.class));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
     }
 
