@@ -53,6 +53,14 @@ public class BuyMedicineActivity extends AppCompatActivity {
             }
             sa = new SimpleAdapter(this, list, R.layout.multi_lines, new String[]{"line1", "line2", "line3", "line4", "line5"}, new int[]{R.id.line_a, R.id.line_b, R.id.line_c, R.id.line_d, R.id.line_e});
             lvBM.setAdapter(sa);
+
+            lvBM.setOnItemClickListener((adapterView, view, i, l) -> {
+                Intent it = new Intent(BuyMedicineActivity.this, BuyMedicineDetailsActivity.class);
+                it.putExtra("text1", medicine_details[i][0]);
+                it.putExtra("text2", medicine_details[i][1]);
+                it.putExtra("text3", medicine_details[i][4]);
+                startActivity(it);
+            });
         }
     }
 

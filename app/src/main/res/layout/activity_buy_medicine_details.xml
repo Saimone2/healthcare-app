@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    tools:context=".CartBuyMedicineActivity">
+    android:background="@drawable/back3"
+    tools:context=".BuyMedicineDetailsActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -35,7 +35,7 @@
         app:layout_constraintVertical_bias="0.046" />
 
     <TextView
-        android:id="@+id/tvCBMCart"
+        android:id="@+id/tvBMDPackageName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -45,84 +45,57 @@
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ListView
-        android:id="@+id/lvCBMDetails"
+    <TextView
+        android:id="@+id/etBMDDetails"
         android:layout_width="331dp"
         android:layout_height="299dp"
         android:layout_marginTop="20dp"
         android:ems="10"
         android:gravity="start|top"
-        android:importantForAutofill="no"
         android:padding="10dp"
+        android:text=""
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCBMCart" />
+        app:layout_constraintTop_toBottomOf="@+id/tvBMDPackageName"
+        android:autofillHints="" />
 
     <TextView
-        android:id="@+id/tvCBMTotalCost"
+        android:id="@+id/tvBMDTotalCost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="@string/default_value"
+        android:text="@string/total_cost"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lvCBMDetails" />
+        app:layout_constraintTop_toBottomOf="@+id/etBMDDetails" />
 
     <Button
-        android:id="@+id/btnCBMCheckout"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:id="@+id/btnBMDAddToCart"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="36dp"
         android:background="@drawable/btn_bg"
-        android:text="@string/checkout"
+        android:text="@string/add_to_cart"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.100"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCBMDate" />
+        app:layout_constraintTop_toBottomOf="@+id/tvBMDTotalCost" />
 
     <Button
-        android:id="@+id/btnCBMBack"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="114dp"
+        android:id="@+id/btnBMDBack"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/btn_bg"
         android:text="@string/back"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.870"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCBMTotalCost" />
-
-    <TextView
-        android:id="@+id/tvCBMDateHint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/select_date"
-        android:textColor="@color/yellowLight"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCBMTotalCost" />
-
-    <Button
-        android:id="@+id/btnCBMDate"
-        style="?android:spinnerStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/default_date"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.10"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCBMDateHint" />
+        app:layout_constraintTop_toBottomOf="@+id/btnBMDAddToCart" />
 </androidx.constraintlayout.widget.ConstraintLayout>

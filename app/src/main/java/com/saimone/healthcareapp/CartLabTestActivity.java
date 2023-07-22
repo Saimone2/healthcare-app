@@ -19,7 +19,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
-public class CartLabActivity extends AppCompatActivity {
+public class CartLabTestActivity extends AppCompatActivity {
     HashMap<String, String> item;
     ArrayList<HashMap<String, String>> list;
     SimpleAdapter sa;
@@ -32,7 +32,7 @@ public class CartLabActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cart_lab);
+        setContentView(R.layout.activity_cart_lab_test);
 
         btnCLDate = findViewById(R.id.btnCLDate);
         btnCLTime = findViewById(R.id.btnCLTime);
@@ -85,10 +85,10 @@ public class CartLabActivity extends AppCompatActivity {
         initTimePicker();
         btnCLTime.setOnClickListener(view -> timePickerDialog.show());
 
-        btnCLBack.setOnClickListener(view -> startActivity(new Intent(CartLabActivity.this, LabTestActivity.class)));
+        btnCLBack.setOnClickListener(view -> startActivity(new Intent(CartLabTestActivity.this, LabTestActivity.class)));
 
         btnCLCheckout.setOnClickListener(view -> {
-            Intent it = new Intent(CartLabActivity.this, LabTestBookActivity.class);
+            Intent it = new Intent(CartLabTestActivity.this, LabTestBookActivity.class);
             it.putExtra("price", tvCLTotalCost.getText());
             it.putExtra("date", btnCLDate.getText());
             it.putExtra("time", btnCLTime.getText());

@@ -78,7 +78,7 @@ public class LabTestActivity extends AppCompatActivity {
             startActivity(it);
         });
 
-        btnLTGoToCart.setOnClickListener(view -> startActivity(new Intent(LabTestActivity.this, CartLabActivity.class)));
+        btnLTGoToCart.setOnClickListener(view -> startActivity(new Intent(LabTestActivity.this, CartLabTestActivity.class)));
     }
 
     private String[][] getLabTestsDetails() {
