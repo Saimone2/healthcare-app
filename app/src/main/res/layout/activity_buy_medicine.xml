@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back1"
-    tools:context=".OrderDetailsActivity">
+    android:background="@drawable/back2"
+    tools:context=".BuyMedicineActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -35,12 +35,12 @@
         app:layout_constraintVertical_bias="0.046" />
 
     <TextView
-        android:id="@+id/tvODTitle"
+        android:id="@+id/tvBMTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="115dp"
-        android:text="@string/order_details"
+        android:text="@string/default_value"
         android:textColor="@color/white"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -49,25 +49,35 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:id="@+id/lvOD"
+        android:id="@+id/lvBM"
         android:layout_width="350dp"
-        android:layout_height="470dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="460dp"
+        android:layout_margin="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvODTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/tvBMTitle"
+        app:layout_constraintVertical_bias="0.050" />
 
     <Button
-        android:id="@+id/btnODBack"
+        android:id="@+id/btnBMBack"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="44dp"
         android:text="@string/back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lvOD"
-        app:layout_constraintVertical_bias="0.437" />
+        app:layout_constraintHorizontal_bias="0.885"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnBMGoToCart"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="44dp"
+        android:text="@string/go_to_cart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.118"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

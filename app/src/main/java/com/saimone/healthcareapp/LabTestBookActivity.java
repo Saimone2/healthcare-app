@@ -36,7 +36,7 @@ public class LabTestBookActivity extends AppCompatActivity {
             SharedPreferences sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
             String username = sharedPreferences.getString("username", "");
 
-            try(UserDatabase db = new UserDatabase(getApplicationContext(), "healthcare-users", null, 1)) {
+            try(Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
                 db.addOrder(username, etLTBFullName.getText().toString(), etLTBAddress.getText().toString(), Integer.parseInt(etLTBPinCode.getText().toString()), etLTBContactNumber.getText().toString(), date, time, Float.parseFloat(price[1]), "lab");
                 db.removeCart(username, "lab");
 

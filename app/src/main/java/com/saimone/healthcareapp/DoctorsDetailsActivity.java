@@ -29,7 +29,6 @@ public class DoctorsDetailsActivity extends AppCompatActivity {
         Intent it = getIntent();
         String title = it.getStringExtra("title");
 
-        // insertTestDataIntoDB();
         doctor_details = getDoctorDetails(title);
 
         if(doctor_details.length == 0) {
@@ -68,42 +67,8 @@ public class DoctorsDetailsActivity extends AppCompatActivity {
     }
 
     private String[][] getDoctorDetails(String specialty) {
-        try(DoctorDatabase db = new DoctorDatabase(getApplicationContext(), "healthcare-doctors", null, 1)) {
+        try(Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
             return db.getDoctorsBySpecialty(specialty);
-        }
-    }
-
-    private void insertTestDataIntoDB() {
-        try(DoctorDatabase db = new DoctorDatabase(getApplicationContext(), "healthcare-doctors", null, 1)) {
-            db.insertData("Family Physician", "John Smith", "303 Main St", 10, "555-1234", 150.0);
-            db.insertData("Family Physician", "Sarah Johnson", "456 Elm St", 5, "555-5678", 120.0);
-            db.insertData("Family Physician", "Emily Thompson", "789 Mine St", 8, "555-9012", 150.0);
-            db.insertData("Family Physician", "Michael Davis", "321 Pine St", 12, "555-3456", 160.0);
-            db.insertData("Family Physician", "Jessica Lee", "987 Maple St", 3, "555-7890", 110.0);
-
-            db.insertData("Dietician", "John Doe", "123 Main St", 5, "555-1234", 100.0);
-            db.insertData("Dietician", "Jane Smith", "456 Elm St", 7, "555-5678", 120.0);
-            db.insertData("Dietician", "Michael Johnson", "789 Oak St", 3, "555-9012", 90.0);
-            db.insertData("Dietician", "Emily Davis", "321 Pine St", 4, "555-3456", 110.0);
-            db.insertData("Dietician", "David Wilson", "654 Maple St", 6, "555-7890", 95.0);
-
-            db.insertData("Dentist", "Sarah Lee", "111 Baker St", 8, "555-1111", 200.0);
-            db.insertData("Dentist", "Robert Thompson", "222 Jefferson St", 10, "555-2222", 220.0);
-            db.insertData("Dentist", "Jennifer Anderson", "333 Lincoln St", 6, "555-3333", 180.0);
-            db.insertData("Dentist", "Daniel Martinez", "444 Madison St", 9, "555-4444", 210.0);
-            db.insertData("Dentist", "Elizabeth Clark", "555 Adams St", 7, "555-5555", 190.0);
-
-            db.insertData("Surgeon", "William Rodriguez", "777 State St", 12, "555-7777", 500.0);
-            db.insertData("Surgeon", "Karen Lewis", "888 Chestnut St", 15, "555-8888", 550.0);
-            db.insertData("Surgeon", "Richard Hernandez", "999 Walnut St", 11, "555-9999", 480.0);
-            db.insertData("Surgeon", "Patricia Thompson", "101 Park St", 13, "555-1010", 520.0);
-            db.insertData("Surgeon", "Thomas Scott", "121 Market St", 14, "555-1212", 490.0);
-
-            db.insertData("Cardiologist", "Linda Martin", "131 Spring St", 20, "555-1313", 300.0);
-            db.insertData("Cardiologist", "Christopher Garcia", "141 Summer St", 18, "555-1414", 320.0);
-            db.insertData("Cardiologist", "Susan Robinson", "151 Autumn St", 22, "555-1515", 280.0);
-            db.insertData("Cardiologist", "Joseph Hill", "161 Winter St", 19, "555-1616", 330.0);
-            db.insertData("Cardiologist", "Jessica King", "171 Park St", 21, "555-1717", 310.0);
         }
     }
 }

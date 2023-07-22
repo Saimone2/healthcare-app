@@ -42,7 +42,7 @@ public class LabTestDetailsActivity extends AppCompatActivity {
             String product = tvLDPackageName.getText().toString();
             float price = Float.parseFloat(it.getStringExtra("text3"));
 
-            try(UserDatabase db = new UserDatabase(getApplicationContext(), "healthcare-users", null, 1)) {
+            try(Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
                 if(db.checkCart(username, product) == 1) {
                     Toast.makeText(getApplicationContext(), "This product has already been added", Toast.LENGTH_SHORT).show();
                 } else {

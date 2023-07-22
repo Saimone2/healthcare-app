@@ -34,7 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
             String password = etRegisterPassword.getText().toString();
             String confirmPassword = etRegisterConfirmPassword.getText().toString();
 
-            try(UserDatabase db = new UserDatabase(getApplicationContext(), "healthcare-users", null, 1)) {
+            try(Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
                 if (username.length() == 0 || email.length() == 0 || password.length() == 0 || confirmPassword.length() == 0) {
                     Toast.makeText(getApplicationContext(), "Please enter all data", Toast.LENGTH_SHORT).show();
                 } else {
