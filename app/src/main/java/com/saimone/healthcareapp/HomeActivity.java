@@ -25,14 +25,6 @@ public class HomeActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Welcome " + username, Toast.LENGTH_SHORT).show();
         }
 
-        CardView logout = findViewById(R.id.cvLogout);
-        logout.setOnClickListener(view -> {
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.clear();
-            editor.apply();
-            startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-        });
-
         CardView cvLabTest = findViewById(R.id.cvLabTest);
         cvLabTest.setOnClickListener(view -> startActivity(new Intent(HomeActivity.this, LabTestActivity.class)));
 
@@ -45,7 +37,15 @@ public class HomeActivity extends AppCompatActivity {
         CardView cvOrderDetails = findViewById(R.id.cvOrderDetails);
         cvOrderDetails.setOnClickListener(view -> startActivity(new Intent(HomeActivity.this, OrderDetailsActivity.class)));
 
-        CardView cvHealthDoctor = findViewById(R.id.cvHealthDoctor);
+        CardView cvHealthDoctor = findViewById(R.id.cvHealthArticles);
         cvHealthDoctor.setOnClickListener(view -> startActivity(new Intent(HomeActivity.this, HealthArticlesActivity.class)));
+
+        CardView logout = findViewById(R.id.cvLogout);
+        logout.setOnClickListener(view -> {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear();
+            editor.apply();
+            startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+        });
     }
 }

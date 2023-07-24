@@ -11,32 +11,32 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class BuyMedicineDetailsActivity extends AppCompatActivity {
-    TextView tvBMDPackageName, tvTotalCost, etBMDDetails;
-    Button btnBMDAddToCart, btnBMDBack;
+    TextView tvTitle, tvTotalCost, tvDetails;
+    Button cartButton, backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buy_medicine_details);
 
-        tvBMDPackageName = findViewById(R.id.tvBMDPackageName);
+        tvTitle = findViewById(R.id.tvBMDTitle);
         tvTotalCost = findViewById(R.id.tvBMDTotalCost);
-        etBMDDetails = findViewById(R.id.etBMDDetails);
-        btnBMDAddToCart = findViewById(R.id.btnBMDAddToCart);
-        btnBMDBack = findViewById(R.id.btnBMDBack);
+        tvDetails = findViewById(R.id.tvBMDDetails);
+        cartButton = findViewById(R.id.btnBMDAddToCart);
+        backButton = findViewById(R.id.btnBMDBack);
 
         Intent it = getIntent();
-        tvBMDPackageName.setText(it.getStringExtra("text1"));
-        etBMDDetails.setText(it.getStringExtra("text2"));
+        tvTitle.setText(it.getStringExtra("text1"));
+        tvDetails.setText(it.getStringExtra("text2"));
         String str = "Total Cost:" + it.getStringExtra("text3") + "$";
         tvTotalCost.setText(str);
 
-        btnBMDBack.setOnClickListener(view -> new Intent(BuyMedicineDetailsActivity.this, BuyMedicineActivity.class));
+        backButton.setOnClickListener(view -> new Intent(BuyMedicineDetailsActivity.this, BuyMedicineActivity.class));
 
-        btnBMDAddToCart.setOnClickListener(view -> {
+        cartButton.setOnClickListener(view -> {
             SharedPreferences sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
             String username = sharedPreferences.getString("username", "");
-            String product = tvBMDPackageName.getText().toString();
+            String product = tvTitle.getText().toString();
             float price = Float.parseFloat(it.getStringExtra("text3"));
 
             try(Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
@@ -51,6 +51,5 @@ public class BuyMedicineDetailsActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         });
-
     }
 }

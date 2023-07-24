@@ -10,7 +10,7 @@
     <string name="registration">Registration</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="register">Register</string>
-    <string name="lab_test">LAB TEST</string>
+    <string name="lab_tests">LAB TESTS</string>
     <string name="buy_medicine">BUY MEDICINE</string>
     <string name="find_doctor">FIND DOCTOR</string>
     <string name="health_articles">HEALTH ARTICLES</string>
@@ -31,7 +31,7 @@
     <string name="select_date">Select Date:</string>
     <string name="select_time">Select Time:</string>
     <string name="fee">Fee</string>
-    <string name="default_date">00.00.0000</string>
+    <string name="default_date">0000/00/00</string>
     <string name="default_time">00:00</string>
     <string name="go_to_cart">GO TO CART</string>
     <string name="add_to_cart">ADD TO CART</string>
@@ -40,4 +40,9 @@
     <string name="book">BOOK</string>
     <string name="please_enter_all_booking_details">Please enter all booking details</string>
     <string name="pin_code">Pin code</string>
+    <string name="articles">Articles</string>
+    <string name="lab_test_details">LAB TEST DETAILS</string>
+    <string name="buy_medicines">BUY MEDICINES</string>
+    <string name="medicine_details">MEDICINE DETAILS</string>
+    <string name="items_in_the_cart">ITEMS IN THE CART</string>
 </resources>

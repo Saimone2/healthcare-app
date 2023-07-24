@@ -13,26 +13,31 @@ import android.widget.Toast;
 import java.util.regex.Pattern;
 
 public class BuyMedicineBookActivity extends AppCompatActivity {
-    EditText etBMBFullName, etBMBAddress, etBMBPinCode, etBMBContactNumber;
-    Button btnBMBBook;
+    EditText etFullName, etAddress, etPinCode, etContactno;
+    Button bookButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buy_medicine_book);
 
+        etFullName = findViewById(R.id.etBMBFullName);
+        etAddress = findViewById(R.id.etBMBAddress);
+        etPinCode = findViewById(R.id.etBMBPinCode);
+        etContactno = findViewById(R.id.etBMBContactNumber);
+        bookButton = findViewById(R.id.btnBMBBook);
+
         Intent it = getIntent();
-        String[] price = it.getStringExtra("price").split(Pattern.quote(":"));
+        String[] price = it.getStringExtra("price").split(Pattern.quote("$"));
         String date = it.getStringExtra("date");
 
-        btnBMBBook.setOnClickListener(view -> {
+        bookButton.setOnClickListener(view -> {
             SharedPreferences sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
             String username = sharedPreferences.getString("username", "");
 
             try(Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
-                db.addOrder(username, etBMBFullName.getText().toString(), etBMBAddress.getText().toString(), Integer.parseInt(etBMBPinCode.getText().toString()), etBMBContactNumber.getText().toString(), date, "", Float.parseFloat(price[1]), "medicine");
-                db.removeCart(username, "lab");
-
+                db.addOrder(username, etFullName.getText().toString(), etAddress.getText().toString(), Integer.parseInt(etPinCode.getText().toString()), etContactno.getText().toString(), date, "", Float.parseFloat(price[1]), "medicine");
+                db.removeCart(username, "medicine");
                 Toast.makeText(getApplicationContext(), "Your booking is done successfully", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(BuyMedicineBookActivity.this, HomeActivity.class));
             } catch (Exception e) {

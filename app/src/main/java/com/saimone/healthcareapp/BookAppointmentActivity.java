@@ -17,63 +17,61 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 public class BookAppointmentActivity extends AppCompatActivity {
-    EditText et1, et2, et3, et4;
+    EditText etFullName, etAddress, etContactno, etFee;
     TextView tvTitle;
-
+    Button dateButton, timeButton, backButton, bookButton;
     private DatePickerDialog datePickerDialog;
     private TimePickerDialog timePickerDialog;
-    Button btnBookDate, btnBookTime, btnBookBack, btnToBook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_appointment);
 
-        tvTitle = findViewById(R.id.tvBookTitle);
-        et1 = findViewById(R.id.etBookFullName);
-        et2 = findViewById(R.id.etBookAddress);
-        et3 = findViewById(R.id.etBookContactNumber);
-        et4 = findViewById(R.id.etBookFee);
+        tvTitle = findViewById(R.id.tvBATitle);
+        etFullName = findViewById(R.id.etBAFullName);
+        etAddress = findViewById(R.id.etBAAddress);
+        etContactno = findViewById(R.id.etBAContactNumber);
+        etFee = findViewById(R.id.etBAFee);
+        dateButton = findViewById(R.id.btnBADate);
+        timeButton = findViewById(R.id.btnBATime);
+        backButton = findViewById(R.id.btnBABack);
+        bookButton = findViewById(R.id.btnBABook);
 
-        et1.setKeyListener(null);
-        et2.setKeyListener(null);
-        et3.setKeyListener(null);
-        et4.setKeyListener(null);
+        etFullName.setKeyListener(null);
+        etAddress.setKeyListener(null);
+        etContactno.setKeyListener(null);
+        etFee.setKeyListener(null);
 
         Intent it = getIntent();
         String title = it.getStringExtra("text1");
         String fullname = it.getStringExtra("text2");
         String address = it.getStringExtra("text3");
-        String contactNum = it.getStringExtra("text4");
+        String contactno = it.getStringExtra("text4");
         String fee = it.getStringExtra("text5");
 
         tvTitle.setText(title);
-        et1.setText(fullname);
-        et2.setText(address);
-        et3.setText(contactNum);
-        et4.setText(fee);
-
-        btnBookDate = findViewById(R.id.btnBookDate);
-        btnBookTime = findViewById(R.id.btnBookTime);
+        etFullName.setText(fullname);
+        etAddress.setText(address);
+        etContactno.setText(contactno);
+        etFee.setText(fee);
 
         initDatePicker();
-        btnBookDate.setOnClickListener(view -> datePickerDialog.show());
+        dateButton.setOnClickListener(view -> datePickerDialog.show());
 
         initTimePicker();
-        btnBookTime.setOnClickListener(view -> timePickerDialog.show());
+        timeButton.setOnClickListener(view -> timePickerDialog.show());
 
-        btnBookBack = findViewById(R.id.btnBookBack);
-        btnBookBack.setOnClickListener(view -> startActivity(new Intent(BookAppointmentActivity.this, FindDoctorActivity.class)));
+        backButton.setOnClickListener(view -> startActivity(new Intent(BookAppointmentActivity.this, FindDoctorActivity.class)));
 
-        btnToBook = findViewById(R.id.btnToBook);
-        btnToBook.setOnClickListener(view -> {
+        bookButton.setOnClickListener(view -> {
             try(Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
                 SharedPreferences sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
                 String username = sharedPreferences.getString("username", "");
-                if(db.checkAppointmentExists(username, title + "=>" + fullname, address, contactNum, 0, btnBookDate.getText().toString(), btnBookTime.getText().toString()) == 1 ) {
+                if(db.checkAppointmentExists(username, title + "=>" + fullname, address, contactno, 0, dateButton.getText().toString(), timeButton.getText().toString()) == 1 ) {
                     Toast.makeText(getApplicationContext(), "Appointment already booked", Toast.LENGTH_SHORT).show();
                 } else {
-                    db.addOrder(username, title + "=>" + fullname, address, 0, contactNum, btnBookDate.getText().toString(), btnBookTime.getText().toString(), Float.parseFloat(fee), "appointment");
+                    db.addOrder(username, title + "=>" + fullname, address, 0, contactno, dateButton.getText().toString(), timeButton.getText().toString(), Float.parseFloat(fee), "appointment");
                     Toast.makeText(getApplicationContext(), "Appointment is done successfully", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(BookAppointmentActivity.this, HomeActivity.class));
                 }
@@ -100,7 +98,7 @@ public class BookAppointmentActivity extends AppCompatActivity {
                     str = i + "/" + i1 + "/" + i2;
                 }
             }
-            btnBookDate.setText(str);
+            dateButton.setText(str);
         };
 
         Calendar calendar = Calendar.getInstance();
@@ -136,7 +134,7 @@ public class BookAppointmentActivity extends AppCompatActivity {
                 str = year + "/" + month + "/" + minDay;
             }
         }
-        btnBookDate.setText(str);
+        dateButton.setText(str);
 
         int style = AlertDialog.THEME_HOLO_DARK;
         datePickerDialog = new DatePickerDialog(this, style, dateSetListener, year, month, day);
@@ -151,7 +149,7 @@ public class BookAppointmentActivity extends AppCompatActivity {
             } else {
                 str = i + ":" + i1;
             }
-            btnBookTime.setText(str);
+            timeButton.setText(str);
         };
 
         Calendar calendar = Calendar.getInstance();
@@ -160,7 +158,7 @@ public class BookAppointmentActivity extends AppCompatActivity {
 
         String str;
         str = hours + ":00";
-        btnBookTime.setText(str);
+        timeButton.setText(str);
 
         int style = AlertDialog.THEME_HOLO_DARK;
         timePickerDialog = new TimePickerDialog(this, style, timeSetListener, hours, minutes, true);

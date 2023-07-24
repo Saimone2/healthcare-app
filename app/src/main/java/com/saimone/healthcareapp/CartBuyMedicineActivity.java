@@ -19,12 +19,12 @@ import java.util.HashMap;
 import java.util.regex.Pattern;
 
 public class CartBuyMedicineActivity extends AppCompatActivity {
+    TextView tvTotalCost;
+    ListView listView;
+    Button dateButton, checkoutButton, backButton;
     HashMap<String, String> item;
     ArrayList<HashMap<String, String>> list;
     SimpleAdapter sa;
-    TextView tvCBMTotalCost;
-    ListView lvCBMDetails;
-    Button btnCBMDate, btnCBMCheckout, btnCBMBack;
     private DatePickerDialog datePickerDialog;
 
     @Override
@@ -32,11 +32,11 @@ public class CartBuyMedicineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart_buy_medicine);
 
-        btnCBMDate = findViewById(R.id.btnCBMDate);
-        btnCBMCheckout = findViewById(R.id.btnCBMCheckout);
-        btnCBMBack = findViewById(R.id.btnCBMBack);
-        tvCBMTotalCost = findViewById(R.id.tvCBMTotalCost);
-        lvCBMDetails = findViewById(R.id.lvCBMDetails);
+        dateButton = findViewById(R.id.btnCBMDate);
+        checkoutButton = findViewById(R.id.btnCBMCheckout);
+        backButton = findViewById(R.id.btnCBMBack);
+        tvTotalCost = findViewById(R.id.tvCBMTotalCost);
+        listView = findViewById(R.id.lvCBMDetails);
 
         SharedPreferences sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
         String username = sharedPreferences.getString("username", "");
@@ -56,8 +56,8 @@ public class CartBuyMedicineActivity extends AppCompatActivity {
                 packages[i][4] = "Cost: " + strData[1] + "$";
                 totalAmount = totalAmount + Float.parseFloat(strData[1]);
             }
-            String str = "Total cost: " + totalAmount;
-            tvCBMTotalCost.setText(str);
+            String str = "Total cost: " + totalAmount + "$";
+            tvTotalCost.setText(str);
 
             list = new ArrayList<>();
             for (String[] aPackage : packages) {
@@ -69,22 +69,23 @@ public class CartBuyMedicineActivity extends AppCompatActivity {
                 item.put("line5", aPackage[4]);
                 list.add(item);
             }
-            sa = new SimpleAdapter(this, list, R.layout.multi_lines, new String[]{"line1","line2","line3","line4","line5"}, new int[]{R.id.line_a, R.id.line_b, R.id.line_c, R.id.line_d, R.id.line_e});
-            lvCBMDetails.setAdapter(sa);
-
+            sa = new SimpleAdapter(this, list,
+                    R.layout.multi_lines, new String[]{"line1","line2","line3","line4","line5"},
+                    new int[]{R.id.line_a, R.id.line_b, R.id.line_c, R.id.line_d, R.id.line_e});
+            listView.setAdapter(sa);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         initDatePicker();
-        btnCBMDate.setOnClickListener(view -> datePickerDialog.show());
+        dateButton.setOnClickListener(view -> datePickerDialog.show());
 
-        btnCBMBack.setOnClickListener(view -> startActivity(new Intent(CartBuyMedicineActivity.this, BuyMedicineActivity.class)));
+        backButton.setOnClickListener(view -> startActivity(new Intent(CartBuyMedicineActivity.this, BuyMedicineActivity.class)));
 
-        btnCBMCheckout.setOnClickListener(view -> {
+        checkoutButton.setOnClickListener(view -> {
             Intent it = new Intent(CartBuyMedicineActivity.this, BuyMedicineBookActivity.class);
-            it.putExtra("price", tvCBMTotalCost.getText());
-            it.putExtra("date", btnCBMDate.getText());
+            it.putExtra("price", tvTotalCost.getText());
+            it.putExtra("date", dateButton.getText());
             startActivity(it);
         });
     }
@@ -106,7 +107,7 @@ public class CartBuyMedicineActivity extends AppCompatActivity {
                     str = i + "/" + i1 + "/" + i2;
                 }
             }
-            btnCBMDate.setText(str);
+            dateButton.setText(str);
         };
 
         Calendar calendar = Calendar.getInstance();
@@ -127,7 +128,6 @@ public class CartBuyMedicineActivity extends AppCompatActivity {
         } else {
             minDay = day + 1;
         }
-
         String str;
         if (minDay < 10) {
             if(month < 10){
@@ -142,7 +142,7 @@ public class CartBuyMedicineActivity extends AppCompatActivity {
                 str = year + "/" + month + "/" + minDay;
             }
         }
-        btnCBMDate.setText(str);
+        dateButton.setText(str);
 
         int style = AlertDialog.THEME_HOLO_DARK;
         datePickerDialog = new DatePickerDialog(this, style, dateSetListener, year, month, day);

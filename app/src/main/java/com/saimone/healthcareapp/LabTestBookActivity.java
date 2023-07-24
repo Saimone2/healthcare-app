@@ -13,33 +13,32 @@ import android.widget.Toast;
 import java.util.regex.Pattern;
 
 public class LabTestBookActivity extends AppCompatActivity {
-    EditText etLTBFullName, etLTBAddress, etLTBPinCode, etLTBContactNumber;
-    Button btnLTBBook;
+    EditText etFullName, etAddress, etPinCode, etContactno;
+    Button bookButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lab_test_book);
 
-        etLTBFullName = findViewById(R.id.etLTBFullName);
-        etLTBAddress = findViewById(R.id.etLTBAddress);
-        etLTBPinCode = findViewById(R.id.etLTBPinCode);
-        etLTBContactNumber = findViewById(R.id.etLTBContactNumber);
-        btnLTBBook = findViewById(R.id.btnLTBBook);
+        etFullName = findViewById(R.id.etLTBFullName);
+        etAddress = findViewById(R.id.etLTBAddress);
+        etPinCode = findViewById(R.id.etLTBPinCode);
+        etContactno = findViewById(R.id.etLTBContactNumber);
+        bookButton = findViewById(R.id.btnLTBBook);
 
         Intent it = getIntent();
-        String[] price = it.getStringExtra("price").split(Pattern.quote(":"));
+        String[] price = it.getStringExtra("price").split(Pattern.quote("$"));
         String date = it.getStringExtra("date");
         String time = it.getStringExtra("time");
 
-        btnLTBBook.setOnClickListener(view -> {
+        bookButton.setOnClickListener(view -> {
             SharedPreferences sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
             String username = sharedPreferences.getString("username", "");
 
             try(Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
-                db.addOrder(username, etLTBFullName.getText().toString(), etLTBAddress.getText().toString(), Integer.parseInt(etLTBPinCode.getText().toString()), etLTBContactNumber.getText().toString(), date, time, Float.parseFloat(price[1]), "lab");
+                db.addOrder(username, etFullName.getText().toString(), etAddress.getText().toString(), Integer.parseInt(etPinCode.getText().toString()), etContactno.getText().toString(), date, time, Float.parseFloat(price[1]), "lab");
                 db.removeCart(username, "lab");
-
                 Toast.makeText(getApplicationContext(), "Your booking is done successfully", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(LabTestBookActivity.this, HomeActivity.class));
             } catch (Exception e) {

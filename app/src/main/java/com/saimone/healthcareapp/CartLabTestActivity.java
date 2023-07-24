@@ -20,12 +20,12 @@ import java.util.HashMap;
 import java.util.regex.Pattern;
 
 public class CartLabTestActivity extends AppCompatActivity {
+    TextView tvTotalCost;
+    ListView listView;
+    Button dateButton, timeButton, checkoutButton, backButton;
     HashMap<String, String> item;
     ArrayList<HashMap<String, String>> list;
     SimpleAdapter sa;
-    TextView tvCLTotalCost;
-    ListView lvCLDetails;
-    Button btnCLDate, btnCLTime, btnCLCheckout, btnCLBack;
     private DatePickerDialog datePickerDialog;
     private TimePickerDialog timePickerDialog;
 
@@ -34,12 +34,12 @@ public class CartLabTestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart_lab_test);
 
-        btnCLDate = findViewById(R.id.btnCLDate);
-        btnCLTime = findViewById(R.id.btnCLTime);
-        btnCLCheckout = findViewById(R.id.btnCLCheckout);
-        btnCLBack = findViewById(R.id.btnCLBack);
-        tvCLTotalCost = findViewById(R.id.tvCLTotalCost);
-        lvCLDetails = findViewById(R.id.lvCLDetails);
+        tvTotalCost = findViewById(R.id.tvCLTTotalCost);
+        listView = findViewById(R.id.lvCLTDetails);
+        dateButton = findViewById(R.id.btnCLTDate);
+        timeButton = findViewById(R.id.btnCLTTime);
+        checkoutButton = findViewById(R.id.btnCLTCheckout);
+        backButton = findViewById(R.id.btnCLTBack);
 
         SharedPreferences sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
         String username = sharedPreferences.getString("username", "");
@@ -51,7 +51,6 @@ public class CartLabTestActivity extends AppCompatActivity {
             for (int i = 0; i < packages.length; i++) {
                 packages[i] = new String[5];
             }
-
             for (int i = 0; i < dbData.size(); i++) {
                 String arrData = dbData.get(i);
                 String[] strData = arrData.split(Pattern.quote("$"));
@@ -59,8 +58,8 @@ public class CartLabTestActivity extends AppCompatActivity {
                 packages[i][4] = "Cost: " + strData[1] + "$";
                 totalAmount = totalAmount + Float.parseFloat(strData[1]);
             }
-            String str = "Total cost: " + totalAmount;
-            tvCLTotalCost.setText(str);
+            String str = "Total cost: " + totalAmount + "$";
+            tvTotalCost.setText(str);
 
             list = new ArrayList<>();
             for (String[] aPackage : packages) {
@@ -72,26 +71,27 @@ public class CartLabTestActivity extends AppCompatActivity {
                 item.put("line5", aPackage[4]);
                 list.add(item);
             }
-            sa = new SimpleAdapter(this, list, R.layout.multi_lines, new String[]{"line1","line2","line3","line4","line5"}, new int[]{R.id.line_a, R.id.line_b, R.id.line_c, R.id.line_d, R.id.line_e});
-            lvCLDetails.setAdapter(sa);
-
+            sa = new SimpleAdapter(this, list,
+                    R.layout.multi_lines, new String[]{"line1", "line2", "line3", "line4", "line5"},
+                    new int[] {R.id.line_a, R.id.line_b, R.id.line_c, R.id.line_d, R.id.line_e});
+            listView.setAdapter(sa);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         initDatePicker();
-        btnCLDate.setOnClickListener(view -> datePickerDialog.show());
+        dateButton.setOnClickListener(view -> datePickerDialog.show());
 
         initTimePicker();
-        btnCLTime.setOnClickListener(view -> timePickerDialog.show());
+        timeButton.setOnClickListener(view -> timePickerDialog.show());
 
-        btnCLBack.setOnClickListener(view -> startActivity(new Intent(CartLabTestActivity.this, LabTestActivity.class)));
+        backButton.setOnClickListener(view -> startActivity(new Intent(CartLabTestActivity.this, LabTestActivity.class)));
 
-        btnCLCheckout.setOnClickListener(view -> {
+        checkoutButton.setOnClickListener(view -> {
             Intent it = new Intent(CartLabTestActivity.this, LabTestBookActivity.class);
-            it.putExtra("price", tvCLTotalCost.getText());
-            it.putExtra("date", btnCLDate.getText());
-            it.putExtra("time", btnCLTime.getText());
+            it.putExtra("price", tvTotalCost.getText());
+            it.putExtra("date", dateButton.getText());
+            it.putExtra("time", timeButton.getText());
             startActivity(it);
         });
     }
@@ -113,7 +113,7 @@ public class CartLabTestActivity extends AppCompatActivity {
                     str = i + "/" + i1 + "/" + i2;
                 }
             }
-            btnCLDate.setText(str);
+            dateButton.setText(str);
         };
 
         Calendar calendar = Calendar.getInstance();
@@ -149,7 +149,7 @@ public class CartLabTestActivity extends AppCompatActivity {
                 str = year + "/" + month + "/" + minDay;
             }
         }
-        btnCLDate.setText(str);
+        dateButton.setText(str);
 
         int style = AlertDialog.THEME_HOLO_DARK;
         datePickerDialog = new DatePickerDialog(this, style, dateSetListener, year, month, day);
@@ -164,7 +164,7 @@ public class CartLabTestActivity extends AppCompatActivity {
             } else {
                 str = i + ":" + i1;
             }
-            btnCLTime.setText(str);
+            timeButton.setText(str);
         };
 
         Calendar calendar = Calendar.getInstance();
@@ -173,7 +173,7 @@ public class CartLabTestActivity extends AppCompatActivity {
 
         String str;
         str = hours + ":00";
-        btnCLTime.setText(str);
+        timeButton.setText(str);
 
         int style = AlertDialog.THEME_HOLO_DARK;
         timePickerDialog = new TimePickerDialog(this, style, timeSetListener, hours, minutes, true);

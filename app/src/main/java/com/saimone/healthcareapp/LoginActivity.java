@@ -12,8 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
-    EditText etLoginUsername, etLoginPassword;
-    Button btnLogin;
+    EditText etUsername, etPassword;
+    Button loginButton;
     TextView tvNewUser;
 
     @Override
@@ -21,17 +21,18 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        etLoginUsername = findViewById(R.id.etLoginUsername);
-        etLoginPassword = findViewById(R.id.etLoginPassword);
-        btnLogin = findViewById(R.id.btnLogin);
-        tvNewUser = findViewById(R.id.tvNewUser);
+        etUsername = findViewById(R.id.etLoginUsername);
+        etPassword = findViewById(R.id.etLoginPassword);
+        loginButton = findViewById(R.id.btnLogin);
+        tvNewUser = findViewById(R.id.tvRegisterNewUser);
 
-        btnLogin.setOnClickListener(view -> {
-            //startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-            String username = etLoginUsername.getText().toString();
-            String password = etLoginPassword.getText().toString();
+        tvNewUser.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
 
-            try(UserDatabase db = new UserDatabase(getApplicationContext(), "healthcare-users", null, 1)) {
+        loginButton.setOnClickListener(view -> {
+            String username = etUsername.getText().toString();
+            String password = etPassword.getText().toString();
+
+            try(Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
                 if (username.length() == 0 || password.length() == 0) {
                     Toast.makeText(getApplicationContext(), "Please enter all data", Toast.LENGTH_SHORT).show();
                 } else {
@@ -52,7 +53,5 @@ public class LoginActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         });
-
-        tvNewUser.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
     }
 }

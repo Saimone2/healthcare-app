@@ -28,6 +28,8 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.btnRegister);
         tvAlreadyHaveAnAccount = findViewById(R.id.tvAlreadyHaveAnAccount);
 
+        tvAlreadyHaveAnAccount.setOnClickListener(view -> startActivity(new Intent(RegisterActivity.this, LoginActivity.class)));
+
         btnRegister.setOnClickListener(view -> {
             String username = etRegisterUsername.getText().toString();
             String email = etRegisterEmail.getText().toString();
@@ -62,8 +64,6 @@ public class RegisterActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         });
-
-        tvAlreadyHaveAnAccount.setOnClickListener(view -> startActivity(new Intent(RegisterActivity.this, LoginActivity.class)));
     }
 
     private boolean isValidUsername(String username) {

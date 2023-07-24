@@ -9,29 +9,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class HealthArticlesDetailsActivity extends AppCompatActivity {
-
-    TextView tv1;
-    ImageView img;
-    Button btn;
+    TextView tvTitle;
+    ImageView imageView;
+    Button backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_health_articles_details);
 
-        tv1 = findViewById(R.id.tvHADTitle);
-        img = findViewById(R.id.content);
-        btn = findViewById(R.id.btnHADBack);
+        tvTitle = findViewById(R.id.tvHADTitle);
+        imageView = findViewById(R.id.ivHealthPoster);
+        backButton = findViewById(R.id.btnHADBack);
 
         Intent it = getIntent();
-        tv1.setText(it.getStringExtra("text1"));
+        tvTitle.setText(it.getStringExtra("text1"));
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null) {
-            int resId = bundle.getInt("text2");
-            img.setImageResource(resId);
+            int resourceId = bundle.getInt("text2");
+            imageView.setImageResource(resourceId);
         }
 
-        btn.setOnClickListener(view -> startActivity(new Intent(HealthArticlesDetailsActivity.this, HomeActivity.class)));
+        backButton.setOnClickListener(view -> startActivity(new Intent(HealthArticlesDetailsActivity.this, HealthArticlesActivity.class)));
     }
 }

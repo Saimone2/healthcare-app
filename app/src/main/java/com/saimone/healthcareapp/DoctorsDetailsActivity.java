@@ -13,8 +13,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DoctorsDetailsActivity extends AppCompatActivity {
-    TextView tvDDTitle;
-    Button btnDDBack;
+    TextView tvTitle;
+    ListView listView;
+    Button backButton;
     String[][] doctor_details = {};
     ArrayList<HashMap<String, String>> list;
     HashMap<String, String> item;
@@ -25,17 +26,19 @@ public class DoctorsDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_details);
 
-        tvDDTitle = findViewById(R.id.tvDDTitle);
+        tvTitle = findViewById(R.id.tvDDTitle);
+        backButton = findViewById(R.id.btnDDBack);
+        listView = findViewById(R.id.listViewDD);
+
         Intent it = getIntent();
         String title = it.getStringExtra("title");
 
         doctor_details = getDoctorDetails(title);
-
         if(doctor_details.length == 0) {
             String str = "Doctors not found";
-            tvDDTitle.setText(str);
+            tvTitle.setText(str);
         } else {
-            tvDDTitle.setText(title);
+            tvTitle.setText(title);
             list = new ArrayList<>();
             for (String[] doctor_detail : doctor_details) {
                 item = new HashMap<>();
@@ -46,12 +49,12 @@ public class DoctorsDetailsActivity extends AppCompatActivity {
                 item.put("line5", "Service fee: " + doctor_detail[4] + "$");
                 list.add(item);
             }
+            sa = new SimpleAdapter(this, list,
+                    R.layout.multi_lines, new String[]{"line1", "line2", "line3", "line4", "line5"},
+                    new int[]{R.id.line_a, R.id.line_b, R.id.line_c, R.id.line_d, R.id.line_e});
+            listView.setAdapter(sa);
 
-            sa = new SimpleAdapter(this, list, R.layout.multi_lines, new String[]{"line1", "line2", "line3", "line4", "line5"}, new int[]{R.id.line_a, R.id.line_b, R.id.line_c, R.id.line_d, R.id.line_e});
-            ListView lvDD = findViewById(R.id.lvDD);
-            lvDD.setAdapter(sa);
-
-            lvDD.setOnItemClickListener((adapterView, view, i, l) -> {
+            listView.setOnItemClickListener((adapterView, view, i, l) -> {
                 Intent intent = new Intent(DoctorsDetailsActivity.this, BookAppointmentActivity.class);
                 intent.putExtra("text1", title);
                 intent.putExtra("text2", doctor_details[i][0]);
@@ -62,8 +65,7 @@ public class DoctorsDetailsActivity extends AppCompatActivity {
             });
         }
 
-        btnDDBack = findViewById(R.id.btnDDBack);
-        btnDDBack.setOnClickListener(view -> startActivity(new Intent(DoctorsDetailsActivity.this, FindDoctorActivity.class)));
+        backButton.setOnClickListener(view -> startActivity(new Intent(DoctorsDetailsActivity.this, FindDoctorActivity.class)));
     }
 
     private String[][] getDoctorDetails(String specialty) {

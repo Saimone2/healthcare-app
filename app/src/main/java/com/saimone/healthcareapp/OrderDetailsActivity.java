@@ -16,22 +16,22 @@ import java.util.HashMap;
 import java.util.regex.Pattern;
 
 public class OrderDetailsActivity extends AppCompatActivity {
+    TextView tvTitle;
+    ListView listView;
+    Button backButton;
     HashMap<String, String> item;
     ArrayList<HashMap<String, String>> list;
     SimpleAdapter sa;
-    ListView lvOD;
-    Button btnODBack;
-    TextView tvODTitle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_details);
 
-        lvOD = findViewById(R.id.lvOD);
-        btnODBack = findViewById(R.id.btnODBack);
-        tvODTitle = findViewById(R.id.tvODTitle);
+        tvTitle = findViewById(R.id.tvODTitle);
+        listView = findViewById(R.id.listViewOD);
+        backButton = findViewById(R.id.btnODBack);
 
-        btnODBack.setOnClickListener(view -> startActivity(new Intent(OrderDetailsActivity.this, HomeActivity.class)));
+        backButton.setOnClickListener(view -> startActivity(new Intent(OrderDetailsActivity.this, HomeActivity.class)));
 
         try(Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
             SharedPreferences sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
@@ -40,7 +40,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
             ArrayList<String> dbData = db.getOrderData(username);
             if (dbData.isEmpty()) {
                 String str = "No orders";
-                tvODTitle.setText(str);
+                tvTitle.setText(str);
             } else {
                 String[][] order_details = new String[dbData.size()][];
                 for (int i = 0; i < order_details.length; i++) {
@@ -68,8 +68,10 @@ public class OrderDetailsActivity extends AppCompatActivity {
                         item.put("line5", order[4]);
                         list.add(item);
                     }
-                    sa = new SimpleAdapter(this, list, R.layout.multi_lines, new String[]{"line1", "line2", "line3", "line4", "line5"}, new int[]{R.id.line_a, R.id.line_b, R.id.line_c, R.id.line_d, R.id.line_e});
-                    lvOD.setAdapter(sa);
+                    sa = new SimpleAdapter(this, list,
+                            R.layout.multi_lines, new String[]{"line1", "line2", "line3", "line4", "line5"},
+                            new int[]{R.id.line_a, R.id.line_b, R.id.line_c, R.id.line_d, R.id.line_e});
+                    listView.setAdapter(sa);
                 }
             }
         } catch (Exception e) {
