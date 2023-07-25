@@ -28,7 +28,7 @@ public class CartLabTestActivity extends AppCompatActivity {
     ArrayList<HashMap<String, String>> list;
     SimpleAdapter sa;
     private DatePickerDialog datePickerDialog;
-    private TimePickerDialog timePickerDialog;
+    private CustomTimePickerDialog timePickerDialog;
     double totalAmount = 0;
 
     @Override
@@ -161,6 +161,7 @@ public class CartLabTestActivity extends AppCompatActivity {
         int style = AlertDialog.THEME_HOLO_DARK;
         datePickerDialog = new DatePickerDialog(this, style, dateSetListener, year, month, day);
         datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis() + 86400000);
+        datePickerDialog.getDatePicker().setMaxDate(calendar.getTimeInMillis() + 1_209_600_000);
     }
 
     private void initTimePicker() {
@@ -183,7 +184,8 @@ public class CartLabTestActivity extends AppCompatActivity {
         timeButton.setText(str);
 
         int style = AlertDialog.THEME_HOLO_DARK;
-        timePickerDialog = new TimePickerDialog(this, style, timeSetListener, hours, minutes, true);
-        datePickerDialog.getDatePicker().setMaxDate(calendar.getTimeInMillis() + 1_209_600_000);
+        timePickerDialog = new CustomTimePickerDialog(this, style, timeSetListener, hours, minutes, true);
+        timePickerDialog.setMinTime(9, 0);
+        timePickerDialog.setMaxTime(18, 0);
     }
 }

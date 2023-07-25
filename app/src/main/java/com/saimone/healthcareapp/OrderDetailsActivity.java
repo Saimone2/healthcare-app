@@ -10,10 +10,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
@@ -65,8 +63,6 @@ public class OrderDetailsActivity extends AppCompatActivity {
                         order_details[i][4] = "Doctor's appointment";
                     }
                     order_details[i][2] = "Price: " + strData[6] + "$";
-
-                    Toast.makeText(getApplicationContext(), "" + Arrays.deepToString(order_details), Toast.LENGTH_SHORT).show();
                 }
 
                 list = new ArrayList<>();
