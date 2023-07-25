@@ -170,7 +170,7 @@ public class Database extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("select * from orderplace where username=?", str);
         if(cursor.moveToFirst()) {
             do {
-                arr.add(cursor.getString(1) + "$" + cursor.getString(2) + "$" + cursor.getString(3) + "$" + cursor.getString(4) + "$" + cursor.getString(5) + "$" + cursor.getString(6) + "$" + cursor.getString(7));
+                arr.add(cursor.getString(1) + "$" + cursor.getString(2) + "$" + cursor.getString(3) + "$" + cursor.getString(4) + "$" + cursor.getString(5) + "$" + cursor.getString(6) + "$" + cursor.getString(7) + "$" + cursor.getString(8));
             } while(cursor.moveToNext());
         }
         cursor.close();
@@ -262,6 +262,26 @@ public class Database extends SQLiteOpenHelper {
         }
     }
 
+    public int checkAppointmentExists(String username, String fullname, String address, String contact, String date, String time) {
+        int result = 0;
+        String[] str = new String[6];
+        str[0] = username;
+        str[1] = fullname;
+        str[2] = address;
+        str[3] = contact;
+        str[4] = date;
+        str[5] = time;
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from orderplace where username=? and fullname=? and address=? and contactno=? and date=? and time=?", str);
+        if(cursor.moveToFirst()) {
+            result = 1;
+        }
+        cursor.close();
+        db.close();
+        return result;
+    }
+
     private void fillLabTestsData(SQLiteDatabase db) {
         insertLabTest(db, "Full Body Checkup", """
                 These include a complete blood count (CBC) to assess red and white blood cell counts, hemoglobin levels, and platelets. It also measures blood sugar levels, cholesterol levels, liver and kidney function, and other important markers.
@@ -275,7 +295,7 @@ public class Database extends SQLiteOpenHelper {
                 Some full body checkups may include X-rays, ultrasound, or other imaging studies to assess the condition of organs such as the heart, lungs, liver, and kidneys.
                                 
                 BMI is calculated based on height and weight measurements, providing an indication of the person's body fat and overall health.
-                """, 999.0);
+                """, 250.0);
         insertLabTest(db,"Blood Glucose Fasting", """
                 The Blood Glucose Fasting lab test is a common diagnostic tool used to measure the level of glucose (sugar) in a person's blood after an overnight fast. It is often done to screen for and diagnose diabetes or to monitor the effectiveness of diabetes treatment.
                                 
@@ -284,21 +304,21 @@ public class Database extends SQLiteOpenHelper {
                 The blood sample is then analyzed in a laboratory to determine the concentration of glucose in the blood. The results are reported in milligrams per deciliter (mg/dL) or millimoles per liter (mmol/L) depending on the country's standard unit of measurement.
                                 
                 The fasting blood glucose level provides valuable information about the body's ability to regulate blood sugar levels. It helps identify potential diabetes or pre-diabetic conditions.
-                """, 299.0);
+                """, 25.0);
         insertLabTest(db,"COVID-19 Antibody - IgG", """
                 This a blood test used to detect the presence of immunoglobulin G (IgG) antibodies against the SARS-CoV-2 virus, which causes COVID-19.
                                 
                 The test involves taking a blood sample from the patient, usually through a simple blood draw. It is often used to determine if someone has been previously infected with the virus and has developed an immune response to it. The presence of IgG antibodies indicates that the individual has been exposed to the virus, even if they did not show symptoms or were asymptomatic.
                                 
                 It is important to note that the presence of IgG antibodies does not necessarily guarantee immunity, and the duration of the immunity provided by these antibodies is still an area of ongoing research. The test can be useful in understanding the prevalence of past infections within a population and for tracking the spread of the virus.
-                """, 899.0);
+                """, 60.0);
         insertLabTest(db,"Thyroid Check", """
                 Thyroid Stimulating Hormone is produced by the pituitary gland and stimulates the thyroid to produce its hormones. High levels of TSH may indicate an underactive thyroid (hypothyroidism), while low levels may suggest an overactive thyroid (hyperthyroidism).
                                 
                 Thyroid Hormones T4 (thyroxine) and T3 (triiodothyronine) are the main hormones produced by the thyroid gland. T4 is the primary hormone secreted by the thyroid, and it gets converted into the more active T3 in the body. Abnormal levels of these hormones can also indicate thyroid dysfunction.
                                 
                 The Thyroid Check lab test is commonly used to diagnose thyroid disorders, monitor thyroid hormone replacement therapy, and assess overall thyroid health.
-                """, 499.0);
+                """, 85.0);
         insertLabTest(db,"Immunity Check", """
                 Antibody Testing: This involves checking for specific antibodies in the blood to determine if a person has been exposed to certain infections or received vaccinations. For example, the COVID-19 Antibody - IgG test is a type of antibody test used to detect past exposure to the SARS-CoV-2 virus.
                                 
@@ -307,7 +327,7 @@ public class Database extends SQLiteOpenHelper {
                 Immunoglobulin Levels: This test measures the levels of different types of immunoglobulins (IgG, IgA, IgM, IgE, IgD), which are antibodies produced by the immune system.
                                 
                 T-Cell Subsets: T-cells are a type of white blood cell that plays a central role in the immune response. Testing for T-cell subsets can help assess the function of the cellular immune response.
-                """, 699.0);
+                """, 130.0);
     }
 
     public void insertLabTest(SQLiteDatabase db, String name, String description, double price) {
@@ -417,26 +437,6 @@ public class Database extends SQLiteOpenHelper {
             db.close();
             return new String[][]{};
         }
-    }
-
-    public int checkAppointmentExists(String username, String fullname, String address, String contact, String date, String time) {
-        int result = 0;
-        String[] str = new String[6];
-        str[0] = username;
-        str[1] = fullname;
-        str[2] = address;
-        str[3] = contact;
-        str[4] = date;
-        str[5] = time;
-
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("select * from orderplace where username=? and fullname=? and address=? and contactno=? and date=? and time=?", str);
-        if(cursor.moveToFirst()) {
-            result = 1;
-        }
-        cursor.close();
-        db.close();
-        return result;
     }
 
     private void fillHealthArticlesData(SQLiteDatabase db) {

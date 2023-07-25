@@ -31,14 +31,13 @@ public class BuyMedicineDetailsActivity extends AppCompatActivity {
         String str = "Total Cost:" + it.getStringExtra("text3") + "$";
         tvTotalCost.setText(str);
 
-        backButton.setOnClickListener(view -> new Intent(BuyMedicineDetailsActivity.this, BuyMedicineActivity.class));
+        backButton.setOnClickListener(view -> startActivity(new Intent(BuyMedicineDetailsActivity.this, BuyMedicineActivity.class)));
 
         cartButton.setOnClickListener(view -> {
-            SharedPreferences sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
+            SharedPreferences sharedPreferences = getSharedPreferences("shared_preferences", Context.MODE_PRIVATE);
             String username = sharedPreferences.getString("username", "");
             String product = tvTitle.getText().toString();
             float price = Float.parseFloat(it.getStringExtra("text3"));
-
             try(Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
                 if(db.checkCart(username, product) == 1) {
                     Toast.makeText(getApplicationContext(), "This product has already been added", Toast.LENGTH_SHORT).show();

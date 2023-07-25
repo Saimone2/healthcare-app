@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -28,6 +29,7 @@ public class CartLabTestActivity extends AppCompatActivity {
     SimpleAdapter sa;
     private DatePickerDialog datePickerDialog;
     private TimePickerDialog timePickerDialog;
+    double totalAmount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,7 @@ public class CartLabTestActivity extends AppCompatActivity {
         checkoutButton = findViewById(R.id.btnCLTCheckout);
         backButton = findViewById(R.id.btnCLTBack);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("shared_preferences", Context.MODE_PRIVATE);
         String username = sharedPreferences.getString("username", "");
 
         try(Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
@@ -59,6 +61,7 @@ public class CartLabTestActivity extends AppCompatActivity {
                 totalAmount = totalAmount + Float.parseFloat(strData[1]);
             }
             String str = "Total cost: " + totalAmount + "$";
+            this.totalAmount = totalAmount;
             tvTotalCost.setText(str);
 
             list = new ArrayList<>();
@@ -88,11 +91,15 @@ public class CartLabTestActivity extends AppCompatActivity {
         backButton.setOnClickListener(view -> startActivity(new Intent(CartLabTestActivity.this, LabTestActivity.class)));
 
         checkoutButton.setOnClickListener(view -> {
-            Intent it = new Intent(CartLabTestActivity.this, LabTestBookActivity.class);
-            it.putExtra("price", tvTotalCost.getText());
-            it.putExtra("date", dateButton.getText());
-            it.putExtra("time", timeButton.getText());
-            startActivity(it);
+            if(totalAmount == 0) {
+                Toast.makeText(getApplicationContext(), "Cart is empty", Toast.LENGTH_SHORT).show();
+            } else {
+                Intent it = new Intent(CartLabTestActivity.this, LabTestBookActivity.class);
+                it.putExtra("price", tvTotalCost.getText());
+                it.putExtra("date", dateButton.getText());
+                it.putExtra("time", timeButton.getText());
+                startActivity(it);
+            }
         });
     }
 
@@ -177,5 +184,6 @@ public class CartLabTestActivity extends AppCompatActivity {
 
         int style = AlertDialog.THEME_HOLO_DARK;
         timePickerDialog = new TimePickerDialog(this, style, timeSetListener, hours, minutes, true);
+        datePickerDialog.getDatePicker().setMaxDate(calendar.getTimeInMillis() + 1_209_600_000);
     }
 }

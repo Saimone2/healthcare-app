@@ -35,7 +35,7 @@ public class LabTestDetailsActivity extends AppCompatActivity {
         backButton.setOnClickListener(view -> startActivity(new Intent(LabTestDetailsActivity.this, LabTestActivity.class)));
 
         cartButton.setOnClickListener(view -> {
-            SharedPreferences sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
+            SharedPreferences sharedPreferences = getSharedPreferences("shared_preferences", Context.MODE_PRIVATE);
             String username = sharedPreferences.getString("username", "");
             String product = tvTitle.getText().toString();
             float price = Float.parseFloat(it.getStringExtra("text3"));

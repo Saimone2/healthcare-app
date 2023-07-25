@@ -15,13 +15,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
+import java.util.regex.Pattern;
 
 public class BookAppointmentActivity extends AppCompatActivity {
     EditText etFullName, etAddress, etContactno, etFee;
     TextView tvTitle;
     Button dateButton, timeButton, backButton, bookButton;
     private DatePickerDialog datePickerDialog;
-    private TimePickerDialog timePickerDialog;
+    private CustomTimePickerDialog timePickerDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,12 +67,16 @@ public class BookAppointmentActivity extends AppCompatActivity {
 
         bookButton.setOnClickListener(view -> {
             try(Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
-                SharedPreferences sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
+                SharedPreferences sharedPreferences = getSharedPreferences("shared_preferences", Context.MODE_PRIVATE);
                 String username = sharedPreferences.getString("username", "");
-                if(db.checkAppointmentExists(username, title + "=>" + fullname, address, contactno, dateButton.getText().toString(), timeButton.getText().toString()) == 1 ) {
+                String date = dateButton.getText().toString();
+                String time = timeButton.getText().toString();
+                String[] price = fee.split(Pattern.quote("$"));
+
+                if(db.checkAppointmentExists(username, title + ": " + fullname, address, contactno, date, time) == 1 ) {
                     Toast.makeText(getApplicationContext(), "Appointment already booked", Toast.LENGTH_SHORT).show();
                 } else {
-                    db.addOrder(username, title + "=>" + fullname, address, 0, contactno, dateButton.getText().toString(), timeButton.getText().toString(), Float.parseFloat(fee), "appointment");
+                    db.addOrder(username, title + ": " + fullname, address, 0, contactno, date, time, Float.parseFloat(price[0]), "appointment");
                     Toast.makeText(getApplicationContext(), "Appointment is done successfully", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(BookAppointmentActivity.this, HomeActivity.class));
                 }
@@ -138,7 +143,8 @@ public class BookAppointmentActivity extends AppCompatActivity {
 
         int style = AlertDialog.THEME_HOLO_DARK;
         datePickerDialog = new DatePickerDialog(this, style, dateSetListener, year, month, day);
-        datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis() + 86400000);
+        datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis() + 86_400_000);
+        datePickerDialog.getDatePicker().setMaxDate(calendar.getTimeInMillis() + 1_209_600_000);
     }
 
     private void initTimePicker() {
@@ -161,6 +167,8 @@ public class BookAppointmentActivity extends AppCompatActivity {
         timeButton.setText(str);
 
         int style = AlertDialog.THEME_HOLO_DARK;
-        timePickerDialog = new TimePickerDialog(this, style, timeSetListener, hours, minutes, true);
+        timePickerDialog = new CustomTimePickerDialog(this, style, timeSetListener, hours, minutes, true);
+        timePickerDialog.setMinTime(9, 0);
+        timePickerDialog.setMaxTime(18, 0);
     }
 }

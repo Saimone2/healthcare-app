@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -26,6 +27,7 @@ public class CartBuyMedicineActivity extends AppCompatActivity {
     ArrayList<HashMap<String, String>> list;
     SimpleAdapter sa;
     private DatePickerDialog datePickerDialog;
+    double totalAmount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,7 @@ public class CartBuyMedicineActivity extends AppCompatActivity {
         tvTotalCost = findViewById(R.id.tvCBMTotalCost);
         listView = findViewById(R.id.lvCBMDetails);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("shared_preferences", Context.MODE_PRIVATE);
         String username = sharedPreferences.getString("username", "");
 
         try(Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
@@ -48,7 +50,6 @@ public class CartBuyMedicineActivity extends AppCompatActivity {
             for (int i = 0; i < packages.length; i++) {
                 packages[i] = new String[5];
             }
-
             for (int i = 0; i < dbData.size(); i++) {
                 String arrData = dbData.get(i);
                 String[] strData = arrData.split(Pattern.quote("$"));
@@ -57,6 +58,7 @@ public class CartBuyMedicineActivity extends AppCompatActivity {
                 totalAmount = totalAmount + Float.parseFloat(strData[1]);
             }
             String str = "Total cost: " + totalAmount + "$";
+            this.totalAmount = totalAmount;
             tvTotalCost.setText(str);
 
             list = new ArrayList<>();
@@ -83,10 +85,14 @@ public class CartBuyMedicineActivity extends AppCompatActivity {
         backButton.setOnClickListener(view -> startActivity(new Intent(CartBuyMedicineActivity.this, BuyMedicineActivity.class)));
 
         checkoutButton.setOnClickListener(view -> {
-            Intent it = new Intent(CartBuyMedicineActivity.this, BuyMedicineBookActivity.class);
-            it.putExtra("price", tvTotalCost.getText());
-            it.putExtra("date", dateButton.getText());
-            startActivity(it);
+            if(totalAmount == 0) {
+                Toast.makeText(getApplicationContext(), "Cart is empty", Toast.LENGTH_SHORT).show();
+            } else {
+                Intent it = new Intent(CartBuyMedicineActivity.this, BuyMedicineBookActivity.class);
+                it.putExtra("price", tvTotalCost.getText());
+                it.putExtra("date", dateButton.getText());
+                startActivity(it);
+            }
         });
     }
 
@@ -147,5 +153,6 @@ public class CartBuyMedicineActivity extends AppCompatActivity {
         int style = AlertDialog.THEME_HOLO_DARK;
         datePickerDialog = new DatePickerDialog(this, style, dateSetListener, year, month, day);
         datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis() + 86400000);
+        datePickerDialog.getDatePicker().setMaxDate(calendar.getTimeInMillis() + 1_209_600_000);
     }
 }
