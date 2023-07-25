@@ -93,7 +93,7 @@
             android:layout_marginTop="30dp"
             android:autofillHints="password"
             android:background="@drawable/input_bg"
-            android:drawableStart="@drawable/ic_baseline_security_24"
+            android:drawableStart="@drawable/ic_baseline_person_24"
             android:drawablePadding="10dp"
             android:ems="10"
             android:hint="@string/password"
@@ -108,6 +108,33 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etLoginUsername" />
+
+        <ImageView
+            android:id="@+id/iconEyeVisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="22dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_eye_visible"
+            app:layout_constraintEnd_toEndOf="@id/etLoginPassword"
+            app:layout_constraintTop_toTopOf="@id/etLoginPassword"
+            android:importantForAccessibility="no" />
+
+        <ImageView
+            android:id="@+id/iconEyeHidden"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="22dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="gone"
+            android:src="@drawable/ic_eye_hidden"
+            app:layout_constraintEnd_toEndOf="@id/etLoginPassword"
+            app:layout_constraintTop_toTopOf="@id/etLoginPassword"
+            android:importantForAccessibility="no" />
 
         <Button
             android:id="@+id/btnLogin"

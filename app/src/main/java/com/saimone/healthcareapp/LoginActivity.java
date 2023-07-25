@@ -6,8 +6,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +19,9 @@ public class LoginActivity extends AppCompatActivity {
     EditText etUsername, etPassword;
     Button loginButton;
     TextView tvNewUser;
+    private ImageView iconEyeVisible;
+    private ImageView iconEyeHidden;
+    private boolean isPasswordVisible = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +32,11 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etLoginPassword);
         loginButton = findViewById(R.id.btnLogin);
         tvNewUser = findViewById(R.id.tvRegisterNewUser);
+        iconEyeVisible = findViewById(R.id.iconEyeVisible);
+        iconEyeHidden = findViewById(R.id.iconEyeHidden);
+
+        iconEyeVisible.setOnClickListener(v -> togglePasswordVisibility());
+        iconEyeHidden.setOnClickListener(v -> togglePasswordVisibility());
 
         tvNewUser.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
 
@@ -53,5 +65,21 @@ public class LoginActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         });
+    }
+
+    private void togglePasswordVisibility() {
+        isPasswordVisible = !isPasswordVisible;
+
+        if (isPasswordVisible) {
+            etPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            iconEyeVisible.setVisibility(View.GONE);
+            iconEyeHidden.setVisibility(View.VISIBLE);
+        } else {
+            etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            iconEyeVisible.setVisibility(View.VISIBLE);
+            iconEyeHidden.setVisibility(View.GONE);
+        }
+
+        etPassword.setSelection(etPassword.getText().length());
     }
 }

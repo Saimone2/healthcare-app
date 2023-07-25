@@ -27,7 +27,7 @@ public class HealthArticlesDetailsActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null) {
-            int resourceId = bundle.getInt("text2");
+            int resourceId = Integer.parseInt(it.getStringExtra("text2"));
             imageView.setImageResource(resourceId);
         }
 

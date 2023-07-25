@@ -68,7 +68,7 @@ public class BookAppointmentActivity extends AppCompatActivity {
             try(Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
                 SharedPreferences sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
                 String username = sharedPreferences.getString("username", "");
-                if(db.checkAppointmentExists(username, title + "=>" + fullname, address, contactno, 0, dateButton.getText().toString(), timeButton.getText().toString()) == 1 ) {
+                if(db.checkAppointmentExists(username, title + "=>" + fullname, address, contactno, dateButton.getText().toString(), timeButton.getText().toString()) == 1 ) {
                     Toast.makeText(getApplicationContext(), "Appointment already booked", Toast.LENGTH_SHORT).show();
                 } else {
                     db.addOrder(username, title + "=>" + fullname, address, 0, contactno, dateButton.getText().toString(), timeButton.getText().toString(), Float.parseFloat(fee), "appointment");

@@ -35,9 +35,17 @@ public class Database extends SQLiteOpenHelper {
         String qry6 = "create table medicines(name text, description text, price double)";
         sqLiteDatabase.execSQL(qry6);
 
-        fillDoctorsData(sqLiteDatabase);
-        //fillLabTestsData(sqLiteDatabase);
-        //fillMedicinesData(sqLiteDatabase);
+        String qry7 = "create table articles(name text, description text, image int)";
+        sqLiteDatabase.execSQL(qry7);
+
+        fillData(sqLiteDatabase);
+    }
+
+    private void fillData(SQLiteDatabase db) {
+        fillDoctorsData(db);
+        fillLabTestsData(db);
+        fillMedicinesData(db);
+        fillHealthArticlesData(db);
     }
 
     @Override
@@ -256,34 +264,56 @@ public class Database extends SQLiteOpenHelper {
 
     private void fillLabTestsData(SQLiteDatabase db) {
         insertLabTest(db, "Full Body Checkup", """
-                Blood Glucose Fasting
-                Complete Hemogram
-                HbA1c
-                Iron Studies
-                Kidney Function Test
-                LDH Lactate Dehydrogenase, Serum
-                Lipid Profile
-                Liver Function Test
+                These include a complete blood count (CBC) to assess red and white blood cell counts, hemoglobin levels, and platelets. It also measures blood sugar levels, cholesterol levels, liver and kidney function, and other important markers.
+                                
+                A urine sample is analyzed to check for signs of kidney function, infections, or other abnormalities.
+                                
+                It helps evaluate cardiovascular health and detect hypertension.
+                                
+                An ECG records the electrical activity of the heart and helps detect any irregularities in heart rhythm.
+                                
+                Some full body checkups may include X-rays, ultrasound, or other imaging studies to assess the condition of organs such as the heart, lungs, liver, and kidneys.
+                                
+                BMI is calculated based on height and weight measurements, providing an indication of the person's body fat and overall health.
                 """, 999.0);
-        insertLabTest(db,"Blood Glucose Fasting", "Blood Glucose Fasting", 299.0);
-        insertLabTest(db,"COVID-19 Antibody - IgG", "COVID-19 Antibody - IgG", 899.0);
-        insertLabTest(db,"Thyroid Check", "Thyroid Profile Total (T3, T4, & TSH Ultra-sensitive)", 499.0);
+        insertLabTest(db,"Blood Glucose Fasting", """
+                The Blood Glucose Fasting lab test is a common diagnostic tool used to measure the level of glucose (sugar) in a person's blood after an overnight fast. It is often done to screen for and diagnose diabetes or to monitor the effectiveness of diabetes treatment.
+                                
+                During the test, the individual is required to fast for a specific period, typically 8 to 12 hours. This means they should not eat or drink anything except water during this time. After the fasting period, a blood sample is taken, usually by drawing blood from a vein in the arm.
+                                
+                The blood sample is then analyzed in a laboratory to determine the concentration of glucose in the blood. The results are reported in milligrams per deciliter (mg/dL) or millimoles per liter (mmol/L) depending on the country's standard unit of measurement.
+                                
+                The fasting blood glucose level provides valuable information about the body's ability to regulate blood sugar levels. It helps identify potential diabetes or pre-diabetic conditions.
+                """, 299.0);
+        insertLabTest(db,"COVID-19 Antibody - IgG", """
+                This a blood test used to detect the presence of immunoglobulin G (IgG) antibodies against the SARS-CoV-2 virus, which causes COVID-19.
+                                
+                The test involves taking a blood sample from the patient, usually through a simple blood draw. It is often used to determine if someone has been previously infected with the virus and has developed an immune response to it. The presence of IgG antibodies indicates that the individual has been exposed to the virus, even if they did not show symptoms or were asymptomatic.
+                                
+                It is important to note that the presence of IgG antibodies does not necessarily guarantee immunity, and the duration of the immunity provided by these antibodies is still an area of ongoing research. The test can be useful in understanding the prevalence of past infections within a population and for tracking the spread of the virus.
+                """, 899.0);
+        insertLabTest(db,"Thyroid Check", """
+                Thyroid Stimulating Hormone is produced by the pituitary gland and stimulates the thyroid to produce its hormones. High levels of TSH may indicate an underactive thyroid (hypothyroidism), while low levels may suggest an overactive thyroid (hyperthyroidism).
+                                
+                Thyroid Hormones T4 (thyroxine) and T3 (triiodothyronine) are the main hormones produced by the thyroid gland. T4 is the primary hormone secreted by the thyroid, and it gets converted into the more active T3 in the body. Abnormal levels of these hormones can also indicate thyroid dysfunction.
+                                
+                The Thyroid Check lab test is commonly used to diagnose thyroid disorders, monitor thyroid hormone replacement therapy, and assess overall thyroid health.
+                """, 499.0);
         insertLabTest(db,"Immunity Check", """
-                Complete Hemogram
-                CRP (C Reactive Protein) Quantitative, Serum
-                Iron Studies
-                Kidney Function Test
-                Liver Function Test
-                Vitamin D Total 25 Hydroxy
-                Lipid Profile
+                Antibody Testing: This involves checking for specific antibodies in the blood to determine if a person has been exposed to certain infections or received vaccinations. For example, the COVID-19 Antibody - IgG test is a type of antibody test used to detect past exposure to the SARS-CoV-2 virus.
+                                
+                Complete Blood Count (CBC): This test provides information about different types of blood cells, including white blood cells, which play a crucial role in the immune response.
+                                
+                Immunoglobulin Levels: This test measures the levels of different types of immunoglobulins (IgG, IgA, IgM, IgE, IgD), which are antibodies produced by the immune system.
+                                
+                T-Cell Subsets: T-cells are a type of white blood cell that plays a central role in the immune response. Testing for T-cell subsets can help assess the function of the cellular immune response.
                 """, 699.0);
     }
 
     public void insertLabTest(SQLiteDatabase db, String name, String description, double price) {
-        String[] str = new String[3];
+        String[] str = new String[2];
         str[0] = name;
-        str[1] = description;
-        str[2] = String.valueOf(price);
+        str[1] = String.valueOf(price);
         Cursor cursor = db.rawQuery("select * from labtests where name=? and price=?", str);
         if(cursor.moveToFirst()) {
             cursor.close();
@@ -322,41 +352,36 @@ public class Database extends SQLiteOpenHelper {
     }
 
     public void fillMedicinesData(SQLiteDatabase db) {
-        insertMedicine(db,"HealthVit Chromium Picolinate 200mcg Capsule", """
-                Chromium is an essential trace mineral that plays an important role in helping insulin regulation
-                """, 300.0);
-        insertMedicine(db,"Uprise-D3 1000IU Capsule", """
-                Building and keeping the bones & teeth strong
-                Reducing Fatigue/stress and muscular pains
-                Boosting immunity and increasing resistance against infection
-                """, 50.0);
-        insertMedicine(db,"Vitamin B Complex Capsule", """
-                Provides relief from vitamin B deficiencies
-                Helps in formation of red blood cells
-                Maintains healthy nervous system
-                """, 450.0);
-        insertMedicine(db,"Dolo 650 Tablet", """
-                Dolo 650 Tablet helps relieve pain and fever by blocking the release of certain chemical message
-                """, 30.0);
-        insertMedicine(db,"Inlife Vitamin E Wheat Germ Oil Capsule", """
-                It promotes health as well as akin benefit
-                It helps reduce skin blemish and pigmentation
-                It act as safeguard the skin from the harsh UVA and UVB sun rays
-                """, 540.0);
-        insertMedicine(db,"Feronia -XT Tablet", """
-                Helps to reduce the iron deficiency due to chronic blood loss or low intake of iron
-                """, 130.0);
-        insertMedicine(db,"Tata 1mg Calcium + Vitamin D3", """
-                Reduces the risk of calcium deficiency, Rickets, and Osteoporosis
-                Promotes mobility and flexibility of joints
-                """, 30.0);
+        insertMedicine(db,"Painexil 30 tablets (Active ingredient: Ibuprofen)", """
+                Painexil is a nonsteroidal anti-inflammatory drug (NSAID) commonly used to relieve pain, reduce inflammation, and lower fever. It is effective in managing mild to moderate pain caused by conditions such as headaches, menstrual cramps, arthritis, and muscle aches.
+                """, 10.0);
+        insertMedicine(db,"Calmazine 60 capsules (Active ingredients: Magnesium and Calcium)", """
+                Calmazine is a supplement that combines magnesium and calcium to support healthy bones, muscles, and nerve function. It is often used to prevent or treat deficiencies of these essential minerals and may also aid in reducing muscle cramps and promoting relaxation.
+                """, 15.0);
+        insertMedicine(db,"Respitrin 20 tablets (Active ingredient: Salbutamol)", """
+                Respitrin is a bronchodilator medication used to alleviate symptoms associated with respiratory conditions like asthma and chronic obstructive pulmonary disease (COPD). It works by relaxing the airway muscles and making it easier to breathe.
+                """, 8.0);
+        insertMedicine(db,"Gastrozole 30 capsules (Active ingredient: Omeprazole)", """
+                Gastronome is a proton pump inhibitor (PPI) that reduces stomach acid production. It is prescribed to treat various gastrointestinal issues, including acid reflux, ulcers, and gastroesophageal reflux disease (GERD).
+                """, 12.0);
+        insertMedicine(db,"Sleepwellon 10 tablets (Active ingredient: Zolpidem)", """
+                Sleepwellon is a sedative-hypnotic medication prescribed for short-term treatment of insomnia. It helps initiate and maintain sleep, allowing individuals to achieve a restful night's sleep.
+                """, 20.0);
+        insertMedicine(db,"Allerclear 30 tablets (Active ingredient: Loratadine)", """
+                Allerclear is an antihistamine used to relieve symptoms associated with allergies, such as sneezing, runny nose, itchy eyes, and skin rashes. It provides relief from allergic reactions without causing drowsiness.
+                """, 6.0);
+        insertMedicine(db,"Cardiovas 60 tablets (Active ingredients: Amlodipine and Atenolol)", """
+                Cardiovas is a combination medication used to manage hypertension (high blood pressure). Amlodipine is a calcium channel blocker that helps relax blood vessels, while Atenolol is a beta-blocker that slows down the heart rate, collectively reducing blood pressure.
+                """, 18.0);
+        insertMedicine(db,"Diabetrix 60 tablets (Active ingredient: Metformin)", """
+                Diabetrix is an oral antidiabetic medication primarily used to treat type 2 diabetes. It improves insulin sensitivity, reduces glucose production in the liver, and helps lower blood sugar levels.
+                """, 14.0);
     }
 
     public void insertMedicine(SQLiteDatabase db, String name, String description, double price) {
-        String[] str = new String[3];
+        String[] str = new String[2];
         str[0] = name;
-        str[1] = description;
-        str[2] = String.valueOf(price);
+        str[1] = String.valueOf(price);
         Cursor cursor = db.rawQuery("select * from medicines where name=? and price=?", str);
         if(cursor.moveToFirst()) {
             cursor.close();
@@ -394,7 +419,7 @@ public class Database extends SQLiteOpenHelper {
         }
     }
 
-    public int checkAppointmentExists(String username, String fullname, String address, String contact, int pincode, String date, String time) {
+    public int checkAppointmentExists(String username, String fullname, String address, String contact, String date, String time) {
         int result = 0;
         String[] str = new String[6];
         str[0] = username;
@@ -412,5 +437,52 @@ public class Database extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return result;
+    }
+
+    private void fillHealthArticlesData(SQLiteDatabase db) {
+        insertHealthArticles(db, "Walking Daily", "Find out the benefits of walking every day", R.drawable.health1);
+        insertHealthArticles(db, "Home care of COVID-19", "How to securely protect yourself from COVID-19", R.drawable.health2);
+        insertHealthArticles(db, "Stop Smoking", "Stages of body recovery after smoking", R.drawable.health3);
+        insertHealthArticles(db, "Healthy Gut", "What to eat for a healthy gut", R.drawable.health4);
+    }
+
+    private void insertHealthArticles(SQLiteDatabase db, String name, String description, int image) {
+        String[] str = new String[1];
+        str[0] = name;
+        Cursor cursor = db.rawQuery("select * from articles where name=?", str);
+        if(cursor.moveToFirst()) {
+            cursor.close();
+            return;
+        }
+        cursor.close();
+
+        ContentValues cv = new ContentValues();
+        cv.put("name", name);
+        cv.put("description", description);
+        cv.put("image", image);
+        db.insert("articles", null, cv);
+    }
+
+    public String[][] getHealthArticles() {
+        String[] str = new String[0];
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from articles", str);
+        if (cursor.moveToFirst()) {
+            String[][] data = new String[cursor.getCount()][3];
+            int i = 0;
+            do {
+                data[i][0] = cursor.getString(0);
+                data[i][1] = cursor.getString(1);
+                data[i][2] = cursor.getString(2);
+                i++;
+            } while (cursor.moveToNext());
+            cursor.close();
+            db.close();
+            return data;
+        } else {
+            cursor.close();
+            db.close();
+            return new String[][]{};
+        }
     }
 }

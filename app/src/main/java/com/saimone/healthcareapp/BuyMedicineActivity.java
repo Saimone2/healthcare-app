@@ -44,7 +44,7 @@ public class BuyMedicineActivity extends AppCompatActivity {
             for (String[] medicine : medicine_details) {
                 item = new HashMap<>();
                 item.put("line1", medicine[0]);
-                item.put("line2", medicine[1]);
+                item.put("line2", "");
                 item.put("line3", "");
                 item.put("line4", "");
                 item.put("line5", "Total cost: " + medicine[2] + "$");
@@ -67,7 +67,7 @@ public class BuyMedicineActivity extends AppCompatActivity {
 
     private String[][] getMedicinesDetails() {
         try(Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
-            return db.getLabTests();
+            return db.getMedicines();
         } catch (Exception e) {
             e.printStackTrace();
         }

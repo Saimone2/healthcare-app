@@ -20,21 +20,6 @@ public class LabTestActivity extends AppCompatActivity {
     HashMap<String, String> item;
     ArrayList<HashMap<String, String>> list;
     SimpleAdapter sa;
-    private final String[][] packages = {
-
-            {"Full Body Checkup", "", "", "", "999"},
-            {"Blood Glucose Fasting", "", "", "", "299"},
-            {"COVID-19 Antibody - IgG", "", "", "", "899"},
-            {"Thyroid Check", "", "", "", "499"},
-            {"Immunity Check", "", "", "", "699"}
-    };
-    private final String[] packages_details = {
-            "Blood Glucose Fasting",
-            "Blood Glucose Fasting",
-            "COVID-19 Antibody - IgG",
-            "Thyroid Profile",
-            "Complete Hemogram"
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,13 +39,13 @@ public class LabTestActivity extends AppCompatActivity {
             tvTitle.setText(str);
         } else {
             list = new ArrayList<>();
-            for (String[] aPackage : packages) {
+            for (String[] labTest : labtests_details) {
                 item = new HashMap<>();
-                item.put("line1", aPackage[0]);
-                item.put("line2", aPackage[1]);
-                item.put("line3", aPackage[2]);
-                item.put("line4", aPackage[3]);
-                item.put("line5", "Total cost: " + aPackage[4] + "$");
+                item.put("line1", labTest[0]);
+                item.put("line2", "");
+                item.put("line3", "");
+                item.put("line4", "");
+                item.put("line5", "Total cost: " + labTest[2] + "$");
                 list.add(item);
             }
             sa = new SimpleAdapter(this, list,
@@ -71,9 +56,9 @@ public class LabTestActivity extends AppCompatActivity {
 
         listView.setOnItemClickListener((adapterView, view, i, l) -> {
             Intent it = new Intent(LabTestActivity.this, LabTestDetailsActivity.class);
-            it.putExtra("text1", packages[i][0]);
-            it.putExtra("text2", packages_details[i]);
-            it.putExtra("text3", packages[i][4]);
+            it.putExtra("text1", labtests_details[i][0]);
+            it.putExtra("text2", labtests_details[i][1]);
+            it.putExtra("text3", labtests_details[i][2]);
             startActivity(it);
         });
 
