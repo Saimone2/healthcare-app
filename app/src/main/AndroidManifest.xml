@@ -13,6 +13,21 @@
         android:theme="@style/Theme.Healthcareapp"
         tools:targetApi="31">
         <activity
+            android:name=".HealthArticlesAdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FindDoctorAdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BuyMedicineAdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LabTestAdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminPanelActivity"
+            android:exported="false" />
+        <activity
             android:name=".HealthArticlesDetailsActivity"
             android:exported="false" />
         <activity

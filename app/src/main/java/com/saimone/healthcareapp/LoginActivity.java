@@ -48,7 +48,11 @@ public class LoginActivity extends AppCompatActivity {
                 if (username.length() == 0 || password.length() == 0) {
                     Toast.makeText(getApplicationContext(), "Please enter all data", Toast.LENGTH_SHORT).show();
                 } else {
-                    if (db.login(username, password) == 1) {
+                    if(db.isAdmin(username, password) == 1) {
+                        Intent intent = new Intent(LoginActivity.this, AdminPanelActivity.class);
+                        intent.putExtra("loggedInFlag", true);
+                        startActivity(intent);
+                    } else if (db.login(username, password) == 1) {
                         SharedPreferences sharedPreferences = getSharedPreferences("shared_preferences", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("username", username);

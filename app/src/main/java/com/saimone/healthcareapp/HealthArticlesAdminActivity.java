@@ -12,10 +12,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class HealthArticlesActivity extends AppCompatActivity {
+public class HealthArticlesAdminActivity extends AppCompatActivity {
     TextView tvTitle;
     ListView listView;
-    Button backButton;
+    Button addNewButton, backButton;
     ArrayList<HashMap<String, String>> list;
     HashMap<String, String> item;
     SimpleAdapter sa;
@@ -24,13 +24,14 @@ public class HealthArticlesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_health_articles);
+        setContentView(R.layout.activity_health_articles_admin);
 
-        tvTitle = findViewById(R.id.tvHATitle);
-        listView = findViewById(R.id.listViewHA);
-        backButton = findViewById(R.id.btnHABack);
+        addNewButton = findViewById(R.id.btnHAAAddNew);
+        tvTitle = findViewById(R.id.tvHAATitle);
+        listView = findViewById(R.id.listViewHAA);
+        backButton = findViewById(R.id.btnHAABack);
 
-        backButton.setOnClickListener(view -> startActivity(new Intent(HealthArticlesActivity.this, HomeActivity.class)));
+        backButton.setOnClickListener(view -> startActivity(new Intent(HealthArticlesAdminActivity.this, AdminPanelActivity.class)));
 
         healthArticles = getHealthArticles();
         if(healthArticles.length == 0) {
@@ -51,13 +52,6 @@ public class HealthArticlesActivity extends AppCompatActivity {
                     R.layout.multi_lines, new String[]{"line1", "line2", "line3", "line4", "line5"},
                     new int[]{R.id.line_a, R.id.line_b, R.id.line_c, R.id.line_d, R.id.line_e});
             listView.setAdapter(sa);
-
-            listView.setOnItemClickListener((adapterView, view, i, l) -> {
-                Intent it = new Intent(HealthArticlesActivity.this, HealthArticlesDetailsActivity.class);
-                it.putExtra("text1", healthArticles[i][0]);
-                it.putExtra("text2", healthArticles[i][2]);
-                startActivity(it);
-            });
         }
     }
 

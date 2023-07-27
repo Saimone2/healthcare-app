@@ -485,4 +485,25 @@ public class Database extends SQLiteOpenHelper {
             return new String[][]{};
         }
     }
+
+    public int isAdmin(String username, String password) {
+        if(username.equals("admin")) {
+            String[] str = new String[2];
+            str[0] = username;
+            str[1] = password;
+            SQLiteDatabase db = getReadableDatabase();
+            Cursor cursor = db.rawQuery("select * from users where username=? and password=?", str);
+            if(cursor.moveToFirst()) {
+                cursor.close();
+                db.close();
+                return  1;
+            } else {
+                cursor.close();
+                db.close();
+                return 0;
+            }
+        } else {
+            return 0;
+        }
+    }
 }

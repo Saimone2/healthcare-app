@@ -45,4 +45,7 @@
     <string name="buy_medicines">BUY MEDICINES</string>
     <string name="medicine_details">MEDICINE DETAILS</string>
     <string name="items_in_the_cart">ITEMS IN THE CART</string>
+    <string name="admin_panel">Admin Panel</string>
+    <string name="add_new">ADD NEW</string>
+    <string name="specialty_doctors">Specialty doctors</string>
 </resources>
