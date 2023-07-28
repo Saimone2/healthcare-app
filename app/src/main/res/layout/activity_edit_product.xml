@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/back1"
-    tools:context=".NewProductActivity">
+    tools:context=".EditProductActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -50,7 +50,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tvNPTitle"
+            android:id="@+id/tvEPTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/default_value"
@@ -64,7 +64,7 @@
             app:layout_constraintVertical_bias="0.3" />
 
         <EditText
-            android:id="@+id/etNPName"
+            android:id="@+id/etEPName"
             android:layout_width="325dp"
             android:layout_height="48dp"
             android:layout_marginTop="25dp"
@@ -84,10 +84,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvNPTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/tvEPTitle" />
 
         <LinearLayout
-            android:id="@+id/llNPDescription"
+            android:id="@+id/llEPDescription"
             android:layout_width="325dp"
             android:layout_height="110dp"
             android:layout_marginTop="30dp"
@@ -95,7 +95,7 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etNPName">
+            app:layout_constraintTop_toBottomOf="@+id/etEPName">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -106,7 +106,7 @@
                 android:contentDescription="@string/description" />
 
             <EditText
-                android:id="@+id/etNPDescription"
+                android:id="@+id/etEPDescription"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:drawablePadding="10dp"
@@ -121,13 +121,13 @@
                 android:paddingBottom="10dp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
-                android:textSize="19sp"
+                android:textSize="18sp"
                 android:importantForAutofill="no"
                 />
         </LinearLayout>
 
         <EditText
-            android:id="@+id/etNPPrice"
+            android:id="@+id/etEPPrice"
             android:layout_width="325dp"
             android:layout_height="48dp"
             android:layout_marginTop="30dp"
@@ -147,22 +147,34 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/llNPDescription" />
+            app:layout_constraintTop_toBottomOf="@+id/llEPDescription" />
 
         <Button
-            android:id="@+id/btnNPAddNew"
-            android:layout_width="300dp"
+            android:id="@+id/btnEPUpdate"
+            android:layout_width="180dp"
             android:layout_height="48dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="36dp"
             android:background="@drawable/btn_bg"
-            android:text="@string/add_new"
+            android:text="@string/update_product"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.203"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etNPPrice" />
+            app:layout_constraintTop_toBottomOf="@+id/etEPPrice" />
 
         <Button
-            android:id="@+id/btnNPBack"
+            android:id="@+id/btnEPDelete"
+            android:layout_width="120dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="33dp"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:text="@string/delete"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.852"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etEPPrice" />
+
+        <Button
+            android:id="@+id/btnEPBack"
             android:layout_width="300dp"
             android:layout_height="48dp"
             android:layout_marginTop="25dp"
@@ -171,6 +183,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnNPAddNew" />
+            app:layout_constraintTop_toBottomOf="@+id/btnEPUpdate" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

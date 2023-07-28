@@ -46,9 +46,11 @@
     <string name="medicine_details">MEDICINE DETAILS</string>
     <string name="items_in_the_cart">ITEMS IN THE CART</string>
     <string name="admin_panel">Admin Panel</string>
-    <string name="add_new">ADD NEW</string>
+    <string name="add_new">ADD NEW PRODUCT</string>
     <string name="specialty_doctors">Specialty doctors</string>
     <string name="name">Name</string>
     <string name="price">Price</string>
     <string name="description">Description</string>
+    <string name="update_product">UPDATE PRODUCT</string>
+    <string name="delete">DELETE</string>
 </resources>

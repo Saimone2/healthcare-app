@@ -52,6 +52,15 @@ public class LabTestAdminActivity extends AppCompatActivity {
                     R.layout.multi_lines, new String[]{"line1", "line2", "line3", "line4", "line5"},
                     new int[]{R.id.line_a, R.id.line_b, R.id.line_c, R.id.line_d, R.id.line_e});
             listView.setAdapter(sa);
+
+            listView.setOnItemClickListener((adapterView, view, i, l) -> {
+                Intent it = new Intent(LabTestAdminActivity.this, EditProductActivity.class);
+                it.putExtra("product", "lab");
+                it.putExtra("name", labtests_details[i][0]);
+                it.putExtra("description", labtests_details[i][1]);
+                it.putExtra("price", labtests_details[i][2]);
+                startActivity(it);
+            });
         }
 
         addNewButton.setOnClickListener(view -> {

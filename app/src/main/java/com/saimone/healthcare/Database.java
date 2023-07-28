@@ -546,4 +546,85 @@ public class Database extends SQLiteOpenHelper {
             return 0;
         }
     }
+
+    public int updateProduct(String oldName, String oldDescription, String oldPrice, String newName, String newDescription, double newPrice, String product) {
+        String[] str = new String[3];
+        str[0] = oldName;
+        str[1] = oldDescription;
+        str[2] = oldPrice;
+
+        ContentValues cv = new ContentValues();
+        cv.put("name", newName);
+        cv.put("description", newDescription);
+        cv.put("price", newPrice);
+
+        SQLiteDatabase db = getReadableDatabase();
+        if(product.equals("lab")) {
+            Cursor cursor = db.rawQuery("select * from labtests where name=? and description=? and price=?", str);
+            if(cursor.moveToFirst()) {
+                cursor.close();
+                db = getWritableDatabase();
+                db.update("labtests", cv, "name=? and description=? and price=?", str);
+                db.close();
+                return 1;
+            } else {
+                cursor.close();
+                db.close();
+                return 0;
+            }
+        } else if(product.equals("medicine")) {
+            Cursor cursor = db.rawQuery("select * from medicines where name=? and description=? and price=?", str);
+            if(cursor.moveToFirst()) {
+                cursor.close();
+                db = getWritableDatabase();
+                db.update("medicines", cv, "name=? and description=? and price=?", str);
+                db.close();
+                return 1;
+            } else {
+                cursor.close();
+                db.close();
+                return 0;
+            }
+        } else {
+            return 0;
+        }
+    }
+
+    public int deleteProduct(String name, String description, String price, String product) {
+        String[] str = new String[3];
+        str[0] = name;
+        str[1] = description;
+        str[2] = price;
+
+        SQLiteDatabase db = getReadableDatabase();
+        if(product.equals("lab")) {
+            Cursor cursor = db.rawQuery("select * from labtests where name=? and description=? and price=?", str);
+            if(cursor.moveToFirst()) {
+                cursor.close();
+                db = getWritableDatabase();
+                db.delete("labtests", "name=? and description=? and price=?", str);
+                db.close();
+                return 1;
+            } else {
+                cursor.close();
+                db.close();
+                return 0;
+            }
+        } else if(product.equals("medicine")) {
+            Cursor cursor = db.rawQuery("select * from medicines where name=? and description=? and price=?", str);
+            if(cursor.moveToFirst()) {
+                cursor.close();
+                db = getWritableDatabase();
+                db.delete("medicines", "name=? and description=? and price=?", str);
+                db.close();
+                return 1;
+            } else {
+                cursor.close();
+                db.close();
+                return 0;
+            }
+        } else {
+            return 0;
+        }
+    }
 }
