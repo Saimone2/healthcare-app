@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">healthcare-app</string>
+    <string name="app_name">Healthcare</string>
     <string name="healthcare">Healthcare</string>
     <string name="password">Password</string>
     <string name="username">Username</string>
@@ -48,4 +48,7 @@
     <string name="admin_panel">Admin Panel</string>
     <string name="add_new">ADD NEW</string>
     <string name="specialty_doctors">Specialty doctors</string>
+    <string name="name">Name</string>
+    <string name="price">Price</string>
+    <string name="description">Description</string>
 </resources>
