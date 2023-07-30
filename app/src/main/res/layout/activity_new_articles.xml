@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back2"
-    tools:context=".NewProductActivity">
+    android:background="@drawable/background"
+    tools:context=".NewArticlesActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -50,10 +50,10 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tvNPTitle"
+            android:id="@+id/tvNATitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/default_value"
+            android:text="@string/health_articles"
             android:textColor="@color/white"
             android:textSize="22sp"
             android:textStyle="bold"
@@ -61,10 +61,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.3" />
+            app:layout_constraintVertical_bias="0.24" />
 
         <EditText
-            android:id="@+id/etNPName"
+            android:id="@+id/etNAName"
             android:layout_width="325dp"
             android:layout_height="48dp"
             android:layout_marginTop="25dp"
@@ -84,61 +84,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvNPTitle" />
-
-        <LinearLayout
-            android:id="@+id/llNPDescription"
-            android:layout_width="325dp"
-            android:layout_height="110dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/input_description"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etNPName">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="15dp"
-                android:src="@drawable/description"
-                android:contentDescription="@string/description" />
-
-            <EditText
-                android:id="@+id/etNPDescription"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:drawablePadding="10dp"
-                android:background="#0000"
-                android:ems="10"
-                android:gravity="top"
-                android:hint="@string/description"
-                android:inputType="text|textMultiLine"
-                android:paddingStart="9dp"
-                android:paddingTop="14dp"
-                android:paddingEnd="10dp"
-                android:paddingBottom="10dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textSize="19sp"
-                android:importantForAutofill="no"
-                />
-        </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@+id/tvNATitle" />
 
         <EditText
-            android:id="@+id/etNPPrice"
+            android:id="@+id/etNADescription"
             android:layout_width="325dp"
             android:layout_height="48dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="25dp"
             android:background="@drawable/input_bg"
-            android:drawableStart="@drawable/cash"
-            android:drawablePadding="10dp"
+            android:drawableStart="@drawable/description"
+            android:drawablePadding="6dp"
             android:ems="10"
-            android:hint="@string/price"
+            android:hint="@string/description"
             android:importantForAutofill="no"
-            android:inputType="numberDecimal"
-            android:paddingStart="20dp"
+            android:inputType="text"
+            android:paddingStart="16dp"
             android:paddingTop="10dp"
             android:paddingEnd="10dp"
             android:paddingBottom="10dp"
@@ -147,22 +107,50 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/llNPDescription" />
+            app:layout_constraintTop_toBottomOf="@+id/etNAName" />
+
+        <ImageView
+            android:id="@+id/ivNAUpload"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="24dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/no_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etNADescription"
+            android:contentDescription="@string/no_image" />
 
         <Button
-            android:id="@+id/btnNPAddNew"
+            android:id="@+id/btnNAUpload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ivNAUpload"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:text="@string/upload_photo"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivNAUpload" />
+
+        <Button
+            android:id="@+id/btnNAAddNew"
             android:layout_width="300dp"
             android:layout_height="48dp"
             android:layout_marginTop="40dp"
             android:background="@drawable/btn_bg"
-            android:text="@string/add_new"
+            android:text="@string/add_new_article"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etNPPrice" />
+            app:layout_constraintTop_toBottomOf="@+id/btnNAUpload" />
 
         <Button
-            android:id="@+id/btnNPBack"
+            android:id="@+id/btnNABack"
             android:layout_width="300dp"
             android:layout_height="48dp"
             android:layout_marginTop="25dp"
@@ -171,6 +159,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnNPAddNew" />
+            app:layout_constraintTop_toBottomOf="@+id/btnNAAddNew" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

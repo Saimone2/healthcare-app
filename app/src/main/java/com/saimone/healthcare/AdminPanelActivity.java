@@ -27,7 +27,7 @@ public class AdminPanelActivity extends AppCompatActivity {
         cvBuyMedicine.setOnClickListener(view -> startActivity(new Intent(AdminPanelActivity.this, BuyMedicineAdminActivity.class)));
 
         CardView findDoctor = findViewById(R.id.cvFindDoctor);
-        findDoctor.setOnClickListener(view -> startActivity(new Intent(AdminPanelActivity.this, FindDoctorAdminActivity.class)));
+        findDoctor.setOnClickListener(view -> startActivity(new Intent(AdminPanelActivity.this, FindDoctorSpecialityAdminActivity.class)));
 
         CardView cvHealthDoctor = findViewById(R.id.cvHealthArticles);
         cvHealthDoctor.setOnClickListener(view -> startActivity(new Intent(AdminPanelActivity.this, HealthArticlesAdminActivity.class)));

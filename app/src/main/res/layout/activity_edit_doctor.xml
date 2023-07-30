@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back2"
-    tools:context=".NewProductActivity">
+    android:background="@drawable/back1"
+    tools:context=".EditDoctorActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -50,7 +50,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tvNPTitle"
+            android:id="@+id/tvEDTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/default_value"
@@ -61,83 +61,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.3" />
+            app:layout_constraintVertical_bias="0.25" />
 
         <EditText
-            android:id="@+id/etNPName"
+            android:id="@+id/etEDFullName"
             android:layout_width="325dp"
             android:layout_height="48dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
+            android:autofillHints="name"
             android:background="@drawable/input_bg"
-            android:drawableStart="@drawable/tag"
-            android:drawablePadding="6dp"
-            android:ems="10"
-            android:hint="@string/name"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:paddingStart="16dp"
-            android:paddingTop="10dp"
-            android:paddingEnd="10dp"
-            android:paddingBottom="10dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvNPTitle" />
-
-        <LinearLayout
-            android:id="@+id/llNPDescription"
-            android:layout_width="325dp"
-            android:layout_height="110dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/input_description"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etNPName">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="15dp"
-                android:src="@drawable/description"
-                android:contentDescription="@string/description" />
-
-            <EditText
-                android:id="@+id/etNPDescription"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:drawablePadding="10dp"
-                android:background="#0000"
-                android:ems="10"
-                android:gravity="top"
-                android:hint="@string/description"
-                android:inputType="text|textMultiLine"
-                android:paddingStart="9dp"
-                android:paddingTop="14dp"
-                android:paddingEnd="10dp"
-                android:paddingBottom="10dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textSize="19sp"
-                android:importantForAutofill="no"
-                />
-        </LinearLayout>
-
-        <EditText
-            android:id="@+id/etNPPrice"
-            android:layout_width="325dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/input_bg"
-            android:drawableStart="@drawable/cash"
+            android:drawableStart="@drawable/ic_baseline_person_24"
             android:drawablePadding="10dp"
             android:ems="10"
-            android:hint="@string/price"
-            android:importantForAutofill="no"
-            android:inputType="numberDecimal"
+            android:hint="@string/full_name"
+            android:inputType="textPersonName"
             android:paddingStart="20dp"
             android:paddingTop="10dp"
             android:paddingEnd="10dp"
@@ -147,22 +84,125 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/llNPDescription" />
+            app:layout_constraintTop_toBottomOf="@+id/tvEDTitle" />
 
-        <Button
-            android:id="@+id/btnNPAddNew"
-            android:layout_width="300dp"
+        <EditText
+            android:id="@+id/etEDAddress"
+            android:layout_width="325dp"
             android:layout_height="48dp"
-            android:layout_marginTop="40dp"
-            android:background="@drawable/btn_bg"
-            android:text="@string/add_new"
+            android:layout_marginTop="30dp"
+            android:autofillHints="postalAddress"
+            android:background="@drawable/input_bg"
+            android:drawableStart="@drawable/address"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="@string/address"
+            android:inputType="text"
+            android:paddingStart="20dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etNPPrice" />
+            app:layout_constraintTop_toBottomOf="@+id/etEDFullName" />
+
+        <EditText
+            android:id="@+id/etEDExperience"
+            android:layout_width="325dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="30dp"
+            android:autofillHints="postalAddress"
+            android:background="@drawable/input_bg"
+            android:drawableStart="@drawable/calenda"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="@string/expirience"
+            android:inputType="text"
+            android:paddingStart="20dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etEDAddress" />
+
+        <EditText
+            android:id="@+id/etEDContactNumber"
+            android:layout_width="325dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="30dp"
+            android:autofillHints="phone"
+            android:background="@drawable/input_bg"
+            android:drawableStart="@drawable/phone"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="@string/contact_number"
+            android:inputType="phone"
+            android:paddingStart="20dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etEDExperience" />
+
+        <EditText
+            android:id="@+id/etEDFee"
+            android:layout_width="325dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="30dp"
+            android:autofillHints="fee"
+            android:background="@drawable/input_bg"
+            android:drawableStart="@drawable/cash"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="@string/fee"
+            android:inputType="text"
+            android:paddingStart="20dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etEDContactNumber" />
 
         <Button
-            android:id="@+id/btnNPBack"
+            android:id="@+id/btnEDUpdate"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:background="@drawable/btn_bg"
+            android:text="@string/update_doc_info"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.203"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etEDFee" />
+
+        <Button
+            android:id="@+id/btnEDDelete"
+            android:layout_width="120dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="33dp"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:text="@string/delete"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.852"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etEDFee" />
+
+        <Button
+            android:id="@+id/btnEDBack"
             android:layout_width="300dp"
             android:layout_height="48dp"
             android:layout_marginTop="25dp"
@@ -171,6 +211,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnNPAddNew" />
+            app:layout_constraintTop_toBottomOf="@+id/btnEDUpdate" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

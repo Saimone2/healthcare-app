@@ -33,6 +33,8 @@ public class HealthArticlesAdminActivity extends AppCompatActivity {
 
         backButton.setOnClickListener(view -> startActivity(new Intent(HealthArticlesAdminActivity.this, AdminPanelActivity.class)));
 
+        addNewButton.setOnClickListener(view -> startActivity(new Intent(HealthArticlesAdminActivity.this, NewArticlesActivity.class)));
+
         healthArticles = getHealthArticles();
         if(healthArticles.length == 0) {
             String str = "Health articles not found";
@@ -53,10 +55,6 @@ public class HealthArticlesAdminActivity extends AppCompatActivity {
                     new int[]{R.id.line_a, R.id.line_b, R.id.line_c, R.id.line_d, R.id.line_e});
             listView.setAdapter(sa);
         }
-
-        addNewButton.setOnClickListener(view -> {
-
-        });
     }
 
     private String[][] getHealthArticles() {

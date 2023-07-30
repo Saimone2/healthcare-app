@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Database extends SQLiteOpenHelper {
     public Database(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
@@ -626,5 +628,120 @@ public class Database extends SQLiteOpenHelper {
         } else {
             return 0;
         }
+    }
+
+    public Set<String> getSpecialties() {
+        String[] str = new String[0];
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("select specialty from doctors", str);
+        if (cursor.moveToFirst()) {
+            Set<String> data = new HashSet<>();
+            do {
+                data.add(cursor.getString(0));
+            } while (cursor.moveToNext());
+            cursor.close();
+            db.close();
+            return data;
+        } else {
+            cursor.close();
+            db.close();
+            return new HashSet<>();
+        }
+    }
+
+    public int deleteDoctor(String fullname, String address, String experience, String contactno, String fee, String specialty) {
+        String[] str = new String[6];
+        str[0] = specialty;
+        str[1] = fullname;
+        str[2] = address;
+        str[3] = experience;
+        str[4] = contactno;
+        str[5] = fee;
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from doctors where specialty=? and fullname=? and hospital_address=? and experience=? and phone=? and fee=?", str);
+        if(cursor.moveToFirst()) {
+            cursor.close();
+            db = getWritableDatabase();
+            db.delete("doctors", "specialty=? and fullname=? and hospital_address=? and experience=? and phone=? and fee=?", str);
+            db.close();
+            return 1;
+        } else {
+            cursor.close();
+            db.close();
+            return 0;
+        }
+    }
+
+    public int updateDoctor(String oldFullname, String oldAddress, String oldExperience, String oldPhone, String oldFee, String newFullname, String newAddress, String newExperience, String newPhone, double newFee, String specialty) {
+        String[] str = new String[6];
+        str[0] = specialty;
+        str[1] = oldFullname;
+        str[2] = oldAddress;
+        str[3] = oldExperience;
+        str[4] = oldPhone;
+        str[5] = oldFee;
+
+        ContentValues cv = new ContentValues();
+        cv.put("specialty", specialty);
+        cv.put("fullname", newFullname);
+        cv.put("hospital_address", newAddress);
+        cv.put("experience", newExperience);
+        cv.put("phone", newPhone);
+        cv.put("fee", newFee);
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from doctors where specialty=? and fullname=? and hospital_address=? and experience=? and phone=? and fee=?", str);
+        if (cursor.moveToFirst()) {
+            cursor.close();
+            db = getWritableDatabase();
+            db.update("doctors", cv, "specialty=? and fullname=? and hospital_address=? and experience=? and phone=? and fee=?", str);
+            db.close();
+            return 1;
+        } else {
+            cursor.close();
+            db.close();
+            return 0;
+        }
+    }
+
+    public int addNewDoctor(String specialty, String fullname, String address, String experience, String phone, double fee) {
+        String[] str = new String[6];
+        str[0] = specialty;
+        str[1] = fullname;
+        str[2] = address;
+        str[3] = experience;
+        str[4] = phone;
+        str[5] = String.valueOf(fee);
+
+        ContentValues cv = new ContentValues();
+        cv.put("specialty", specialty);
+        cv.put("fullname", fullname);
+        cv.put("hospital_address", address);
+        cv.put("experience", experience);
+        cv.put("phone", phone);
+        cv.put("fee", fee);
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from doctors where specialty=? and fullname=? and hospital_address=? and experience=? and phone=? and fee=?", str);
+        if (cursor.moveToFirst()) {
+            cursor.close();
+            db.close();
+            return 0;
+        } else {
+            cursor.close();
+            db = getWritableDatabase();
+            db.insert("doctors", null, cv);
+            db.close();
+            return 1;
+        }
+    }
+
+    public void deleteSpecialty(String specialty) {
+        String[] str = new String[1];
+        str[0] = specialty;
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete("doctors", "specialty=?", str);
+        db.close();
     }
 }

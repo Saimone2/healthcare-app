@@ -1,6 +1,7 @@
 package com.saimone.healthcare;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,8 +16,8 @@ import java.util.HashMap;
 public class FindDoctorAdminActivity extends AppCompatActivity {
     TextView tvTitle;
     ListView listView;
-    Button addNewButton, backButton;
-    String[][] doctor_details = {};
+    Button addNewButton, backButton, deleteButton;
+    String[][] doctors_details = {};
     ArrayList<HashMap<String, String>> list;
     HashMap<String, String> item;
     SimpleAdapter sa;
@@ -30,18 +31,20 @@ public class FindDoctorAdminActivity extends AppCompatActivity {
         backButton = findViewById(R.id.btnFDABack);
         listView = findViewById(R.id.listViewFDA);
         addNewButton = findViewById(R.id.btnFDAAddNew);
+        deleteButton = findViewById(R.id.btnFDADelete);
 
-        backButton.setOnClickListener(view -> startActivity(new Intent(FindDoctorAdminActivity.this, AdminPanelActivity.class)));
+        backButton.setOnClickListener(view -> startActivity(new Intent(FindDoctorAdminActivity.this, FindDoctorSpecialityAdminActivity.class)));
 
-        String title = "Dentist";
+        String specialty = getIntent().getStringExtra("specialty");
+        doctors_details = getDoctorsBySpecialty(specialty);
 
-        doctor_details = getDoctorDetails(title);
-        if(doctor_details.length == 0) {
+        if(doctors_details.length == 0) {
             String str = "Doctors not found";
             tvTitle.setText(str);
         } else {
+            tvTitle.setText(specialty);
             list = new ArrayList<>();
-            for (String[] doctor_detail : doctor_details) {
+            for (String[] doctor_detail : doctors_details) {
                 item = new HashMap<>();
                 item.put("line1", doctor_detail[0]);
                 item.put("line2", "Address: " + doctor_detail[1]);
@@ -54,16 +57,38 @@ public class FindDoctorAdminActivity extends AppCompatActivity {
                     R.layout.multi_lines, new String[]{"line1", "line2", "line3", "line4", "line5"},
                     new int[]{R.id.line_a, R.id.line_b, R.id.line_c, R.id.line_d, R.id.line_e});
             listView.setAdapter(sa);
+
+            listView.setOnItemClickListener((adapterView, view, i, l) -> {
+                Intent it = new Intent(FindDoctorAdminActivity.this, EditDoctorActivity.class);
+                it.putExtra("specialty", specialty);
+                it.putExtra("fullname", doctors_details[i][0]);
+                it.putExtra("hospital_address", doctors_details[i][1]);
+                it.putExtra("experience", doctors_details[i][2]);
+                it.putExtra("phone", doctors_details[i][3]);
+                it.putExtra("fee", doctors_details[i][4]);
+                startActivity(it);
+            });
         }
 
         addNewButton.setOnClickListener(view -> {
+            Intent it = new Intent(FindDoctorAdminActivity.this, NewDoctorActivity.class);
+            it.putExtra("specialty", specialty);
+            startActivity(it);
+        });
 
+        deleteButton.setOnClickListener(view -> {
+            FragmentManager manager = getSupportFragmentManager();
+            MyDialogFragment myDialogFragment = MyDialogFragment.newInstance("DELETE SPECIALTY", specialty);
+            myDialogFragment.show(manager, "myDialog");
         });
     }
 
-    private String[][] getDoctorDetails(String specialty) {
+    private String[][] getDoctorsBySpecialty(String specialty) {
         try(Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
             return db.getDoctorsBySpecialty(specialty);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return new String[][] {};
     }
 }

@@ -1,6 +1,7 @@
 package com.saimone.healthcare;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +14,6 @@ public class EditProductActivity extends AppCompatActivity {
     TextView tvTitle;
     EditText etName, etDescription, etPrice;
     Button updateButton, backButton, deleteButton;
-    private static final String PRODUCT_TYPE_LAB = "lab";
     private String productType;
 
     @Override
@@ -30,7 +30,7 @@ public class EditProductActivity extends AppCompatActivity {
         deleteButton = findViewById(R.id.btnEPDelete);
 
         productType = getIntent().getStringExtra("product");
-        tvTitle.setText(productType.equals(PRODUCT_TYPE_LAB) ? "Edit lab test" : "Edit medicine");
+        tvTitle.setText(productType.equals("lab") ? "Edit lab test" : "Edit medicine");
 
         etName.setText(getIntent().getStringExtra("name"));
         etDescription.setText(getIntent().getStringExtra("description"));
@@ -44,17 +44,9 @@ public class EditProductActivity extends AppCompatActivity {
             String description = etDescription.getText().toString();
             String priceStr = etPrice.getText().toString().replace("$", "");
 
-            try (Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
-                int result = db.deleteProduct(name, description, priceStr, productType);
-                if (result == 0) {
-                    Toast.makeText(getApplicationContext(), "Something wrong", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Product updated", Toast.LENGTH_LONG).show();
-                    navigateToAdminActivity();
-                }
-            } catch (Exception e) {
-                Toast.makeText(getApplicationContext(), "Something wrong", Toast.LENGTH_SHORT).show();
-            }
+            FragmentManager manager = getSupportFragmentManager();
+            MyDialogFragment myDialogFragment = MyDialogFragment.newInstance("DELETE PRODUCT", name, description, priceStr, productType);
+            myDialogFragment.show(manager, "myDialog");
         });
 
         updateButton.setOnClickListener(view -> {
@@ -69,7 +61,7 @@ public class EditProductActivity extends AppCompatActivity {
                     if (result == 0) {
                         Toast.makeText(getApplicationContext(), "Something wrong", Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Product updated", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Product deleted", Toast.LENGTH_LONG).show();
                         navigateToAdminActivity();
                     }
                 } catch (Exception e) {
@@ -80,7 +72,7 @@ public class EditProductActivity extends AppCompatActivity {
     }
 
     private void navigateToAdminActivity() {
-        Class<?> adminActivityClass = productType.equals(PRODUCT_TYPE_LAB)? LabTestAdminActivity.class : BuyMedicineAdminActivity.class;
+        Class<?> adminActivityClass = productType.equals("lab")? LabTestAdminActivity.class : BuyMedicineAdminActivity.class;
         startActivity(new Intent(EditProductActivity.this, adminActivityClass));
     }
 
