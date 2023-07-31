@@ -13,91 +13,91 @@
         android:theme="@style/Theme.Healthcareapp"
         tools:targetApi="31">
         <activity
-            android:name=".NewSpecialtyActivity"
+            android:name=".admin.add.NewSpecialtyActivity"
             android:exported="false" />
         <activity
-            android:name=".NewDoctorActivity"
+            android:name=".admin.add.NewDoctorActivity"
             android:exported="false" />
         <activity
-            android:name=".EditDoctorActivity"
+            android:name=".admin.edit.EditDoctorActivity"
             android:exported="false" />
         <activity
-            android:name=".FindDoctorAdminActivity"
+            android:name=".admin.FindDoctorAdminActivity"
             android:exported="false" />
         <activity
-            android:name=".NewArticlesActivity"
+            android:name=".admin.add.NewArticlesActivity"
             android:exported="false" />
         <activity
-            android:name=".EditProductActivity"
+            android:name=".admin.edit.EditProductActivity"
             android:exported="false" />
         <activity
-            android:name=".NewProductActivity"
+            android:name=".admin.add.NewProductActivity"
             android:exported="false" />
         <activity
-            android:name=".HealthArticlesAdminActivity"
+            android:name=".admin.HealthArticlesAdminActivity"
             android:exported="false" />
         <activity
-            android:name=".FindDoctorSpecialityAdminActivity"
+            android:name=".admin.FindDoctorSpecialityAdminActivity"
             android:exported="false" />
         <activity
-            android:name=".BuyMedicineAdminActivity"
+            android:name=".admin.BuyMedicineAdminActivity"
             android:exported="false" />
         <activity
-            android:name=".LabTestAdminActivity"
+            android:name=".admin.LabTestAdminActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminPanelActivity"
+            android:name=".admin.AdminPanelActivity"
             android:exported="false" />
         <activity
-            android:name=".HealthArticlesDetailsActivity"
+            android:name=".user.HealthArticlesDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".HealthArticlesActivity"
+            android:name=".user.HealthArticlesActivity"
             android:exported="false" />
         <activity
-            android:name=".BuyMedicineBookActivity"
+            android:name=".user.BuyMedicineBookActivity"
             android:exported="false" />
         <activity
-            android:name=".BuyMedicineDetailsActivity"
+            android:name=".user.BuyMedicineDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".CartBuyMedicineActivity"
+            android:name=".user.CartBuyMedicineActivity"
             android:exported="false" />
         <activity
-            android:name=".BuyMedicineActivity"
+            android:name=".user.BuyMedicineActivity"
             android:exported="false" />
         <activity
-            android:name=".OrderDetailsActivity"
+            android:name=".user.OrderDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".LabTestBookActivity"
+            android:name=".user.LabTestBookActivity"
             android:exported="false" />
         <activity
-            android:name=".CartLabTestActivity"
+            android:name=".user.CartLabTestActivity"
             android:exported="false" />
         <activity
-            android:name=".LabTestDetailsActivity"
+            android:name=".user.LabTestDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".LabTestActivity"
+            android:name=".user.LabTestActivity"
             android:exported="false" />
         <activity
-            android:name=".BookAppointmentActivity"
+            android:name=".user.BookAppointmentActivity"
             android:exported="false" />
         <activity
-            android:name=".DoctorsDetailsActivity"
+            android:name=".user.DoctorsDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".FindDoctorActivity"
+            android:name=".user.FindDoctorActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".user.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".auth.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".auth.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
