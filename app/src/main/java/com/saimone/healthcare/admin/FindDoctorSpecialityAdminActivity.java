@@ -20,10 +20,10 @@ public class FindDoctorSpecialityAdminActivity extends AppCompatActivity {
     TextView tvTitle;
     ListView listView;
     Button addNewButton, backButton;
-    String[] specialties;
     ArrayList<HashMap<String, String>> list;
     HashMap<String, String> item;
     SimpleAdapter sa;
+    String[] specialties;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +36,8 @@ public class FindDoctorSpecialityAdminActivity extends AppCompatActivity {
         addNewButton = findViewById(R.id.btnFDSAAddNew);
 
         backButton.setOnClickListener(view -> startActivity(new Intent(FindDoctorSpecialityAdminActivity.this, AdminPanelActivity.class)));
+
+        addNewButton.setOnClickListener(view -> startActivity(new Intent(FindDoctorSpecialityAdminActivity.this, NewSpecialtyActivity.class)));
 
         specialties = getSpecialties();
         if(specialties.length == 0) {
@@ -63,8 +65,6 @@ public class FindDoctorSpecialityAdminActivity extends AppCompatActivity {
                 startActivity(it);
             });
         }
-
-        addNewButton.setOnClickListener(view -> startActivity(new Intent(FindDoctorSpecialityAdminActivity.this, NewSpecialtyActivity.class)));
     }
 
     private String[] getSpecialties() {

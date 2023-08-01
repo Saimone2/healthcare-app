@@ -86,7 +86,7 @@
             android:id="@+id/tvLTDTotalCost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:text="@string/total_cost"
             android:textColor="@color/white"
             android:textSize="20sp"
@@ -97,10 +97,9 @@
 
         <Button
             android:id="@+id/btnLTDAddToCart"
-            android:layout_width="220dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
-            android:background="@drawable/btn_bg"
+            android:layout_width="280dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="20dp"
             android:text="@string/add_to_cart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -109,10 +108,9 @@
 
         <Button
             android:id="@+id/btnLTDBack"
-            android:layout_width="220dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:background="@drawable/btn_bg"
+            android:layout_width="280dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="20dp"
             android:text="@string/back"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

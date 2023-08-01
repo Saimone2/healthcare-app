@@ -56,9 +56,10 @@
     <string name="add_new_article">ADD NEW ARTICLE</string>
     <string name="upload_photo">Upload Photo</string>
     <string name="add_new_speciality">ADD NEW SPECIALITY</string>
-    <string name="update_doc_info">UPDATE DOC INFO</string>
     <string name="expirience">Expirience</string>
     <string name="add_new_doctor">ADD NEW DOCTOR</string>
     <string name="delete_specialty">DELETE SPECIALTY</string>
     <string name="no_image">NO IMAGE</string>
+    <string name="update_doctor">UPDATE DOCTOR</string>
+    <string name="update_article">UPDATE ARTICLE</string>
 </resources>

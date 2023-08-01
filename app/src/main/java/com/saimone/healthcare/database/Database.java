@@ -588,11 +588,16 @@ public class Database extends SQLiteOpenHelper {
         }
     }
 
-    public int updateProduct(String oldName, String oldDescription, String oldPrice, String newName, String newDescription, double newPrice, String product) {
+    public int updateProduct(String oldName, String oldDescription, String oldPrice, String newName, String newDescription, String newPrice, String product) {
         String[] str = new String[3];
         str[0] = oldName;
         str[1] = oldDescription;
         str[2] = oldPrice;
+
+        String[] str1 = new String[3];
+        str1[0] = newName;
+        str1[1] = newDescription;
+        str1[2] = newPrice;
 
         ContentValues cv = new ContentValues();
         cv.put("name", newName);
@@ -601,8 +606,8 @@ public class Database extends SQLiteOpenHelper {
 
         switch (product) {
             case "lab": {
-                try (SQLiteDatabase db = getWritableDatabase(); Cursor cursor = db.rawQuery("select * from labtests where name=? and description=? and price=?", str)) {
-                    if (cursor.moveToFirst()) {
+                try (SQLiteDatabase db = getWritableDatabase(); Cursor cursor = db.rawQuery("select * from labtests where name=? and description=? and price=?", str1)) {
+                    if (!cursor.moveToFirst()) {
                         db.update("labtests", cv, "name=? and description=? and price=?", str);
                         return 1;
                     } else {
@@ -614,9 +619,8 @@ public class Database extends SQLiteOpenHelper {
                 return -1;
             }
             case "medicine": {
-                try(SQLiteDatabase db = getWritableDatabase(); Cursor cursor = db.rawQuery("select * from medicines where name=? and description=? and price=?", str)) {
-                    if (cursor.moveToFirst()) {
-                        cursor.close();
+                try(SQLiteDatabase db = getWritableDatabase(); Cursor cursor = db.rawQuery("select * from medicines where name=? and description=? and price=?", str1)) {
+                    if (!cursor.moveToFirst()) {
                         db.update("medicines", cv, "name=? and description=? and price=?", str);
                         return 1;
                     } else {
@@ -670,7 +674,7 @@ public class Database extends SQLiteOpenHelper {
         }
     }
 
-    public int addNewDoctor(String fullname, String address, String experience, String phone, double fee, String specialtyName) {
+    public int addNewDoctor(String fullname, String address, String experience, String phone, String fee, String specialtyName) {
         SQLiteDatabase db = getWritableDatabase();
 
         String id = getSpecialtyIdByName(db, specialtyName);
@@ -683,7 +687,7 @@ public class Database extends SQLiteOpenHelper {
             str[1] = address;
             str[2] = experience;
             str[3] = phone;
-            str[4] = String.valueOf(fee);
+            str[4] = fee;
             str[5] = id;
 
             try(Cursor cursor1 = db.rawQuery("select * from doctors where fullname=? and hospital_address=? and experience=? and phone=? and fee=? and specialty_id=?", str)) {
@@ -721,15 +725,15 @@ public class Database extends SQLiteOpenHelper {
             return 0;
         } else {
             String[] str = new String[6];
-            str[0] = oldFullname;
-            str[1] = oldAddress;
-            str[2] = oldExperience;
-            str[3] = oldPhone;
-            str[4] = oldFee;
+            str[0] = newFullname;
+            str[1] = newAddress;
+            str[2] = newExperience;
+            str[3] = newPhone;
+            str[4] = newFee;
             str[5] = id;
 
             try (Cursor cursor = db.rawQuery("select * from doctors where fullname=? and hospital_address=? and experience=? and phone=? and fee=? and specialty_id=?", str)) {
-                if (cursor.moveToFirst()) {
+                if (!cursor.moveToFirst()) {
                     ContentValues cv = new ContentValues();
                     cv.put("fullname", newFullname);
                     cv.put("hospital_address", newAddress);
@@ -738,7 +742,15 @@ public class Database extends SQLiteOpenHelper {
                     cv.put("fee", newFee);
                     cv.put("specialty_id", id);
 
-                    db.update("doctors", cv, "fullname=? and hospital_address=? and experience=? and phone=? and fee=? and specialty_id=?", str);
+                    String[] str1 = new String[6];
+                    str1[0] = oldFullname;
+                    str1[1] = oldAddress;
+                    str1[2] = oldExperience;
+                    str1[3] = oldPhone;
+                    str1[4] = oldFee;
+                    str1[5] = id;
+
+                    db.update("doctors", cv, "fullname=? and hospital_address=? and experience=? and phone=? and fee=? and specialty_id=?", str1);
                     db.close();
                     return 1;
                 } else {
@@ -762,17 +774,17 @@ public class Database extends SQLiteOpenHelper {
             db.close();
             return 0;
         } else {
-            String[] str1 = new String[6];
-            str1[0] = fullname;
-            str1[1] = address;
-            str1[2] = experience;
-            str1[3] = phone;
-            str1[4] = fee;
-            str1[5] = id;
+            String[] str = new String[6];
+            str[0] = fullname;
+            str[1] = address;
+            str[2] = experience;
+            str[3] = phone;
+            str[4] = fee;
+            str[5] = id;
 
-            try(Cursor cursor = db.rawQuery("select * from doctors where fullname=? and hospital_address=? and experience=? and phone=? and fee=? and specialty_id=?", str1)) {
+            try(Cursor cursor = db.rawQuery("select * from doctors where fullname=? and hospital_address=? and experience=? and phone=? and fee=? and specialty_id=?", str)) {
                 if (cursor.moveToFirst()) {
-                    db.delete("doctors", "fullname=? and hospital_address=? and experience=? and phone=? and fee=? and specialty_id=?", str1);
+                    db.delete("doctors", "fullname=? and hospital_address=? and experience=? and phone=? and fee=? and specialty_id=?", str);
                     db.close();
                     return 1;
                 } else {
@@ -841,5 +853,71 @@ public class Database extends SQLiteOpenHelper {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public int addNewArticle(String name, String description) {
+        String[] str = new String[2];
+        str[0] = name;
+        str[1] = description;
+
+        try (SQLiteDatabase db = getWritableDatabase(); Cursor cursor = db.rawQuery("select * from articles where name=? and description=?", str)) {
+            if (cursor.moveToFirst()) {
+                return 0;
+            } else {
+                ContentValues cv = new ContentValues();
+                cv.put("name", name);
+                cv.put("description", description);
+                db.insert("articles", null, cv);
+                return 1;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+
+    public int updateArticle(String oldName, String oldDescription, String newName, String newDescription) {
+        String[] str = new String[2];
+        str[0] = newName;
+        str[1] = newDescription;
+
+        try (SQLiteDatabase db = getWritableDatabase(); Cursor cursor = db.rawQuery("select * from articles where name=? and description=?", str)) {
+            if (!cursor.moveToFirst()) {
+                ContentValues cv = new ContentValues();
+                cv.put("name", newName);
+                cv.put("description", newDescription);
+
+                String[] str1 = new String[2];
+                str1[0] = oldName;
+                str1[1] = oldDescription;
+
+                db.update("articles", cv, "name=? and description=?", str1);
+                return 1;
+            } else {
+                return 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public int deleteArticle(String name, String description) {
+        String[] str = new String[2];
+        str[0] = name;
+        str[1] = description;
+
+        try (SQLiteDatabase db = getWritableDatabase(); Cursor cursor = db.rawQuery("select * from articles where name=? and description=?", str)) {
+            if (cursor.moveToFirst()) {
+                db.delete("articles", "name=? and description=?", str);
+                return 1;
+            } else {
+                return 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
 }

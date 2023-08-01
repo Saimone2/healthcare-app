@@ -93,7 +93,7 @@
             android:layout_marginTop="30dp"
             android:autofillHints="password"
             android:background="@drawable/input_bg"
-            android:drawableStart="@drawable/ic_baseline_person_24"
+            android:drawableStart="@drawable/ic_baseline_security_24"
             android:drawablePadding="10dp"
             android:ems="10"
             android:hint="@string/password"
@@ -138,10 +138,9 @@
 
         <Button
             android:id="@+id/btnLogin"
-            android:layout_width="300dp"
-            android:layout_height="48dp"
+            android:layout_width="280dp"
+            android:layout_height="55dp"
             android:layout_marginTop="50dp"
-            android:background="@drawable/btn_bg"
             android:text="@string/login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

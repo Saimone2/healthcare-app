@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.saimone.healthcare.R;
 import com.saimone.healthcare.admin.add.NewArticlesActivity;
+import com.saimone.healthcare.admin.edit.EditArticlesActivity;
 import com.saimone.healthcare.database.Database;
 
 import java.util.ArrayList;
@@ -58,6 +59,13 @@ public class HealthArticlesAdminActivity extends AppCompatActivity {
                     R.layout.multi_lines, new String[]{"line1", "line2", "line3", "line4", "line5"},
                     new int[]{R.id.line_a, R.id.line_b, R.id.line_c, R.id.line_d, R.id.line_e});
             listView.setAdapter(sa);
+
+            listView.setOnItemClickListener((adapterView, view, i, l) -> {
+                Intent it = new Intent(HealthArticlesAdminActivity.this, EditArticlesActivity.class);
+                it.putExtra("name", healthArticles[i][0]);
+                it.putExtra("description", healthArticles[i][1]);
+                startActivity(it);
+            });
         }
     }
 

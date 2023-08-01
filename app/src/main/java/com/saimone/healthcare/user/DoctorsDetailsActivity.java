@@ -34,7 +34,7 @@ public class DoctorsDetailsActivity extends AppCompatActivity {
         listView = findViewById(R.id.listViewDD);
 
         Intent it = getIntent();
-        String title = it.getStringExtra("title");
+        String title = it.getStringExtra("specialty");
 
         doctor_details = getDoctorDetails(title);
         if(doctor_details.length == 0) {

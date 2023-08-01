@@ -77,25 +77,25 @@
 
         <Button
             android:id="@+id/btnHAABack"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
+            android:layout_width="160dp"
+            android:layout_height="55dp"
             android:text="@string/back"
             android:layout_marginTop="35dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.885"
+            android:layout_marginStart="190dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/listViewHAA" />
 
         <Button
             android:id="@+id/btnHAAAddNew"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
+            android:layout_width="160dp"
+            android:layout_height="55dp"
             android:text="@string/add_new"
             android:layout_marginTop="35dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.115"
+            android:layout_marginEnd="190dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/listViewHAA" />
     </androidx.constraintlayout.widget.ConstraintLayout>

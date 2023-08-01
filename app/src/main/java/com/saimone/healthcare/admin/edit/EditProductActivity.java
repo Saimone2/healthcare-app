@@ -38,40 +38,42 @@ public class EditProductActivity extends AppCompatActivity {
         productType = getIntent().getStringExtra("product");
         tvTitle.setText(productType.equals("lab") ? "Edit lab test" : "Edit medicine");
 
-        etName.setText(getIntent().getStringExtra("name"));
-        etDescription.setText(getIntent().getStringExtra("description"));
-        String str = getIntent().getStringExtra("price") + "$";
-        etPrice.setText(str);
+        String name = getIntent().getStringExtra("name");
+        String description = getIntent().getStringExtra("description");
+        String price = getIntent().getStringExtra("price");
+
+        etName.setText(name);
+        etDescription.setText(description);
+        String priceStr = price + "$";
+        etPrice.setText(priceStr);
 
         backButton.setOnClickListener(view -> navigateToAdminActivity());
 
         deleteButton.setOnClickListener(view -> {
-            String name = etName.getText().toString();
-            String description = etDescription.getText().toString();
-            String priceStr = etPrice.getText().toString().replace("$", "");
-
             FragmentManager manager = getSupportFragmentManager();
-            MyDialogFragment myDialogFragment = MyDialogFragment.newInstance("DELETE PRODUCT", name, description, priceStr, productType);
+            MyDialogFragment myDialogFragment = MyDialogFragment.newInstance("DELETE PRODUCT", name, description, price, productType);
             myDialogFragment.show(manager, "myDialog");
         });
 
         updateButton.setOnClickListener(view -> {
-            if (validateInput()) {
-                String name = etName.getText().toString();
-                String description = etDescription.getText().toString();
-                String priceStr = etPrice.getText().toString().replace("$", "");
-                double price = Double.parseDouble(priceStr);
+            String newName = etName.getText().toString();
+            String newDescription = etDescription.getText().toString();
+            String newPrice = etPrice.getText().toString().replace("$", "");
 
+            if (validateInput(newName, newDescription, newPrice)) {
                 try (Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
-                    int result = db.updateProduct(getIntent().getStringExtra("name"), getIntent().getStringExtra("description"), getIntent().getStringExtra("price"), name, description, price, productType);
-                    if (result == 0) {
-                        Toast.makeText(getApplicationContext(), "Something wrong", Toast.LENGTH_SHORT).show();
-                    } else {
+                    int res = db.updateProduct(name, description, price, newName, newDescription, newPrice, productType);
+                    if (res == 0) {
+                        Toast.makeText(getApplicationContext(), "This product is already in the database", Toast.LENGTH_SHORT).show();
+                    } else if (res == 1) {
                         Toast.makeText(getApplicationContext(), "Product updated", Toast.LENGTH_LONG).show();
                         navigateToAdminActivity();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Database Error", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(getApplicationContext(), "Something wrong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Database Error", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
                 }
             }
         });
@@ -82,21 +84,17 @@ public class EditProductActivity extends AppCompatActivity {
         startActivity(new Intent(EditProductActivity.this, adminActivityClass));
     }
 
-    private boolean validateInput() {
-        String name = etName.getText().toString();
-        String description = etDescription.getText().toString();
-        String priceStr = etPrice.getText().toString().replace("$", "");
-
-        if (name.isEmpty() || description.isEmpty() || priceStr.isEmpty()) {
+    private boolean validateInput(String newName, String newDescription, String newPrice) {
+        if (newName.isEmpty() || newDescription.isEmpty() || newPrice.isEmpty()) {
             Toast.makeText(this, "Please enter all data", Toast.LENGTH_SHORT).show();
             return false;
         }
 
         double price;
         try {
-            price = Double.parseDouble(priceStr);
+            price = Double.parseDouble(newPrice);
         } catch (NumberFormatException e) {
-            Toast.makeText(this, "Incorrect price", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Incorrect price", Toast.LENGTH_SHORT).show();
             return false;
         }
 

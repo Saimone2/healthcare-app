@@ -157,10 +157,9 @@
 
         <Button
             android:id="@+id/btnBABook"
-            android:layout_width="300dp"
-            android:layout_height="48dp"
+            android:layout_width="280dp"
+            android:layout_height="55dp"
             android:layout_marginTop="125dp"
-            android:background="@drawable/btn_bg"
             android:text="@string/book_an_appointment"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -169,10 +168,9 @@
 
         <Button
             android:id="@+id/btnBABack"
-            android:layout_width="300dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="25dp"
-            android:background="@drawable/btn_bg"
+            android:layout_width="280dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="20dp"
             android:text="@string/back"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

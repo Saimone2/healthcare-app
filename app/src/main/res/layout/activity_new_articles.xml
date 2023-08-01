@@ -111,17 +111,17 @@
 
         <ImageView
             android:id="@+id/ivNAUpload"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="190dp"
+            android:layout_height="190dp"
             android:layout_centerInParent="true"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="20dp"
+            android:contentDescription="@string/no_image"
             android:scaleType="centerCrop"
             android:src="@drawable/no_image"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etNADescription"
-            android:contentDescription="@string/no_image" />
+            app:layout_constraintTop_toBottomOf="@+id/etNADescription" />
 
         <Button
             android:id="@+id/btnNAUpload"
@@ -129,20 +129,20 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/ivNAUpload"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
             android:text="@string/upload_photo"
             android:textAllCaps="false"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivNAUpload" />
 
         <Button
             android:id="@+id/btnNAAddNew"
-            android:layout_width="300dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="40dp"
-            android:background="@drawable/btn_bg"
+            android:layout_width="280dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="35dp"
             android:text="@string/add_new_article"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -151,10 +151,9 @@
 
         <Button
             android:id="@+id/btnNABack"
-            android:layout_width="300dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="25dp"
-            android:background="@drawable/btn_bg"
+            android:layout_width="280dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="20dp"
             android:text="@string/back"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

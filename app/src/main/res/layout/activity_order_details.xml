@@ -78,8 +78,8 @@
 
         <Button
             android:id="@+id/btnODBack"
-            android:layout_width="220dp"
-            android:layout_height="wrap_content"
+            android:layout_width="280dp"
+            android:layout_height="55dp"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="16dp"
             android:text="@string/back"

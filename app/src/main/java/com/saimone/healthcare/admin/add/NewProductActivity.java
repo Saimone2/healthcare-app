@@ -56,31 +56,47 @@ public class NewProductActivity extends AppCompatActivity {
             String description = etDescription.getText().toString();
             String price = etPrice.getText().toString();
 
-            try(Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
-                if (name.length() == 0 || description.length() == 0 || price.length() == 0) {
-                    Toast.makeText(getApplicationContext(), "Please enter all data", Toast.LENGTH_SHORT).show();
-                } else {
-                    double dblPrice = Double.parseDouble(price);
-                    if(dblPrice <= 0 || dblPrice > 999) {
-                        Toast.makeText(getApplicationContext(), "Incorrect price", Toast.LENGTH_SHORT).show();
-                    } else {
-                        if(db.addNewProduct(name, description, price, product) == 0) {
-                            Toast.makeText(getApplicationContext(), "This product is already in the database", Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "New item added", Toast.LENGTH_LONG).show();
-                            switch (product) {
-                                case "lab" ->
-                                        startActivity(new Intent(NewProductActivity.this, LabTestAdminActivity.class));
-                                case "medicine" ->
-                                        startActivity(new Intent(NewProductActivity.this, BuyMedicineAdminActivity.class));
-                                default -> Toast.makeText(getApplicationContext(), "Unknown product", Toast.LENGTH_SHORT).show();
-                            }
+            if(validateInput(name, description, price)) {
+                try (Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
+                    int res = db.addNewProduct(name, description, price, product);
+                    if (res == 0) {
+                        Toast.makeText(getApplicationContext(), "This product is already in the database", Toast.LENGTH_SHORT).show();
+                    } else if (res == 1) {
+                        Toast.makeText(getApplicationContext(), "New product added", Toast.LENGTH_LONG).show();
+                        switch (product) {
+                            case "lab" -> startActivity(new Intent(NewProductActivity.this, LabTestAdminActivity.class));
+                            case "medicine" -> startActivity(new Intent(NewProductActivity.this, BuyMedicineAdminActivity.class));
+                            default -> Toast.makeText(getApplicationContext(), "Unknown product", Toast.LENGTH_SHORT).show();
                         }
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Database Error", Toast.LENGTH_SHORT).show();
                     }
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), "Database Error", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         });
+    }
+
+    private boolean validateInput(String newName, String newDescription, String newPrice) {
+        if (newName.isEmpty() || newDescription.isEmpty() || newPrice.isEmpty()) {
+            Toast.makeText(this, "Please enter all data", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        double fee;
+        try {
+            fee = Double.parseDouble(newPrice);
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Incorrect price", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (fee <= 0 || fee > 999) {
+            Toast.makeText(this, "Incorrect price", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 }

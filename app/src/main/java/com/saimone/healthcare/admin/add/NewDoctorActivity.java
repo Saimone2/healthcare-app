@@ -46,29 +46,47 @@ public class NewDoctorActivity extends AppCompatActivity {
             String address = etAddress.getText().toString();
             String experience = etExperience.getText().toString();
             String phone = etContactno.getText().toString();
-            String feeStr = etFee.getText().toString().replace("$", "");
+            String fee = etFee.getText().toString().replace("$", "");
 
-            try(Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
-                if (fullname.length() == 0 || address.length() == 0 || experience.length() == 0 || phone.length() == 0 || feeStr.length() == 0) {
-                    Toast.makeText(getApplicationContext(), "Please enter all data", Toast.LENGTH_SHORT).show();
-                } else {
-                    double fee = Double.parseDouble(feeStr);
-                    if(fee <= 0 || fee > 999) {
-                        Toast.makeText(getApplicationContext(), "Incorrect price", Toast.LENGTH_SHORT).show();
+            if(validateInput(fullname, address, experience, phone, fee)) {
+                try (Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
+                    int res = db.addNewDoctor(fullname, address, experience, phone, fee, specialty);
+                    if (res == 0) {
+                        Toast.makeText(getApplicationContext(), "This doctor is already in the database", Toast.LENGTH_SHORT).show();
+                    } else if (res == 1) {
+                        Toast.makeText(getApplicationContext(), "New doctor added", Toast.LENGTH_LONG).show();
+                        Intent it = new Intent(NewDoctorActivity.this, FindDoctorAdminActivity.class);
+                        it.putExtra("specialty", specialty);
+                        startActivity(it);
                     } else {
-                        if(db.addNewDoctor(fullname, address, experience, phone, fee, specialty) == 0) {
-                            Toast.makeText(getApplicationContext(), "This doctor is already in the database", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "New doctor added", Toast.LENGTH_LONG).show();
-                            Intent it = new Intent(NewDoctorActivity.this, FindDoctorAdminActivity.class);
-                            it.putExtra("specialty", specialty);
-                            startActivity(it);
-                        }
+                        Toast.makeText(getApplicationContext(), "Database Error", Toast.LENGTH_SHORT).show();
                     }
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), "Database Error", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         });
+    }
+
+    private boolean validateInput(String newFullname, String newAddress, String newExperience, String newPhone, String newFee) {
+        if (newFullname.isEmpty() || newAddress.isEmpty() || newExperience.isEmpty() || newPhone.isEmpty() || newFee.isEmpty()) {
+            Toast.makeText(this, "Please enter all data", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        double fee;
+        try {
+            fee = Double.parseDouble(newFee);
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Incorrect price", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (fee <= 0 || fee > 999) {
+            Toast.makeText(this, "Incorrect price", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 }

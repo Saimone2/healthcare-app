@@ -17,7 +17,7 @@ import com.saimone.healthcare.database.Database;
 
 public class EditDoctorActivity extends AppCompatActivity {
     TextView tvTitle;
-    EditText etFullName, etAddress, etExperience, etContactno, etFee;
+    EditText etFullName, etAddress, etExperience, etPhone, etFee;
     Button backButton, updateButton, deleteButton;
 
     @Override
@@ -29,20 +29,26 @@ public class EditDoctorActivity extends AppCompatActivity {
         etFullName = findViewById(R.id.etEDFullName);
         etAddress = findViewById(R.id.etEDAddress);
         etExperience = findViewById(R.id.etEDExperience);
-        etContactno = findViewById(R.id.etEDContactNumber);
+        etPhone = findViewById(R.id.etEDContactNumber);
         etFee = findViewById(R.id.etEDFee);
         backButton = findViewById(R.id.btnEDBack);
         updateButton = findViewById(R.id.btnEDUpdate);
         deleteButton = findViewById(R.id.btnEDDelete);
 
         String specialty = getIntent().getStringExtra("specialty");
-        etFullName.setText(getIntent().getStringExtra("fullname"));
-        etAddress.setText(getIntent().getStringExtra("hospital_address"));
-        etExperience.setText(getIntent().getStringExtra("experience"));
-        etContactno.setText(getIntent().getStringExtra("phone"));
-        String str = getIntent().getStringExtra("fee") + "$";
-        etFee.setText(str);
+        String fullname = getIntent().getStringExtra("fullname");
+        String address = getIntent().getStringExtra("hospital_address");
+        String experience = getIntent().getStringExtra("experience");
+        String phone = getIntent().getStringExtra("phone");
+        String fee = getIntent().getStringExtra("fee");
+
         tvTitle.setText(specialty);
+        etFullName.setText(fullname);
+        etAddress.setText(address);
+        etExperience.setText(experience);
+        etPhone.setText(phone);
+        String feeStr = fee + "$";
+        etFee.setText(feeStr);
 
         backButton.setOnClickListener(view -> {
             Intent it = new Intent(EditDoctorActivity.this, FindDoctorAdminActivity.class);
@@ -51,59 +57,50 @@ public class EditDoctorActivity extends AppCompatActivity {
         });
 
         deleteButton.setOnClickListener(view -> {
-            String fullname = etFullName.getText().toString();
-            String address = etAddress.getText().toString();
-            String experience = etExperience.getText().toString();
-            String phone = etContactno.getText().toString();
-            String fee = etFee.getText().toString().replace("$", "");
-
             FragmentManager manager = getSupportFragmentManager();
             MyDialogFragment myDialogFragment = MyDialogFragment.newInstance("DELETE DOCTOR", fullname, address, experience, phone, fee, specialty);
             myDialogFragment.show(manager, "myDialog");
         });
 
         updateButton.setOnClickListener(view -> {
-            if (validateInput()) {
-                String fullname = etFullName.getText().toString();
-                String address = etAddress.getText().toString();
-                String experience = etExperience.getText().toString();
-                String contactno = etContactno.getText().toString();
-                String feeStr = etFee.getText().toString().replace("$", "");
+            String newFullname = etFullName.getText().toString();
+            String newAddress = etAddress.getText().toString();
+            String newExperience = etExperience.getText().toString();
+            String newPhone = etPhone.getText().toString();
+            String newFee = etFee.getText().toString().replace("$", "");
 
+            if (validateInput(newFullname, newAddress, newExperience, newPhone, newFee)) {
                 try (Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
-                    int result = db.updateDoctor(getIntent().getStringExtra("fullname"), getIntent().getStringExtra("hospital_address"), getIntent().getStringExtra("experience"), getIntent().getStringExtra("phone"), getIntent().getStringExtra("fee"), fullname, address, experience, contactno, feeStr, specialty);
-                    if (result == 0) {
-                        Toast.makeText(getApplicationContext(), "Something wrong", Toast.LENGTH_SHORT).show();
-                    } else {
+                    int res = db.updateDoctor(fullname, address, experience, phone, fee, newFullname, newAddress, newExperience, newPhone, newFee, specialty);
+                    if (res == 0) {
+                        Toast.makeText(getApplicationContext(), "This doctor is already in the database", Toast.LENGTH_SHORT).show();
+                    } else if(res == 1) {
                         Toast.makeText(getApplicationContext(), "Doctor's info updated", Toast.LENGTH_LONG).show();
                         Intent it = new Intent(EditDoctorActivity.this, FindDoctorAdminActivity.class);
                         it.putExtra("specialty", specialty);
                         startActivity(it);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Database Error", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(getApplicationContext(), "Something wrong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Database Error", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
                 }
             }
         });
     }
 
-    private boolean validateInput() {
-        String fullname = etFullName.getText().toString();
-        String address = etAddress.getText().toString();
-        String experience = etExperience.getText().toString();
-        String contactno = etContactno.getText().toString();
-        String feeStr = etFee.getText().toString().replace("$", "");
-
-        if (fullname.isEmpty() || address.isEmpty() || experience.isEmpty() || contactno.isEmpty() || feeStr.isEmpty()) {
+    private boolean validateInput(String newFullname, String newAddress, String newExperience, String newPhone, String newFee) {
+        if (newFullname.isEmpty() || newAddress.isEmpty() || newExperience.isEmpty() || newPhone.isEmpty() || newFee.isEmpty()) {
             Toast.makeText(this, "Please enter all data", Toast.LENGTH_SHORT).show();
             return false;
         }
 
         double fee;
         try {
-            fee = Double.parseDouble(feeStr);
+            fee = Double.parseDouble(newFee);
         } catch (NumberFormatException e) {
-            Toast.makeText(this, "Incorrect price", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Incorrect price", Toast.LENGTH_SHORT).show();
             return false;
         }
 

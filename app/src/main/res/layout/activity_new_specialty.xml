@@ -88,10 +88,9 @@
 
         <Button
             android:id="@+id/btnNSAddNew"
-            android:layout_width="300dp"
-            android:layout_height="48dp"
+            android:layout_width="280dp"
+            android:layout_height="55dp"
             android:layout_marginTop="40dp"
-            android:background="@drawable/btn_bg"
             android:text="@string/add_new_speciality"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.504"
@@ -100,10 +99,9 @@
 
         <Button
             android:id="@+id/btnNSBack"
-            android:layout_width="300dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="25dp"
-            android:background="@drawable/btn_bg"
+            android:layout_width="280dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="20dp"
             android:text="@string/back"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

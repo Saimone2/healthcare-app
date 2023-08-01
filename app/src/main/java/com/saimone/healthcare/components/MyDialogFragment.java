@@ -12,6 +12,7 @@ import androidx.fragment.app.DialogFragment;
 import com.saimone.healthcare.admin.BuyMedicineAdminActivity;
 import com.saimone.healthcare.admin.FindDoctorAdminActivity;
 import com.saimone.healthcare.admin.FindDoctorSpecialityAdminActivity;
+import com.saimone.healthcare.admin.HealthArticlesAdminActivity;
 import com.saimone.healthcare.admin.LabTestAdminActivity;
 import com.saimone.healthcare.database.Database;
 
@@ -58,6 +59,14 @@ public class MyDialogFragment extends DialogFragment {
         return fragment;
     }
 
+    public static MyDialogFragment newInstance(String state, String name, String description) {
+        MyDialogFragment fragment = new MyDialogFragment();
+        fragment.state = state;
+        fragment.name = name;
+        fragment.description = description;
+        return fragment;
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -75,8 +84,7 @@ public class MyDialogFragment extends DialogFragment {
             try (Database db = new Database(requireActivity().getApplicationContext(), "healthcare", null, 1)) {
                 switch (state) {
                     case "DELETE DOCTOR" -> {
-                        int result = db.deleteDoctor(fullname, address, experience, phone, fee, specialty);
-                        if (result == 0) {
+                        if (db.deleteDoctor(fullname, address, experience, phone, fee, specialty) == 0) {
                             Toast.makeText(requireActivity().getApplicationContext(), "Something wrong", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(requireActivity().getApplicationContext(), "Doctor deleted", Toast.LENGTH_LONG).show();
@@ -86,8 +94,7 @@ public class MyDialogFragment extends DialogFragment {
                         }
                     }
                     case "DELETE SPECIALTY" -> {
-                        int result = db.deleteSpecialty(specialty);
-                        if (result == 0) {
+                        if (db.deleteSpecialty(specialty) == 0) {
                             Toast.makeText(requireActivity().getApplicationContext(), "Something wrong", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(requireActivity().getApplicationContext(), "Specialty deleted", Toast.LENGTH_LONG).show();
@@ -95,12 +102,19 @@ public class MyDialogFragment extends DialogFragment {
                         }
                     }
                     case "DELETE PRODUCT" -> {
-                        int result = db.deleteProduct(name, description, price, productType);
-                        if (result == 0) {
+                        if (db.deleteProduct(name, description, price, productType) == 0) {
                             Toast.makeText(requireActivity().getApplicationContext(), "Something wrong", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(requireActivity().getApplicationContext(), "Product deleted", Toast.LENGTH_LONG).show();
                             navigateToAdminActivity();
+                        }
+                    }
+                    case "DELETE ARTICLE" -> {
+                        if (db.deleteArticle(name, description) == 0) {
+                            Toast.makeText(requireActivity().getApplicationContext(), "Something wrong", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(requireActivity().getApplicationContext(), "Article deleted", Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(getActivity(), HealthArticlesAdminActivity.class));
                         }
                     }
                 }
