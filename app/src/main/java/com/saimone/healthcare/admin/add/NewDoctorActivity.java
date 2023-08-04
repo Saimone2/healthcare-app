@@ -15,7 +15,7 @@ import com.saimone.healthcare.database.Database;
 
 public class NewDoctorActivity extends AppCompatActivity {
     TextView tvTitle;
-    EditText etFullName, etAddress, etExperience, etContactno, etFee;
+    EditText etFullName, etAddress, etExperience, etPhone, etFee;
     Button addNewButton, backButton;
 
     @Override
@@ -27,7 +27,7 @@ public class NewDoctorActivity extends AppCompatActivity {
         etFullName = findViewById(R.id.etNDFullName);
         etAddress = findViewById(R.id.etNDAddress);
         etExperience = findViewById(R.id.etNDExperience);
-        etContactno = findViewById(R.id.etNDContactNumber);
+        etPhone = findViewById(R.id.etNDContactNumber);
         etFee = findViewById(R.id.etNDFee);
         addNewButton = findViewById(R.id.btnNDAddNew);
         backButton = findViewById(R.id.btnNDBack);
@@ -42,15 +42,15 @@ public class NewDoctorActivity extends AppCompatActivity {
         });
 
         addNewButton.setOnClickListener(view -> {
-            String fullname = etFullName.getText().toString();
+            String fullName = etFullName.getText().toString();
             String address = etAddress.getText().toString();
             String experience = etExperience.getText().toString();
-            String phone = etContactno.getText().toString();
+            String phone = etPhone.getText().toString();
             String fee = etFee.getText().toString().replace("$", "");
 
-            if(validateInput(fullname, address, experience, phone, fee)) {
+            if(validateInput(fullName, address, experience, phone, fee)) {
                 try (Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
-                    int res = db.addNewDoctor(fullname, address, experience, phone, fee, specialty);
+                    int res = db.addNewDoctor(fullName, address, experience, phone, fee, specialty);
                     if (res == 0) {
                         Toast.makeText(getApplicationContext(), "This doctor is already in the database", Toast.LENGTH_SHORT).show();
                     } else if (res == 1) {
@@ -69,8 +69,8 @@ public class NewDoctorActivity extends AppCompatActivity {
         });
     }
 
-    private boolean validateInput(String newFullname, String newAddress, String newExperience, String newPhone, String newFee) {
-        if (newFullname.isEmpty() || newAddress.isEmpty() || newExperience.isEmpty() || newPhone.isEmpty() || newFee.isEmpty()) {
+    private boolean validateInput(String newFullName, String newAddress, String newExperience, String newPhone, String newFee) {
+        if (newFullName.isEmpty() || newAddress.isEmpty() || newExperience.isEmpty() || newPhone.isEmpty() || newFee.isEmpty()) {
             Toast.makeText(this, "Please enter all data", Toast.LENGTH_SHORT).show();
             return false;
         }

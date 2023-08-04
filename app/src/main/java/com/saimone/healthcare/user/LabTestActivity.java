@@ -59,9 +59,9 @@ public class LabTestActivity extends AppCompatActivity {
 
         listView.setOnItemClickListener((adapterView, view, i, l) -> {
             Intent it = new Intent(LabTestActivity.this, LabTestDetailsActivity.class);
-            it.putExtra("text1", labtests_details[i][0]);
-            it.putExtra("text2", labtests_details[i][1]);
-            it.putExtra("text3", labtests_details[i][2]);
+            it.putExtra("name", labtests_details[i][0]);
+            it.putExtra("description", labtests_details[i][1]);
+            it.putExtra("price", labtests_details[i][2]);
             startActivity(it);
         });
 

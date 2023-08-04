@@ -57,8 +57,8 @@ public class HealthArticlesActivity extends AppCompatActivity {
 
             listView.setOnItemClickListener((adapterView, view, i, l) -> {
                 Intent it = new Intent(HealthArticlesActivity.this, HealthArticlesDetailsActivity.class);
-                it.putExtra("text1", healthArticles[i][0]);
-                it.putExtra("text2", healthArticles[i][2]);
+                it.putExtra("title", healthArticles[i][0]);
+                it.putExtra("image_path", healthArticles[i][2]);
                 startActivity(it);
             });
         }

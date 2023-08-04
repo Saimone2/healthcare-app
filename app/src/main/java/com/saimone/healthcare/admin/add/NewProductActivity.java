@@ -34,6 +34,7 @@ public class NewProductActivity extends AppCompatActivity {
         Intent it = getIntent();
         String product = it.getStringExtra("product");
 
+        assert product != null;
         String str = switch (product) {
             case "lab" -> "Lab tests";
             case "medicine" -> "Medicines";

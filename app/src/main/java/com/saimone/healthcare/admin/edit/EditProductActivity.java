@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.saimone.healthcare.R;
+import com.saimone.healthcare.admin.AdminPanelActivity;
 import com.saimone.healthcare.admin.BuyMedicineAdminActivity;
 import com.saimone.healthcare.admin.LabTestAdminActivity;
 import com.saimone.healthcare.components.MyDialogFragment;
@@ -36,7 +37,15 @@ public class EditProductActivity extends AppCompatActivity {
         deleteButton = findViewById(R.id.btnEPDelete);
 
         productType = getIntent().getStringExtra("product");
-        tvTitle.setText(productType.equals("lab") ? "Edit lab test" : "Edit medicine");
+
+        String str;
+        assert productType != null;
+        switch (productType) {
+            case "lab" -> str = "Edit lab test";
+            case "medicine" -> str = "Edit medicine";
+            default -> str = "Unknown product";
+        }
+        tvTitle.setText(str);
 
         String name = getIntent().getStringExtra("name");
         String description = getIntent().getStringExtra("description");
@@ -62,6 +71,7 @@ public class EditProductActivity extends AppCompatActivity {
 
             if (validateInput(newName, newDescription, newPrice)) {
                 try (Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
+                    assert name != null;
                     int res = db.updateProduct(name, description, price, newName, newDescription, newPrice, productType);
                     if (res == 0) {
                         Toast.makeText(getApplicationContext(), "This product is already in the database", Toast.LENGTH_SHORT).show();
@@ -80,7 +90,11 @@ public class EditProductActivity extends AppCompatActivity {
     }
 
     private void navigateToAdminActivity() {
-        Class<?> adminActivityClass = productType.equals("lab")? LabTestAdminActivity.class : BuyMedicineAdminActivity.class;
+        Class<?> adminActivityClass = switch (productType) {
+            case "lab" -> LabTestAdminActivity.class;
+            case "medicine" -> BuyMedicineAdminActivity.class;
+            default -> AdminPanelActivity.class;
+        };
         startActivity(new Intent(EditProductActivity.this, adminActivityClass));
     }
 

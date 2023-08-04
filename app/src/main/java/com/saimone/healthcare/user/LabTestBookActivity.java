@@ -14,7 +14,7 @@ import com.saimone.healthcare.R;
 import com.saimone.healthcare.database.Database;
 
 public class LabTestBookActivity extends AppCompatActivity {
-    EditText etFullName, etAddress, etPinCode, etContactno;
+    EditText etFullName, etAddress, etPinCode, etPhone;
     Button bookButton;
 
     @Override
@@ -25,11 +25,12 @@ public class LabTestBookActivity extends AppCompatActivity {
         etFullName = findViewById(R.id.etLTBFullName);
         etAddress = findViewById(R.id.etLTBAddress);
         etPinCode = findViewById(R.id.etLTBPinCode);
-        etContactno = findViewById(R.id.etLTBContactNumber);
+        etPhone = findViewById(R.id.etLTBContactNumber);
         bookButton = findViewById(R.id.btnLTBBook);
 
         Intent it = getIntent();
         String priceStr = it.getStringExtra("price");
+        assert priceStr != null;
         int p1 = priceStr.indexOf(":") + 1;
         int p2 = priceStr.indexOf("$", p1);
         float price = Float.parseFloat(priceStr.substring(p1, p2));
@@ -40,16 +41,16 @@ public class LabTestBookActivity extends AppCompatActivity {
         bookButton.setOnClickListener(view -> {
             SharedPreferences sharedPreferences = getSharedPreferences("shared_preferences", Context.MODE_PRIVATE);
             String username = sharedPreferences.getString("username", "");
-            String fullname = etFullName.getText().toString();
+            String fullName = etFullName.getText().toString();
             String address = etAddress.getText().toString();
             String pinCode = etPinCode.getText().toString();
-            String contactno = etContactno.getText().toString();
+            String phone = etPhone.getText().toString();
 
             try(Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
-                if (fullname.length() == 0 || address.length() == 0 || pinCode.length() == 0 || contactno.length() == 0) {
+                if (fullName.length() == 0 || address.length() == 0 || pinCode.length() == 0 || phone.length() == 0) {
                     Toast.makeText(getApplicationContext(), "Please enter all data", Toast.LENGTH_SHORT).show();
                 } else {
-                    db.addOrder(username, fullname, address, Integer.parseInt(pinCode), contactno, date, time, price, "lab");
+                    db.addOrder(username, fullName, address, Integer.parseInt(pinCode), phone, date, time, price, "lab");
                     db.removeCart(username, "lab");
                     Toast.makeText(getApplicationContext(), "Your booking is done successfully", Toast.LENGTH_LONG).show();
                     startActivity(new Intent(LabTestBookActivity.this, HomeActivity.class));

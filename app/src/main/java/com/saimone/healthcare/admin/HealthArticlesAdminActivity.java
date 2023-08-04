@@ -64,6 +64,7 @@ public class HealthArticlesAdminActivity extends AppCompatActivity {
                 Intent it = new Intent(HealthArticlesAdminActivity.this, EditArticlesActivity.class);
                 it.putExtra("name", healthArticles[i][0]);
                 it.putExtra("description", healthArticles[i][1]);
+                it.putExtra("image_path", healthArticles[i][2]);
                 startActivity(it);
             });
         }

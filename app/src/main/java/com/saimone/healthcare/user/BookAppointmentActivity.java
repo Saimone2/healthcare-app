@@ -22,7 +22,7 @@ import java.util.Calendar;
 import java.util.regex.Pattern;
 
 public class BookAppointmentActivity extends AppCompatActivity {
-    EditText etFullName, etAddress, etContactno, etFee;
+    EditText etFullName, etAddress, etPhone, etFee;
     TextView tvTitle;
     Button dateButton, timeButton, backButton, bookButton;
     private DatePickerDialog datePickerDialog;
@@ -36,7 +36,7 @@ public class BookAppointmentActivity extends AppCompatActivity {
         tvTitle = findViewById(R.id.tvBATitle);
         etFullName = findViewById(R.id.etBAFullName);
         etAddress = findViewById(R.id.etBAAddress);
-        etContactno = findViewById(R.id.etBAContactNumber);
+        etPhone = findViewById(R.id.etBAContactNumber);
         etFee = findViewById(R.id.etBAFee);
         dateButton = findViewById(R.id.btnBADate);
         timeButton = findViewById(R.id.btnBATime);
@@ -45,20 +45,20 @@ public class BookAppointmentActivity extends AppCompatActivity {
 
         etFullName.setKeyListener(null);
         etAddress.setKeyListener(null);
-        etContactno.setKeyListener(null);
+        etPhone.setKeyListener(null);
         etFee.setKeyListener(null);
 
         Intent it = getIntent();
-        String title = it.getStringExtra("text1");
-        String fullname = it.getStringExtra("text2");
-        String address = it.getStringExtra("text3");
-        String contactno = it.getStringExtra("text4");
-        String fee = it.getStringExtra("text5");
+        String title = it.getStringExtra("title");
+        String fullName = it.getStringExtra("fullname");
+        String address = it.getStringExtra("address");
+        String phone = it.getStringExtra("phone");
+        String fee = it.getStringExtra("fee");
 
         tvTitle.setText(title);
-        etFullName.setText(fullname);
+        etFullName.setText(fullName);
         etAddress.setText(address);
-        etContactno.setText(contactno);
+        etPhone.setText(phone);
         etFee.setText(fee);
 
         initDatePicker();
@@ -75,9 +75,10 @@ public class BookAppointmentActivity extends AppCompatActivity {
                 String username = sharedPreferences.getString("username", "");
                 String date = dateButton.getText().toString();
                 String time = timeButton.getText().toString();
+                assert fee != null;
                 String[] price = fee.split(Pattern.quote("$"));
 
-                int result = db.addOrder(username, title + ": " + fullname, address, 0, contactno, date, time, Float.parseFloat(price[0]), "appointment");
+                int result = db.addOrder(username, title + ": " + fullName, address, 0, phone, date, time, Float.parseFloat(price[0]), "appointment");
                 if(result == 1) {
                     Toast.makeText(getApplicationContext(), "Appointment is done successfully", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(BookAppointmentActivity.this, HomeActivity.class));

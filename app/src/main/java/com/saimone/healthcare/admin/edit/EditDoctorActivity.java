@@ -36,14 +36,14 @@ public class EditDoctorActivity extends AppCompatActivity {
         deleteButton = findViewById(R.id.btnEDDelete);
 
         String specialty = getIntent().getStringExtra("specialty");
-        String fullname = getIntent().getStringExtra("fullname");
+        String fullName = getIntent().getStringExtra("fullname");
         String address = getIntent().getStringExtra("hospital_address");
         String experience = getIntent().getStringExtra("experience");
         String phone = getIntent().getStringExtra("phone");
         String fee = getIntent().getStringExtra("fee");
 
         tvTitle.setText(specialty);
-        etFullName.setText(fullname);
+        etFullName.setText(fullName);
         etAddress.setText(address);
         etExperience.setText(experience);
         etPhone.setText(phone);
@@ -58,20 +58,20 @@ public class EditDoctorActivity extends AppCompatActivity {
 
         deleteButton.setOnClickListener(view -> {
             FragmentManager manager = getSupportFragmentManager();
-            MyDialogFragment myDialogFragment = MyDialogFragment.newInstance("DELETE DOCTOR", fullname, address, experience, phone, fee, specialty);
+            MyDialogFragment myDialogFragment = MyDialogFragment.newInstance("DELETE DOCTOR", fullName, address, experience, phone, fee, specialty);
             myDialogFragment.show(manager, "myDialog");
         });
 
         updateButton.setOnClickListener(view -> {
-            String newFullname = etFullName.getText().toString();
+            String newFullName = etFullName.getText().toString();
             String newAddress = etAddress.getText().toString();
             String newExperience = etExperience.getText().toString();
             String newPhone = etPhone.getText().toString();
             String newFee = etFee.getText().toString().replace("$", "");
 
-            if (validateInput(newFullname, newAddress, newExperience, newPhone, newFee)) {
+            if (validateInput(newFullName, newAddress, newExperience, newPhone, newFee)) {
                 try (Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
-                    int res = db.updateDoctor(fullname, address, experience, phone, fee, newFullname, newAddress, newExperience, newPhone, newFee, specialty);
+                    int res = db.updateDoctor(fullName, address, experience, phone, fee, newFullName, newAddress, newExperience, newPhone, newFee, specialty);
                     if (res == 0) {
                         Toast.makeText(getApplicationContext(), "This doctor is already in the database", Toast.LENGTH_SHORT).show();
                     } else if(res == 1) {
@@ -90,8 +90,8 @@ public class EditDoctorActivity extends AppCompatActivity {
         });
     }
 
-    private boolean validateInput(String newFullname, String newAddress, String newExperience, String newPhone, String newFee) {
-        if (newFullname.isEmpty() || newAddress.isEmpty() || newExperience.isEmpty() || newPhone.isEmpty() || newFee.isEmpty()) {
+    private boolean validateInput(String newFullName, String newAddress, String newExperience, String newPhone, String newFee) {
+        if (newFullName.isEmpty() || newAddress.isEmpty() || newExperience.isEmpty() || newPhone.isEmpty() || newFee.isEmpty()) {
             Toast.makeText(this, "Please enter all data", Toast.LENGTH_SHORT).show();
             return false;
         }

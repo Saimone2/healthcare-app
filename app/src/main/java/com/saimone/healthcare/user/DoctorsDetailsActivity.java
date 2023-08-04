@@ -59,11 +59,11 @@ public class DoctorsDetailsActivity extends AppCompatActivity {
 
             listView.setOnItemClickListener((adapterView, view, i, l) -> {
                 Intent intent = new Intent(DoctorsDetailsActivity.this, BookAppointmentActivity.class);
-                intent.putExtra("text1", title);
-                intent.putExtra("text2", doctor_details[i][0]);
-                intent.putExtra("text3", doctor_details[i][1]);
-                intent.putExtra("text4", doctor_details[i][3]);
-                intent.putExtra("text5", doctor_details[i][4] + "$");
+                intent.putExtra("title", title);
+                intent.putExtra("fullname", doctor_details[i][0]);
+                intent.putExtra("address", doctor_details[i][1]);
+                intent.putExtra("phone", doctor_details[i][3]);
+                intent.putExtra("fee", doctor_details[i][4] + "$");
                 startActivity(intent);
             });
         }

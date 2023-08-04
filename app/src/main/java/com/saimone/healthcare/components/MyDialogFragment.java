@@ -15,11 +15,12 @@ import com.saimone.healthcare.admin.FindDoctorSpecialityAdminActivity;
 import com.saimone.healthcare.admin.HealthArticlesAdminActivity;
 import com.saimone.healthcare.admin.LabTestAdminActivity;
 import com.saimone.healthcare.database.Database;
+import com.saimone.healthcare.user.HomeActivity;
 
 public class MyDialogFragment extends DialogFragment {
 
     private String specialty;
-    private String fullname;
+    private String fullName;
     private String address;
     private String experience;
     private String phone;
@@ -37,10 +38,10 @@ public class MyDialogFragment extends DialogFragment {
         return fragment;
     }
 
-    public static MyDialogFragment newInstance(String state, String fullname, String address, String experience, String phone, String fee, String specialty) {
+    public static MyDialogFragment newInstance(String state, String fullName, String address, String experience, String phone, String fee, String specialty) {
         MyDialogFragment fragment = new MyDialogFragment();
         fragment.state = state;
-        fragment.fullname = fullname;
+        fragment.fullName = fullName;
         fragment.address = address;
         fragment.experience = experience;
         fragment.phone = phone;
@@ -71,7 +72,7 @@ public class MyDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         String title = "Caution";
-        String message = "Are you sure you want to delete the specialty and all its doctors?";
+        String message = "Are you sure you want to delete this item?";
         String button1String = "NO";
         String button2String = "YES";
 
@@ -84,37 +85,46 @@ public class MyDialogFragment extends DialogFragment {
             try (Database db = new Database(requireActivity().getApplicationContext(), "healthcare", null, 1)) {
                 switch (state) {
                     case "DELETE DOCTOR" -> {
-                        if (db.deleteDoctor(fullname, address, experience, phone, fee, specialty) == 0) {
-                            Toast.makeText(requireActivity().getApplicationContext(), "Something wrong", Toast.LENGTH_SHORT).show();
-                        } else {
+                        int res = db.deleteDoctor(fullName, address, experience, phone, fee, specialty);
+                        if(res == 0) {
+                            Toast.makeText(requireActivity().getApplicationContext(), "The doctor was not found in the database", Toast.LENGTH_SHORT).show();
+                        } else if (res == 1) {
                             Toast.makeText(requireActivity().getApplicationContext(), "Doctor deleted", Toast.LENGTH_LONG).show();
                             Intent it = new Intent(getActivity(), FindDoctorAdminActivity.class);
                             it.putExtra("specialty", specialty);
                             startActivity(it);
+                        } else {
+                            Toast.makeText(requireActivity().getApplicationContext(), "Database Error", Toast.LENGTH_SHORT).show();
                         }
                     }
                     case "DELETE SPECIALTY" -> {
-                        if (db.deleteSpecialty(specialty) == 0) {
-                            Toast.makeText(requireActivity().getApplicationContext(), "Something wrong", Toast.LENGTH_SHORT).show();
-                        } else {
+                        int res = db.deleteSpecialty(specialty);
+                        if(res == 0) {
+                            Toast.makeText(requireActivity().getApplicationContext(), "The specialty is not found in the database", Toast.LENGTH_SHORT).show();
+                        } else if (res == 1) {
                             Toast.makeText(requireActivity().getApplicationContext(), "Specialty deleted", Toast.LENGTH_LONG).show();
                             startActivity(new Intent(getActivity(), FindDoctorSpecialityAdminActivity.class));
+                        } else {
+                            Toast.makeText(requireActivity().getApplicationContext(), "Database Error", Toast.LENGTH_SHORT).show();
                         }
                     }
                     case "DELETE PRODUCT" -> {
                         if (db.deleteProduct(name, description, price, productType) == 0) {
-                            Toast.makeText(requireActivity().getApplicationContext(), "Something wrong", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(requireActivity().getApplicationContext(), "The product is not found in the database", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(requireActivity().getApplicationContext(), "Product deleted", Toast.LENGTH_LONG).show();
                             navigateToAdminActivity();
                         }
                     }
                     case "DELETE ARTICLE" -> {
-                        if (db.deleteArticle(name, description) == 0) {
-                            Toast.makeText(requireActivity().getApplicationContext(), "Something wrong", Toast.LENGTH_SHORT).show();
-                        } else {
+                        int res = db.deleteArticle(name, description);
+                        if (res == 0) {
+                            Toast.makeText(requireActivity().getApplicationContext(), "The article is not found in the database", Toast.LENGTH_SHORT).show();
+                        } else if (res == 1) {
                             Toast.makeText(requireActivity().getApplicationContext(), "Article deleted", Toast.LENGTH_LONG).show();
                             startActivity(new Intent(getActivity(), HealthArticlesAdminActivity.class));
+                        } else {
+                            Toast.makeText(requireActivity().getApplicationContext(), "Database Error", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -128,7 +138,11 @@ public class MyDialogFragment extends DialogFragment {
     }
 
     private void navigateToAdminActivity() {
-        Class<?> adminActivityClass = productType.equals("lab")? LabTestAdminActivity.class : BuyMedicineAdminActivity.class;
+        Class<?> adminActivityClass = switch (productType) {
+            case "lab" -> LabTestAdminActivity.class;
+            case "medicine" -> BuyMedicineAdminActivity.class;
+            default -> HomeActivity.class;
+        };
         startActivity(new Intent(requireActivity().getApplicationContext(), adminActivityClass));
     }
 }

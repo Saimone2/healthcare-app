@@ -3,6 +3,8 @@ package com.saimone.healthcare.user;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -25,14 +27,21 @@ public class HealthArticlesDetailsActivity extends AppCompatActivity {
         backButton = findViewById(R.id.btnHADBack);
 
         Intent it = getIntent();
-        tvTitle.setText(it.getStringExtra("text1"));
+        String title = it.getStringExtra("title");
+        String imagePath = it.getStringExtra("image_path");
 
-        Bundle bundle = getIntent().getExtras();
-        if(bundle != null) {
-            int resourceId = Integer.parseInt(it.getStringExtra("text2"));
-            imageView.setImageResource(resourceId);
-        }
+        tvTitle.setText(title);
+        loadImageFromFilePath(imagePath, imageView);
 
         backButton.setOnClickListener(view -> startActivity(new Intent(HealthArticlesDetailsActivity.this, HealthArticlesActivity.class)));
+    }
+
+    private void loadImageFromFilePath(String imagePath, ImageView imageView) {
+        try {
+            Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+            imageView.setImageBitmap(bitmap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

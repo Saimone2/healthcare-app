@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.saimone.healthcare.R;
 import com.saimone.healthcare.database.Database;
 
+import java.util.Objects;
+
 public class BuyMedicineDetailsActivity extends AppCompatActivity {
     TextView tvTitle, tvTotalCost, tvDetails;
     Button cartButton, backButton;
@@ -29,9 +31,9 @@ public class BuyMedicineDetailsActivity extends AppCompatActivity {
         backButton = findViewById(R.id.btnBMDBack);
 
         Intent it = getIntent();
-        tvTitle.setText(it.getStringExtra("text1"));
-        tvDetails.setText(it.getStringExtra("text2"));
-        String str = "Total Cost:" + it.getStringExtra("text3") + "$";
+        tvTitle.setText(it.getStringExtra("name"));
+        tvDetails.setText(it.getStringExtra("description"));
+        String str = "Total Cost:" + it.getStringExtra("price") + "$";
         tvTotalCost.setText(str);
 
         backButton.setOnClickListener(view -> startActivity(new Intent(BuyMedicineDetailsActivity.this, BuyMedicineActivity.class)));
@@ -40,7 +42,7 @@ public class BuyMedicineDetailsActivity extends AppCompatActivity {
             SharedPreferences sharedPreferences = getSharedPreferences("shared_preferences", Context.MODE_PRIVATE);
             String username = sharedPreferences.getString("username", "");
             String product = tvTitle.getText().toString();
-            float price = Float.parseFloat(it.getStringExtra("text3"));
+            float price = Float.parseFloat(Objects.requireNonNull(it.getStringExtra("price")));
             try(Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
                 if(db.checkCart(username, product) == 1) {
                     Toast.makeText(getApplicationContext(), "This product has already been added", Toast.LENGTH_SHORT).show();

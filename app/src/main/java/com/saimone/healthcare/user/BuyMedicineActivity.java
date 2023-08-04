@@ -60,9 +60,9 @@ public class BuyMedicineActivity extends AppCompatActivity {
 
             listView.setOnItemClickListener((adapterView, view, i, l) -> {
                 Intent it = new Intent(BuyMedicineActivity.this, BuyMedicineDetailsActivity.class);
-                it.putExtra("text1", medicine_details[i][0]);
-                it.putExtra("text2", medicine_details[i][1]);
-                it.putExtra("text3", medicine_details[i][2]);
+                it.putExtra("name", medicine_details[i][0]);
+                it.putExtra("description", medicine_details[i][1]);
+                it.putExtra("price", medicine_details[i][2]);
                 startActivity(it);
             });
         }
