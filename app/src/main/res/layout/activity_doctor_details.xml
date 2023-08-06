@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/back1"
-    tools:context=".user.DoctorsDetailsActivity">
+    tools:context=".user.FindDoctorsDetailsActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -63,7 +63,21 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.20" />
+            app:layout_constraintVertical_bias="0.16" />
+
+        <SearchView
+            android:id="@+id/searchViewDD"
+            android:layout_width="350dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/input_bg"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            style="@style/WhiteTextSearchField"
+            app:layout_constraintTop_toBottomOf="@id/tvDDTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5" />
 
         <ListView
             android:id="@+id/listViewDD"
@@ -73,17 +87,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvDDTitle"
+            app:layout_constraintTop_toBottomOf="@+id/searchViewDD"
             tools:ignore="NestedScrolling" />
 
         <Button
             android:id="@+id/btnDDBack"
             android:layout_width="280dp"
             android:layout_height="55dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginTop="30dp"
             android:text="@string/back"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"

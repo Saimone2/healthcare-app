@@ -53,7 +53,7 @@
             android:id="@+id/tvNSTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/specialty_doctors"
+            android:text="@string/specialty"
             android:textColor="@color/white"
             android:textSize="22sp"
             android:textStyle="bold"

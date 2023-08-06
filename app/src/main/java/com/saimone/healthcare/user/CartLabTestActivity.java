@@ -179,16 +179,11 @@ public class CartLabTestActivity extends AppCompatActivity {
             timeButton.setText(str);
         };
 
-        Calendar calendar = Calendar.getInstance();
-        int hours = calendar.get(Calendar.HOUR);
-        int minutes = calendar.get(Calendar.MINUTE);
-
-        String str;
-        str = hours + ":00";
+        String str = "9:00";
         timeButton.setText(str);
 
         int style = AlertDialog.THEME_HOLO_DARK;
-        timePickerDialog = new CustomTimePickerDialog(this, style, timeSetListener, hours, minutes, true);
+        timePickerDialog = new CustomTimePickerDialog(this, style, timeSetListener, 9, 0, true);
         timePickerDialog.setMinTime(9, 0);
         timePickerDialog.setMaxTime(18, 0);
     }

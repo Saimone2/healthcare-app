@@ -29,7 +29,7 @@ public class EditArticlesActivity extends AppCompatActivity {
     ImageView imageView;
     EditText etName, etDescription;
     Button backButton, updateButton, uploadButton, deleteButton;
-    String newImagePath;
+    private String newImagePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

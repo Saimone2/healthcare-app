@@ -62,7 +62,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.2" />
+            app:layout_constraintVertical_bias="0.16" />
+
+        <SearchView
+            android:id="@+id/searchViewBM"
+            android:layout_width="350dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/input_bg"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            style="@style/WhiteTextSearchField"
+            app:layout_constraintTop_toBottomOf="@id/tvBMTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5" />
 
         <ListView
             android:id="@+id/listViewBM"
@@ -72,7 +86,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvBMTitle"
+            app:layout_constraintTop_toBottomOf="@+id/searchViewBM"
             tools:ignore="NestedScrolling" />
 
         <Button
@@ -80,9 +94,8 @@
             android:layout_width="160dp"
             android:layout_height="55dp"
             android:text="@string/go_to_cart"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="190dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/listViewBM" />
@@ -92,9 +105,8 @@
             android:layout_width="160dp"
             android:layout_height="55dp"
             android:text="@string/back"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="30dp"
             android:layout_marginStart="190dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/listViewBM" />

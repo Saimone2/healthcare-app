@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="WhiteTextSearchField">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:searchIcon">@drawable/ic_search_white</item>
+        <item name="android:closeIcon">@drawable/ic_close_white</item>
+        <item name="android:queryBackground">@null</item>
+    </style>
+</resources>

@@ -53,7 +53,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="77dp"
             android:columnCount="2"
             android:rowCount="3">
 
@@ -81,7 +81,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/lab_tests"
+                        android:text="@string/lab_tests_up"
                         android:textAlignment="center"
                         android:textColor="@color/purple_500"
                         android:textStyle="bold"
@@ -177,7 +177,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/health_articles"
+                        android:text="@string/health_articles_up"
                         android:textAlignment="center"
                         android:textColor="@color/purple_500"
                         android:textSize="14sp"
@@ -210,7 +210,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/order_details"
+                        android:text="@string/orders_details_up"
                         android:textAlignment="center"
                         android:textColor="@color/purple_500"
                         android:textStyle="bold"

@@ -10,15 +10,15 @@
     <string name="registration">Registration</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="register">Register</string>
-    <string name="lab_tests">LAB TESTS</string>
+    <string name="lab_tests">Lab tests</string>
     <string name="buy_medicine">BUY MEDICINE</string>
     <string name="find_doctor">FIND DOCTOR</string>
-    <string name="health_articles">HEALTH ARTICLES</string>
-    <string name="order_details">ORDER DETAILS</string>
+    <string name="health_articles">Health articles</string>
+    <string name="orders_details">Orders details</string>
     <string name="logout">LOGOUT</string>
     <string name="top_doctors">Top doctors</string>
     <string name="family_physician">FAMILY PHYSICIAN</string>
-    <string name="dietician">DIETICIAN</string>
+    <string name="dietician">DIETITIAN</string>
     <string name="dentist">DENTIST</string>
     <string name="surgeon">SURGEON</string>
     <string name="cardiologist">CARDIOLOGIST</string>
@@ -42,12 +42,11 @@
     <string name="pin_code">Pin code</string>
     <string name="articles">Articles</string>
     <string name="lab_test_details">LAB TEST DETAILS</string>
-    <string name="buy_medicines">BUY MEDICINES</string>
+    <string name="buy_medicines">Buy medicines</string>
     <string name="medicine_details">MEDICINE DETAILS</string>
     <string name="items_in_the_cart">ITEMS IN THE CART</string>
     <string name="admin_panel">Admin Panel</string>
     <string name="add_new">ADD NEW PRODUCT</string>
-    <string name="specialty_doctors">Specialty doctors</string>
     <string name="name">Name</string>
     <string name="price">Price</string>
     <string name="description">Description</string>
@@ -62,4 +61,9 @@
     <string name="no_image">NO IMAGE</string>
     <string name="update_doctor">UPDATE DOCTOR</string>
     <string name="update_article">UPDATE ARTICLE</string>
+    <string name="specialties_of_doctors">Specialties of doctors</string>
+    <string name="specialty">Specialty</string>
+    <string name="lab_tests_up">LAB TESTS</string>
+    <string name="health_articles_up">HEALTH ARTICLES</string>
+    <string name="orders_details_up">ORDERS DETAILS</string>
 </resources>

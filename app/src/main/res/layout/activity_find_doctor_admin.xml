@@ -64,6 +64,20 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.16" />
 
+        <SearchView
+            android:id="@+id/searchViewFDA"
+            android:layout_width="350dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/input_bg"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            style="@style/WhiteTextSearchField"
+            app:layout_constraintTop_toBottomOf="@id/tvFDATitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5" />
+
         <ListView
             android:id="@+id/listViewFDA"
             android:layout_width="350dp"
@@ -72,7 +86,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvFDATitle"
+            app:layout_constraintTop_toBottomOf="@+id/searchViewFDA"
             tools:ignore="NestedScrolling" />
 
         <Button

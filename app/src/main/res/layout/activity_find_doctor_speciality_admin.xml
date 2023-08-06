@@ -54,15 +54,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="@string/specialty_doctors"
+            android:text="@string/specialties_of_doctors"
             android:textColor="@color/white"
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.2" />
+            app:layout_constraintVertical_bias="0.16" />
+
+        <SearchView
+            android:id="@+id/searchViewFDSA"
+            android:layout_width="350dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/input_bg"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            style="@style/WhiteTextSearchField"
+            app:layout_constraintTop_toBottomOf="@id/tvFDSATitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5" />
 
         <ListView
             android:id="@+id/listViewFDSA"
@@ -72,17 +87,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvFDSATitle"
+            app:layout_constraintTop_toBottomOf="@+id/searchViewFDSA"
             tools:ignore="NestedScrolling" />
 
         <Button
             android:id="@+id/btnFDSABack"
             android:layout_width="130dp"
             android:layout_height="55dp"
-            android:text="@string/back"
-            android:layout_marginTop="35dp"
             android:layout_marginStart="218dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="30dp"
+            android:text="@string/back"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/listViewFDSA" />
@@ -91,10 +105,9 @@
             android:id="@+id/btnFDSAAddNew"
             android:layout_width="200dp"
             android:layout_height="55dp"
-            android:text="@string/add_new_speciality"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="150dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@string/add_new_speciality"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/listViewFDSA" />

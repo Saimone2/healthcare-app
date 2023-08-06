@@ -19,49 +19,50 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class BuyMedicineActivity extends AppCompatActivity {
+public class FindDoctorsDetailsActivity extends AppCompatActivity {
     TextView tvTitle;
     SearchView searchView;
     ListView listView;
-    Button cartButton, backButton;
+    Button backButton;
     private ArrayList<Map<String, String>> list;
     private SimpleAdapter sa;
-    private String[][] medicineDetails = {};
-    private String[][] filteredMedicineDetails = {};
+    private String[][] doctorsDetails = {};
+    private String[][] filteredDoctorsDetails = {};
+    String specialty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_buy_medicine);
+        setContentView(R.layout.activity_doctor_details);
 
-        tvTitle = findViewById(R.id.tvBMTitle);
-        searchView = findViewById(R.id.searchViewBM);
-        listView = findViewById(R.id.listViewBM);
-        cartButton = findViewById(R.id.btnBMGoToCart);
-        backButton = findViewById(R.id.btnBMBack);
-        tvTitle = findViewById(R.id.tvBMTitle);
+        tvTitle = findViewById(R.id.tvDDTitle);
+        searchView = findViewById(R.id.searchViewDD);
+        listView = findViewById(R.id.listViewDD);
+        backButton = findViewById(R.id.btnDDBack);
 
-        backButton.setOnClickListener(view -> startActivity(new Intent(BuyMedicineActivity.this, HomeActivity.class)));
+        backButton.setOnClickListener(view -> startActivity(new Intent(FindDoctorsDetailsActivity.this, FindDoctorActivity.class)));
 
         int searchPlateId = searchView.getContext().getResources()
                 .getIdentifier("android:id/search_src_text", null, null);
         EditText searchPlate = searchView.findViewById(searchPlateId);
         searchPlate.setTextColor(getResources().getColor(R.color.white));
 
-        medicineDetails = getMedicinesDetails();
-        filteredMedicineDetails = medicineDetails;
-        if(medicineDetails.length == 0) {
-            String str = "Medicine not found";
+        specialty = getIntent().getStringExtra("specialty");
+        doctorsDetails = getDoctorDetails(specialty);
+        filteredDoctorsDetails = doctorsDetails;
+        if(doctorsDetails.length == 0) {
+            String str = "Doctors not found";
             tvTitle.setText(str);
         } else {
+            tvTitle.setText(specialty);
             list = new ArrayList<>();
-            for (String[] medicine : medicineDetails) {
+            for (String[] doctor : doctorsDetails) {
                 HashMap<String, String> item = new HashMap<>();
-                item.put("line1", medicine[0]);
-                item.put("line2", "");
-                item.put("line3", "");
-                item.put("line4", "");
-                item.put("line5", "Total cost: " + medicine[2] + "$");
+                item.put("line1", doctor[0]);
+                item.put("line2", "Address: " + doctor[1]);
+                item.put("line3", "Exp: " + doctor[2]);
+                item.put("line4", "Mobile No: " + doctor[3]);
+                item.put("line5", "Service fee: " + doctor[4] + "$");
                 list.add(item);
             }
             sa = new SimpleAdapter(this, list,
@@ -70,11 +71,13 @@ public class BuyMedicineActivity extends AppCompatActivity {
             listView.setAdapter(sa);
 
             listView.setOnItemClickListener((adapterView, view, i, l) -> {
-                Intent it = new Intent(BuyMedicineActivity.this, BuyMedicineDetailsActivity.class);
-                it.putExtra("name", filteredMedicineDetails[i][0]);
-                it.putExtra("description", filteredMedicineDetails[i][1]);
-                it.putExtra("price", filteredMedicineDetails[i][2]);
-                startActivity(it);
+                Intent intent = new Intent(FindDoctorsDetailsActivity.this, BookAppointmentActivity.class);
+                intent.putExtra("title", specialty);
+                intent.putExtra("fullname", filteredDoctorsDetails[i][0]);
+                intent.putExtra("address", filteredDoctorsDetails[i][1]);
+                intent.putExtra("phone", filteredDoctorsDetails[i][3]);
+                intent.putExtra("fee", filteredDoctorsDetails[i][4] + "$");
+                startActivity(intent);
             });
         }
 
@@ -90,13 +93,11 @@ public class BuyMedicineActivity extends AppCompatActivity {
                 return true;
             }
         });
-
-        cartButton.setOnClickListener(view -> startActivity(new Intent(BuyMedicineActivity.this, CartBuyMedicineActivity.class)));
     }
 
-    private String[][] getMedicinesDetails() {
+    private String[][] getDoctorDetails(String specialty) {
         try(Database db = new Database(getApplicationContext(), "healthcare", null, 1)) {
-            return db.getMedicines();
+            return db.getDoctorsBySpecialty(specialty);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -106,42 +107,42 @@ public class BuyMedicineActivity extends AppCompatActivity {
     private void filterData(String query) {
         list.clear();
         if (query.isEmpty()) {
-            list.addAll(generateItemList(medicineDetails));
-            filteredMedicineDetails = medicineDetails;
+            list.addAll(generateItemList(doctorsDetails));
+            filteredDoctorsDetails = doctorsDetails;
         } else {
-            filteredMedicineDetails = filterMedicineDetails(query);
-            list.addAll(generateItemList(filteredMedicineDetails));
+            filteredDoctorsDetails = filterDoctorsDetails(query);
+            list.addAll(generateItemList(filteredDoctorsDetails));
         }
         sa.notifyDataSetChanged();
 
         String str;
         if (list.isEmpty()) {
-            str = "Medicines not found";
+            str = "Doctors not found";
         } else {
-            str = "Buy medicines";
+            str = specialty;
         }
         tvTitle.setText(str);
     }
 
     private List<Map<String, String>> generateItemList(String[][] data) {
         List<Map<String, String>> itemList = new ArrayList<>();
-        for (String[] medicine : data) {
+        for (String[] doctor : data) {
             Map<String, String> item = new HashMap<>();
-            item.put("line1", medicine[0]);
-            item.put("line2", "");
-            item.put("line3", "");
-            item.put("line4", "");
-            item.put("line5", "Total cost: " + medicine[2] + "$");
+            item.put("line1", doctor[0]);
+            item.put("line2", "Address: " + doctor[1]);
+            item.put("line3", "Exp: " + doctor[2]);
+            item.put("line4", "Mobile No: " + doctor[3]);
+            item.put("line5", "Service fee: " + doctor[4] + "$");
             itemList.add(item);
         }
         return itemList;
     }
 
-    private String[][] filterMedicineDetails(String query) {
+    private String[][] filterDoctorsDetails(String query) {
         List<String[]> filteredList = new ArrayList<>();
-        for (String[] medicine : medicineDetails) {
-            if (medicine[0].toLowerCase().contains(query.toLowerCase())) {
-                filteredList.add(medicine);
+        for (String[] doctor : doctorsDetails) {
+            if (doctor[0].toLowerCase().contains(query.toLowerCase())) {
+                filteredList.add(doctor);
             }
         }
         return filteredList.toArray(new String[0][0]);

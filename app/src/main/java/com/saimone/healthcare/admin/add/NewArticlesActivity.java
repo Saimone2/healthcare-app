@@ -26,7 +26,7 @@ public class NewArticlesActivity extends AppCompatActivity {
     ImageView imageView;
     EditText etName, etDescription;
     Button backButton, uploadButton, addNewButton;
-    String imagePath;
+    private String imagePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
