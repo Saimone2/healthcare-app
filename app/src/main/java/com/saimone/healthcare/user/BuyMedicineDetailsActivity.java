@@ -33,7 +33,7 @@ public class BuyMedicineDetailsActivity extends AppCompatActivity {
         Intent it = getIntent();
         tvTitle.setText(it.getStringExtra("name"));
         tvDetails.setText(it.getStringExtra("description"));
-        String str = "Total Cost:" + it.getStringExtra("price") + "$";
+        String str = "Total Cost: " + it.getStringExtra("price") + "$";
         tvTotalCost.setText(str);
 
         backButton.setOnClickListener(view -> startActivity(new Intent(BuyMedicineDetailsActivity.this, BuyMedicineActivity.class)));

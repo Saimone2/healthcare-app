@@ -6,16 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/back1"
-    tools:context=".admin.add.NewSpecialtyActivity">
+    tools:context=".user.FindDoctorActivity">
 
     <LinearLayout
         android:id="@+id/logoLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="85dp"
+        android:layout_marginTop="35dp"
         android:layout_marginEnd="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="UseCompoundDrawables">
@@ -46,66 +46,56 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tvNSTitle"
+        android:id="@+id/tvFDTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/noto_sans"
-        android:text="@string/specialty"
+        android:text="@string/specialties_of_doctors"
         android:textColor="@color/white"
         android:textSize="22sp"
         android:textStyle="bold"
-        android:layout_marginTop="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logoLayout" />
 
-    <EditText
-        android:id="@+id/etNSSpecName"
-        android:layout_width="325dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="40dp"
-        android:autofillHints="name"
+    <SearchView
+        android:id="@+id/searchViewFD"
+        style="@style/WhiteTextSearchField"
+        android:layout_width="310dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/input_bg"
-        android:drawableStart="@drawable/tag"
-        android:drawablePadding="10dp"
-        android:ems="10"
-        android:hint="@string/name"
-        android:inputType="text"
-        android:paddingStart="20dp"
-        android:paddingEnd="10dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvNSTitle" />
+        app:layout_constraintTop_toBottomOf="@id/tvFDTitle" />
 
-    <Button
-        android:id="@+id/btnNSAddNew"
-        android:layout_width="280dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="223dp"
-        android:text="@string/add_new_speciality"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:fontFamily="@font/noto_sans"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNSSpecName" />
-
-    <Button
-        android:id="@+id/btnNSBack"
-        android:layout_width="280dp"
-        android:layout_height="55dp"
+    <ListView
+        android:id="@+id/listViewFD"
+        android:layout_width="340dp"
+        android:layout_height="409dp"
         android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchViewFD" />
+
+    <Button
+        android:id="@+id/btnFDBack"
+        android:layout_width="280dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/noto_sans"
         android:text="@string/back"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:fontFamily="@font/noto_sans"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnNSAddNew" />
+        app:layout_constraintTop_toBottomOf="@+id/listViewFD" />
 </androidx.constraintlayout.widget.ConstraintLayout>

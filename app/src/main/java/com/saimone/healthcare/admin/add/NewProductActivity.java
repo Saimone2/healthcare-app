@@ -36,8 +36,8 @@ public class NewProductActivity extends AppCompatActivity {
 
         assert product != null;
         String str = switch (product) {
-            case "lab" -> "Lab tests";
-            case "medicine" -> "Medicines";
+            case "lab" -> "New laboratory test";
+            case "medicine" -> "New medicine";
             default -> "Unknown";
         };
         tvTitle.setText(str);

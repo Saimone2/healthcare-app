@@ -2,6 +2,7 @@ package com.saimone.healthcare.user;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -32,7 +33,7 @@ public class FindDoctorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_find_doctor);
+        setContentView(R.layout.activity_find_doctor_specialty);
 
         tvTitle = findViewById(R.id.tvFDTitle);
         searchView = findViewById(R.id.searchViewFD);
@@ -41,7 +42,7 @@ public class FindDoctorActivity extends AppCompatActivity {
 
         backButton.setOnClickListener(view -> startActivity(new Intent(FindDoctorActivity.this, HomeActivity.class)));
 
-        int searchPlateId = searchView.getContext().getResources()
+        @SuppressLint("DiscouragedApi") int searchPlateId = searchView.getContext().getResources()
                 .getIdentifier("android:id/search_src_text", null, null);
         EditText searchPlate = searchView.findViewById(searchPlateId);
         searchPlate.setTextColor(getResources().getColor(R.color.white));

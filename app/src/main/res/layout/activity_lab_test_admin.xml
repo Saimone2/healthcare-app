@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,109 +8,107 @@
     android:background="@drawable/back3"
     tools:context=".admin.LabTestAdminActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/logoLayout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="45dp">
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UseCompoundDrawables">
 
-        <LinearLayout
-            android:id="@+id/logoLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
-            android:layout_marginEnd="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toStartOf="parent"
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="85dp"
+            android:layout_height="70dp"
+            android:contentDescription="@string/healthcare"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvHealthcare"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="UseCompoundDrawables">
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="85dp"
-                android:layout_height="70dp"
-                android:contentDescription="@string/healthcare"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/tvHealthcare"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/healthcare" />
-
-            <TextView
-                android:id="@+id/tvHealthcare"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/amita"
-                android:text="@string/healthcare"
-                android:textColor="@color/purple_200"
-                android:textSize="40sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </LinearLayout>
+            app:srcCompat="@drawable/healthcare" />
 
         <TextView
-            android:id="@+id/tvLTATitle"
+            android:id="@+id/tvHealthcare"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="@string/lab_tests"
-            android:textColor="@color/white"
-            android:textSize="22sp"
+            android:fontFamily="@font/amita"
+            android:text="@string/healthcare"
+            android:textColor="@color/purple_200"
+            android:textSize="40sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.16" />
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
 
-        <SearchView
-            android:id="@+id/searchViewLTA"
-            android:layout_width="350dp"
-            android:layout_height="42dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/input_bg"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            style="@style/WhiteTextSearchField"
-            app:layout_constraintTop_toBottomOf="@id/tvLTATitle"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5" />
+    <TextView
+        android:id="@+id/tvLTATitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/lab_tests"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/noto_sans"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logoLayout" />
 
-        <ListView
-            android:id="@+id/listViewLTA"
-            android:layout_width="350dp"
-            android:layout_height="480dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchViewLTA"
-            tools:ignore="NestedScrolling" />
+    <SearchView
+        android:id="@+id/searchViewLTA"
+        style="@style/WhiteTextSearchField"
+        android:layout_width="310dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/input_bg"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvLTATitle" />
 
-        <Button
-            android:id="@+id/btnLTABack"
-            android:layout_width="160dp"
-            android:layout_height="55dp"
-            android:layout_marginStart="188dp"
-            android:layout_marginTop="30dp"
-            android:text="@string/back"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/listViewLTA" />
+    <ListView
+        android:id="@+id/listViewLTA"
+        android:layout_width="340dp"
+        android:layout_height="409dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchViewLTA" />
 
-        <Button
-            android:id="@+id/btnLTAAddNew"
-            android:layout_width="160dp"
-            android:layout_height="55dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="190dp"
-            android:text="@string/add_new"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/listViewLTA"
-            app:layout_constraintVertical_bias="0.0" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+    <Button
+        android:id="@+id/btnLTABack"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="170dp"
+        android:layout_marginTop="25dp"
+        android:text="@string/back"
+        android:textColor="@color/white"
+        android:fontFamily="@font/noto_sans"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listViewLTA" />
+
+    <Button
+        android:id="@+id/btnLTAAddNew"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="170dp"
+        android:text="@string/add_new"
+        android:textColor="@color/white"
+        android:fontFamily="@font/noto_sans"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listViewLTA" />
+</androidx.constraintlayout.widget.ConstraintLayout>

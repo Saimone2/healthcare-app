@@ -10,7 +10,7 @@
     <string name="registration">Registration</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="register">Register</string>
-    <string name="lab_tests">Lab tests</string>
+    <string name="lab_tests">Laboratory tests</string>
     <string name="buy_medicine">BUY MEDICINE</string>
     <string name="find_doctor">FIND DOCTOR</string>
     <string name="health_articles">Health articles</string>
@@ -46,14 +46,15 @@
     <string name="medicine_details">MEDICINE DETAILS</string>
     <string name="items_in_the_cart">ITEMS IN THE CART</string>
     <string name="admin_panel">Admin Panel</string>
-    <string name="add_new">ADD NEW PRODUCT</string>
+    <string name="add_new">ADD NEW</string>
+    <string name="add">ADD</string>
     <string name="name">Name</string>
     <string name="price">Price</string>
     <string name="description">Description</string>
     <string name="update_product">UPDATE PRODUCT</string>
     <string name="delete">DELETE</string>
     <string name="add_new_article">ADD NEW ARTICLE</string>
-    <string name="upload_photo">Upload Photo</string>
+    <string name="upload_photo">UPLOAD POSTER</string>
     <string name="add_new_speciality">ADD NEW SPECIALITY</string>
     <string name="expirience">Expirience</string>
     <string name="add_new_doctor">ADD NEW DOCTOR</string>

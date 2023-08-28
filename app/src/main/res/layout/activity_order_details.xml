@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,99 +8,94 @@
     android:background="@drawable/background"
     tools:context=".user.OrderDetailsActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/logoLayout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="45dp">
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UseCompoundDrawables">
 
-        <LinearLayout
-            android:id="@+id/logoLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
-            android:layout_marginEnd="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toStartOf="parent"
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="85dp"
+            android:layout_height="70dp"
+            android:contentDescription="@string/healthcare"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvHealthcare"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="UseCompoundDrawables">
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="85dp"
-                android:layout_height="70dp"
-                android:contentDescription="@string/healthcare"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/tvHealthcare"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/healthcare" />
-
-            <TextView
-                android:id="@+id/tvHealthcare"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/amita"
-                android:text="@string/healthcare"
-                android:textColor="@color/purple_200"
-                android:textSize="40sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </LinearLayout>
+            app:srcCompat="@drawable/healthcare" />
 
         <TextView
-            android:id="@+id/tvODTitle"
+            android:id="@+id/tvHealthcare"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="@string/orders_details"
-            android:textColor="@color/white"
-            android:textSize="22sp"
+            android:fontFamily="@font/amita"
+            android:text="@string/healthcare"
+            android:textColor="@color/purple_200"
+            android:textSize="40sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.16" />
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
 
-        <SearchView
-            android:id="@+id/searchViewOD"
-            android:layout_width="350dp"
-            android:layout_height="42dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/input_bg"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            style="@style/WhiteTextSearchField"
-            app:layout_constraintTop_toBottomOf="@id/tvODTitle"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5" />
+    <TextView
+        android:id="@+id/tvODTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/noto_sans"
+        android:text="@string/orders_details"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logoLayout" />
 
-        <ListView
-            android:id="@+id/listViewOD"
-            android:layout_width="350dp"
-            android:layout_height="480dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchViewOD"
-            tools:ignore="NestedScrolling" />
+    <SearchView
+        android:id="@+id/searchViewOD"
+        style="@style/WhiteTextSearchField"
+        android:layout_width="310dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/input_bg"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvODTitle" />
 
-        <Button
-            android:id="@+id/btnODBack"
-            android:layout_width="280dp"
-            android:layout_height="55dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/back"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/listViewOD" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+    <ListView
+        android:id="@+id/listViewOD"
+        android:layout_width="340dp"
+        android:layout_height="420dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchViewOD" />
+
+    <Button
+        android:id="@+id/btnODBack"
+        android:layout_width="280dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/noto_sans"
+        android:text="@string/back"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listViewOD" />
+</androidx.constraintlayout.widget.ConstraintLayout>

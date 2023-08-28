@@ -2,6 +2,7 @@ package com.saimone.healthcare.user;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -44,7 +45,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
 
         backButton.setOnClickListener(view -> startActivity(new Intent(OrderDetailsActivity.this, HomeActivity.class)));
 
-        int searchPlateId = searchView.getContext().getResources()
+        @SuppressLint("DiscouragedApi") int searchPlateId = searchView.getContext().getResources()
                 .getIdentifier("android:id/search_src_text", null, null);
         EditText searchPlate = searchView.findViewById(searchPlateId);
         searchPlate.setTextColor(getResources().getColor(R.color.white));
@@ -68,7 +69,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
                     orderDetails[i][3] = "Delivery: " + strData[4];
                     orderDetails[i][4] = "Buying medicines";
                 } else if(strData[7].compareTo("lab") == 0) {
-                    orderDetails[i][3] = "Delivery: " + strData[4] + " " + strData[5];
+                    orderDetails[i][3] = "Conducting: " + strData[4] + " " + strData[5];
                     orderDetails[i][4] = "Registration for lab tests";
                 } else {
                     orderDetails[i][3] = "Reception time: " + strData[4] + " " + strData[5];

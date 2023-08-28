@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,202 +8,70 @@
     android:background="@drawable/back2"
     tools:context=".admin.AdminPanelActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/logoLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_centerHorizontal="true"
+        tools:ignore="UseCompoundDrawables">
 
-        <LinearLayout
-            android:id="@+id/logoLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
-            android:layout_centerHorizontal="true"
-            tools:ignore="UseCompoundDrawables">
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="85dp"
-                android:layout_height="70dp"
-                android:contentDescription="@string/healthcare"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/tvHealthcare"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/healthcare" />
-
-            <TextView
-                android:id="@+id/tvHealthcare"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/amita"
-                android:text="@string/healthcare"
-                android:textColor="@color/purple_200"
-                android:textSize="40sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="85dp"
+            android:layout_height="70dp"
+            android:contentDescription="@string/healthcare"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvHealthcare"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/healthcare" />
 
         <TextView
-            android:id="@+id/tvBATitle"
+            android:id="@+id/tvHealthcare"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="@string/admin_panel"
-            android:textColor="@color/white"
-            android:textSize="22sp"
+            android:fontFamily="@font/amita"
+            android:text="@string/healthcare"
+            android:textColor="@color/purple_200"
+            android:textSize="40sp"
             android:textStyle="bold"
-            android:layout_marginTop="145dp"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
 
-        <GridLayout
-            android:id="@+id/glHome"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:minHeight="435dp"
-            android:layout_below="@+id/tvBATitle"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="15dp"
-            android:columnCount="2"
-            android:rowCount="2">
+    <TextView
+        android:id="@+id/tvBATitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/admin_panel"
+        android:fontFamily="@font/noto_sans"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginTop="145dp"/>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cvLabTest"
-                android:layout_width="135sp"
-                android:layout_height="wrap_content"
-                android:layout_row="0"
-                android:layout_column="0"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_gravity="fill"
-                app:cardBackgroundColor="@color/yellowLight"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="8dp"
-                app:cardUseCompatPadding="true">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/lab_tests_up"
-                        android:textAlignment="center"
-                        android:textColor="@color/purple_500"
-                        android:textStyle="bold"
-                        app:drawableTopCompat="@drawable/home" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cvBuyMedicine"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_row="0"
-                android:layout_column="1"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_gravity="fill"
-                app:cardBackgroundColor="@color/yellowLight"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="8dp"
-                app:cardUseCompatPadding="true" >
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/buy_medicine"
-                        android:textAlignment="center"
-                        android:textColor="@color/purple_500"
-                        android:textStyle="bold"
-                        app:drawableTopCompat="@drawable/language" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cvFindDoctor"
-                android:layout_width="135sp"
-                android:layout_height="wrap_content"
-                android:layout_row="1"
-                android:layout_column="0"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_gravity="fill"
-                app:cardBackgroundColor="@color/yellowLight"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="8dp"
-                app:cardUseCompatPadding="true">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/find_doctor"
-                        android:textAlignment="center"
-                        android:textColor="@color/purple_500"
-                        android:textStyle="bold"
-                        app:drawableTopCompat="@drawable/chat" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cvHealthArticles"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_row="1"
-                android:layout_column="1"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_gravity="fill"
-                app:cardBackgroundColor="@color/yellowLight"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="8dp"
-                app:cardUseCompatPadding="true" >
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/health_articles_up"
-                        android:textAlignment="center"
-                        android:textColor="@color/purple_500"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        app:drawableTopCompat="@drawable/calendar" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-        </GridLayout>
+    <GridLayout
+        android:id="@+id/glHome"
+        android:layout_width="match_parent"
+        android:layout_height="395dp"
+        android:minHeight="435dp"
+        android:layout_below="@+id/tvBATitle"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:columnCount="2"
+        android:rowCount="2">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cvLogout"
-            android:layout_width="190dp"
-            android:layout_height="200dp"
-            android:layout_below="@+id/glHome"
-            android:layout_centerHorizontal="true"
+            android:id="@+id/cvLabTest"
+            android:layout_width="140sp"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             app:cardBackgroundColor="@color/yellowLight"
             app:cardCornerRadius="8dp"
@@ -219,12 +88,139 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/logout"
+                    android:text="@string/lab_tests_up"
                     android:textAlignment="center"
                     android:textColor="@color/purple_500"
                     android:textStyle="bold"
-                    app:drawableTopCompat="@drawable/info" />
+                    app:drawableTopCompat="@drawable/home" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-    </RelativeLayout>
-</ScrollView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvBuyMedicine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            app:cardBackgroundColor="@color/yellowLight"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            app:cardUseCompatPadding="true" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/buy_medicine"
+                    android:textAlignment="center"
+                    android:textColor="@color/purple_500"
+                    android:textStyle="bold"
+                    app:drawableTopCompat="@drawable/language" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvFindDoctor"
+            android:layout_width="135sp"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            app:cardBackgroundColor="@color/yellowLight"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/find_doctor"
+                    android:textAlignment="center"
+                    android:textColor="@color/purple_500"
+                    android:textStyle="bold"
+                    app:drawableTopCompat="@drawable/chat" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvHealthArticles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            app:cardBackgroundColor="@color/yellowLight"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            app:cardUseCompatPadding="true" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/health_articles_up"
+                    android:textAlignment="center"
+                    android:textColor="@color/purple_500"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:drawableTopCompat="@drawable/calendar" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </GridLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvLogout"
+        android:layout_width="164dp"
+        android:layout_height="200dp"
+        android:layout_below="@+id/glHome"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="fill"
+        app:cardBackgroundColor="@color/yellowLight"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/logout"
+                android:textAlignment="center"
+                android:textColor="@color/purple_500"
+                android:textStyle="bold"
+                app:drawableTopCompat="@drawable/info" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
