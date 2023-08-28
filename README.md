@@ -1,19 +1,21 @@
 # healthcare-app
 
-Healthcare is Android application written in Java. This application is designed to cater to various aspects of your healthcare needs, providing you with a seamless and convenient way to access essential healthcare services right at your fingertips. Whether you need to book a doctor's appointment, order lab tests or medicines, or simply stay informed with health articles, this application has got you covered!
+Healthcare is an Android application written in Java. This application is designed to meet the various aspects of your healthcare needs by providing a seamless and convenient way to access essential healthcare services right at your fingertips. Whether you need to make a doctor's appointment, order lab tests or medication, or just keep up to date with health articles, this app is here to help!
 
-1. Login: Begin your healthcare journey by securely logging into your personal account, ensuring that your sensitive information remains protected.
+1. Log in: Start your healthcare journey by securely logging into your personal account, ensuring your confidential information remains protected.
 
-2. Registration: New to the application? Easily create a new account and gain access to the array of healthcare services available.
+2. Register: Not familiar with the app? Easily create a new account and access a range of available health services. The registration form includes validation of all information, telling the user what has been entered incorrectly. Data is stored securely in a SQLite database with password hashing.
 
-3. Lab Test: Need to get a lab test done? Browse through multiple package details, add the desired tests to your cart, and place an order for hassle-free lab testing.
+3. Administration: Interact with the database directly in the application from an administrator account. Using the interface that implements the CRUD system, you can not only interact with textual information, but also download posters that are stored in a special file and links to them in the database.
 
-4. Medicine: Running out of medicines? Explore our extensive medicine list, add the required medicines to your cart, and place an order to get them delivered to your doorstep.
+4. Lab Tests: Need a lab test? View details of different packs, add the tests you need to your basket and place your order for a hassle-free lab testing experience.
 
-5. Find Doctor: Seeking medical advice? Use our search functionality to find specialist doctors in your area and book appointments with ease.
+5. Medicines: Running out of medication? View our extensive list of medicines, add the right ones to your basket and place an order to have them delivered to your door.
 
-6. Health Articles: Stay informed and educated about various health topics through our collection of informative health articles.
+6. Find a Doctor: Looking for medical advice? Use our locator to find specialists in your area and easily make an appointment.
 
-7. Order Details: Keep track of your healthcare orders with comprehensive order information, ensuring transparency and easy reference.
+7. Health Articles: Stay up to date on a variety of health topics with our collection of informative health articles. Browse our informative posters on a variety of useful health topics.
 
-8. Logout: End your session securely and log out of your account when you're done using the application.
+8. Order information: Keep track of your medical orders with comprehensive order information for transparency and easy searching. It contains all the important summary information about the order, such as the date of the doctor's appointment, medication delivery or test shipment.
+
+9. Sign out: Safely end your session and sign out of your account when you're done using the app. Save your Google Password Manager credentials for quick sign-in.
