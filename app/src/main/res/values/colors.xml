@@ -13,5 +13,16 @@
     <color name="purpleDark">#FF210642</color>
     <color name="yellowLight">#FFF777</color>
     <color name="yellow_primary">#FFEBEB37</color>
-    <color name="red">#C11515</color>
+
+    <color name="background_gray">#DFDFDF</color>
+    <color name="text_gray">#333333</color>
+    <color name="primary_blue">#007BFF</color>
+    <color name="text_blue">#005EC5</color>
+    <color name="secondary">#66D381</color>
+    <color name="button_orange">#FF9500 </color>
+    <color name="red">#FF3B30</color>
+
+
+
+
 </resources>

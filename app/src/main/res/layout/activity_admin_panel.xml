@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back2"
+    android:background="@color/background_gray"
     tools:context=".admin.AdminPanelActivity">
 
     <LinearLayout
         android:id="@+id/logoLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
         tools:ignore="UseCompoundDrawables">
 
         <ImageView
@@ -32,7 +31,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/amita"
             android:text="@string/healthcare"
-            android:textColor="@color/purple_200"
+            android:textColor="@color/text_blue"
             android:textSize="40sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -46,36 +45,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="@string/admin_panel"
+        android:layout_marginTop="135dp"
+        android:layout_marginBottom="8dp"
         android:fontFamily="@font/noto_sans"
-        android:textColor="@color/white"
+        android:text="@string/admin_panel"
+        android:textColor="@color/text_gray"
         android:textSize="22sp"
-        android:textStyle="bold"
-        android:layout_marginTop="145dp"/>
+        android:textStyle="bold" />
 
     <GridLayout
         android:id="@+id/glHome"
         android:layout_width="match_parent"
         android:layout_height="395dp"
-        android:minHeight="435dp"
         android:layout_below="@+id/tvBATitle"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:columnCount="2"
+        android:minHeight="435dp"
         android:rowCount="2">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvLabTest"
-            android:layout_width="140sp"
+            android:layout_width="134dp"
             android:layout_height="wrap_content"
             android:layout_row="0"
-            android:layout_column="0"
             android:layout_rowWeight="1"
+            android:layout_column="0"
             android:layout_columnWeight="1"
             android:layout_gravity="fill"
-            app:cardBackgroundColor="@color/yellowLight"
+            app:cardBackgroundColor="@color/secondary"
             app:cardCornerRadius="8dp"
-            app:cardElevation="8dp"
+            app:cardElevation="5dp"
             app:cardUseCompatPadding="true">
 
             <LinearLayout
@@ -90,7 +90,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/lab_tests_up"
                     android:textAlignment="center"
-                    android:textColor="@color/purple_500"
+                    android:textColor="@color/text_gray"
                     android:textStyle="bold"
                     app:drawableTopCompat="@drawable/home" />
             </LinearLayout>
@@ -101,14 +101,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_row="0"
-            android:layout_column="1"
             android:layout_rowWeight="1"
+            android:layout_column="1"
             android:layout_columnWeight="1"
             android:layout_gravity="fill"
-            app:cardBackgroundColor="@color/yellowLight"
+            app:cardBackgroundColor="@color/secondary"
             app:cardCornerRadius="8dp"
-            app:cardElevation="8dp"
-            app:cardUseCompatPadding="true" >
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="true">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -122,7 +122,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/buy_medicine"
                     android:textAlignment="center"
-                    android:textColor="@color/purple_500"
+                    android:textColor="@color/text_gray"
                     android:textStyle="bold"
                     app:drawableTopCompat="@drawable/language" />
             </LinearLayout>
@@ -133,13 +133,13 @@
             android:layout_width="135sp"
             android:layout_height="wrap_content"
             android:layout_row="1"
-            android:layout_column="0"
             android:layout_rowWeight="1"
+            android:layout_column="0"
             android:layout_columnWeight="1"
             android:layout_gravity="fill"
-            app:cardBackgroundColor="@color/yellowLight"
+            app:cardBackgroundColor="@color/secondary"
             app:cardCornerRadius="8dp"
-            app:cardElevation="8dp"
+            app:cardElevation="5dp"
             app:cardUseCompatPadding="true">
 
             <LinearLayout
@@ -154,7 +154,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/find_doctor"
                     android:textAlignment="center"
-                    android:textColor="@color/purple_500"
+                    android:textColor="@color/text_gray"
                     android:textStyle="bold"
                     app:drawableTopCompat="@drawable/chat" />
             </LinearLayout>
@@ -165,14 +165,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_row="1"
-            android:layout_column="1"
             android:layout_rowWeight="1"
+            android:layout_column="1"
             android:layout_columnWeight="1"
             android:layout_gravity="fill"
-            app:cardBackgroundColor="@color/yellowLight"
+            app:cardBackgroundColor="@color/secondary"
             app:cardCornerRadius="8dp"
-            app:cardElevation="8dp"
-            app:cardUseCompatPadding="true" >
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="true">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -186,7 +186,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/health_articles_up"
                     android:textAlignment="center"
-                    android:textColor="@color/purple_500"
+                    android:textColor="@color/text_gray"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:drawableTopCompat="@drawable/calendar" />
@@ -201,9 +201,10 @@
         android:layout_below="@+id/glHome"
         android:layout_centerHorizontal="true"
         android:layout_gravity="fill"
-        app:cardBackgroundColor="@color/yellowLight"
+        app:cardBackgroundColor="@color/secondary"
         app:cardCornerRadius="8dp"
-        app:cardElevation="8dp"
+        app:cardElevation="5dp"
+        android:layout_marginBottom="10dp"
         app:cardUseCompatPadding="true">
 
         <LinearLayout
@@ -218,7 +219,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/logout"
                 android:textAlignment="center"
-                android:textColor="@color/purple_500"
+                android:textColor="@color/text_gray"
                 android:textStyle="bold"
                 app:drawableTopCompat="@drawable/info" />
         </LinearLayout>
